@@ -7,20 +7,24 @@
       </ion-col>
 
       <ion-col float-left col-12>
-        <form class="form" #registerForm="ngForm">
+        <form class="form" (ngSubmit)="login()" #registerForm="ngForm">
           <ion-item>
-            <ion-input class="grey-form w100" required text-center placeholder="test" type="email" pattern="[A-Za-z0-9._%+-]{3,}@[a-zA-Z._%+-]{3,}([.]{1}[a-zA-Z]{2,})"
-              name="email">
+            <ion-input class="grey-form w100" required text-center placeholder="Nama Pengguna" type="text"
+              name="username" [(ngModel)]="loginCredentials.username">
             </ion-input>
           </ion-item>
           <ion-item style="margin-bottom:10%">
-            <ion-input  class="grey-form" required text-center placeholder="test" type="password"
-              name="password">
+            <ion-input  class="grey-form w100" required text-center placeholder="Kata Sandi" type="password"
+              name="password" [(ngModel)]="loginCredentials.password">
             </ion-input>
           </ion-item>
-          <button ion-button block>MASUK PAK EKO !</button>
+          <button ion-button block>MASUK</button>
         </form>
         <p>Lupa password anda untuk masuk pak eko ? <b>Dapatkan bantuan untuk masuk</b></p>
+      </ion-col>
+
+      <ion-col float-left col-12>
+        <p (click)="goToRegisterPage()">Anda tidak punya akun ? <b>Buat Akun.</b></p>
       </ion-col>
     </ion-col>
   </ion-col>

@@ -36,3 +36,25 @@ body {
     background-color: #eeeeee;
     color: #828282;
 }
+
+.app-header {
+    // min-width: 56px;
+    // padding-bottom: 0px;
+    // height: 200px;
+}
+
+.app-header .app-header-button {
+    margin-top:1%;
+}
+
+.app-header .app-header-icon {
+    font-size:3.6rem;
+    color: #a3a1a0;
+}
+
+.app-course-title {
+    margin-right:4%;
+    color:#333;
+    font-weight: bold;
+    font-size: 28px;
+}
