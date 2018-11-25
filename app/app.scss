@@ -37,24 +37,32 @@ body {
     color: #828282;
 }
 
-.app-header {
-    // min-width: 56px;
-    // padding-bottom: 0px;
-    // height: 200px;
+.toolbar-background {
+    background-color: white;
 }
 
-.app-header .app-header-button {
-    margin-top:1%;
+// Top Bar Setting
+.custom-icon {
+    color: red;
 }
 
-.app-header .app-header-icon {
-    font-size:3.6rem;
-    color: #a3a1a0;
+// Tabs Setting
+.tabs .tabbar {
+    background-color: #fff;
 }
 
-.app-course-title {
-    margin-right:4%;
-    color:#333;
-    font-weight: bold;
-    font-size: 28px;
+.tabs-md .tab-button-icon, .tabs-ios .tab-button-icon{
+    color: grey !important;
+}
+
+.tabs-md .tab-button[aria-selected=true] .tab-button-icon, .tabs-ios .tab-button[aria-selected=true] .tab-button-icon {
+    color: red !important;
+}
+
+.tabs-md .tab-button, .tabs-ios .tab-button {
+    color: grey !important;
+}
+  
+.tabs-md .tab-button[aria-selected=true], .tabs-ios .tab-button[aria-selected=true] {
+    color: red !important;
 }

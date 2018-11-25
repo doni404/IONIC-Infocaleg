@@ -14,8 +14,8 @@ import 'rxjs/add/operator/toPromise';
 @Injectable()
 export class RestProvider {
 
-  apiUrl = 'http://backend.jhia.academy/api';
-  devApiUrl = 'http://52.198.34.72/api';
+  apiUrl = 'http://18.182.255.183/api';
+  // devApiUrl = 'http://52.198.34.72/api';
 
   constructor(
     public http: HttpClient,
@@ -40,7 +40,7 @@ export class RestProvider {
     });
 
     return new Promise((resolve, reject) => {
-      this.httpangular.post(this.apiUrl + '/login?token=2', postData, options)
+      this.httpangular.post(this.apiUrl + '/masuk?token=2', postData, options)
         .subscribe(res => {
           resolve(res.json());
           console.log(res);

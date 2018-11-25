@@ -3,7 +3,7 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { NotificationPage } from '../notification/notification';
 
 /**
- * Generated class for the TimelinePage page.
+ * Generated class for the DetailUserPage page.
  *
  * See https://ionicframework.com/docs/components/#navigation for more info on
  * Ionic pages and navigation.
@@ -11,20 +11,24 @@ import { NotificationPage } from '../notification/notification';
 
 @IonicPage()
 @Component({
-  selector: 'page-timeline',
-  templateUrl: 'timeline.html',
+  selector: 'page-detail-user',
+  templateUrl: 'detail-user.html',
 })
-export class TimelinePage {
+export class DetailUserPage {
 
   constructor(public navCtrl: NavController, public navParams: NavParams) {
   }
 
   ionViewDidLoad() {
-    console.log('ionViewDidLoad TimelinePage');
+    console.log('ionViewDidLoad DetailUserPage');
   }
 
   goToNotification() {
     this.navCtrl.push(NotificationPage);
+  }
+
+  goBack() {
+    this.navCtrl.pop();
   }
 
 }
