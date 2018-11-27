@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, LoadingController, AlertController} from 'ionic-angular';
+import { RestProvider } from '../../providers/rest/rest';
 
 /**
  * Generated class for the RegisterPage page.
@@ -15,7 +16,16 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 })
 export class RegisterPage {
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+  response: any;
+  registrationCredentials = { name: '', username: '', password: '', email: ''};
+
+  constructor(
+    public navCtrl: NavController, 
+    public navParams: NavParams,
+    public restProvider: RestProvider,
+    public loadingCtrl: LoadingController,
+    public alertCtrl: AlertController) {
+
   }
 
   ionViewDidLoad() {
@@ -24,6 +34,37 @@ export class RegisterPage {
 
   goToLoginPage() {
     this.navCtrl.pop();
+  }
+
+  register() {
+    let loader = this.loadingCtrl.create({
+      content: "Mohon tunggu..."
+    });
+    loader.present();
+
+    this.restProvider.register(this.registrationCredentials.name,this.registrationCredentials.username,this.registrationCredentials.password,this.registrationCredentials.email)
+      .then(data => {
+        this.response = data;
+
+        if(this.response.status == 'success'){
+
+          loader.dismiss();
+          this.showInfo('Registrasi sukses!');
+          this.navCtrl.pop();
+        }else{
+          loader.dismiss();
+          this.showInfo('Registrasi gagal, silahkan cek kolom!');
+        }
+    });
+  }
+
+  showInfo(text) {
+    let alert = this.alertCtrl.create({
+      title: 'Informasi',
+      subTitle: text,
+      buttons: ['Tutup']
+    });
+    alert.present();
   }
 
 }

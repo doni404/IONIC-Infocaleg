@@ -41,6 +41,11 @@ body {
     background-color: white;
 }
 
+.rounded-image {
+    object-fit: cover;
+    border-radius:50%;
+}
+
 // Top Bar Setting
 .custom-icon {
     color: red;

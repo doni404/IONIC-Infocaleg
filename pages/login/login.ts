@@ -59,6 +59,8 @@ export class LoginPage {
 
             loader.dismiss();
             this.showInfo('Login sukses!');
+
+            console.log("token : " + this.user.token);
   
             this.storage.set('token', this.user.token);
             this.storage.set('id', this.user.data[0].id);
@@ -66,6 +68,7 @@ export class LoginPage {
             this.storage.set('username', this.user.data[0].username);
             this.storage.set('email', this.user.data[0].email);
             this.storage.set('password', this.user.data[0].password);
+            this.storage.set('gambar', this.user.data[0].gambar);
             this.storage.set('role', this.user.data[0].role);
             this.storage.set('isLogin', "true");
             this.navCtrl.setRoot(TabsPage);

@@ -8,26 +8,26 @@
   <ion-col no-padding float-left col-12 text-center class="dIF aiCenter" style="height: 100%;">
     <ion-col no-padding float-left col-12>
       <ion-col float-left col-12>
-        <img class="app-login-logo" src="assets/imgs/icon2.png">
+        <!-- <img class="app-login-logo" src="assets/imgs/icon2.png"> -->
         <h2 class="app-second-title">INFO CALEG</h2>
       </ion-col>
 
       <ion-col float-left col-12>
-        <form class="form" #registerForm="ngForm">
+        <form class="form" (ngSubmit)="register()" #registerForm="ngForm">
           <ion-item style="margin-bottom:10%">
-            <ion-input class="grey-form w100" required text-center placeholder="Masukkan Nama Lengkap" type="text" name="fullname">
+            <ion-input class="grey-form w100" required text-center placeholder="Masukkan Nama Lengkap" type="text" name="name" [(ngModel)]="registrationCredentials.name">
             </ion-input>
           </ion-item>
           <ion-item style="margin-bottom:10%">
-            <ion-input class="grey-form w100" required text-center placeholder="Masukkan Nama Pengguna" type="text" name="username">
+            <ion-input class="grey-form w100" required text-center placeholder="Masukkan Nama Pengguna" type="text" name="username" [(ngModel)]="registrationCredentials.username">
             </ion-input>
           </ion-item>
           <ion-item style="margin-bottom:10%">
-            <ion-input class="grey-form w100" required text-center placeholder="Masukkan Kata Sandi" type="password" name="password">
+            <ion-input class="grey-form w100" required text-center placeholder="Masukkan Kata Sandi" type="password" name="password" [(ngModel)]="registrationCredentials.password">
             </ion-input>
           </ion-item>
           <ion-item style="margin-bottom:10%">
-            <ion-input class="grey-form w100" required text-center placeholder="Masukkan Email" type="email" name="email" pattern="[A-Za-z0-9._%+-]{3,}@[a-zA-Z._%+-]{3,}([.]{1}[a-zA-Z]{2,})">
+            <ion-input class="grey-form w100" required text-center placeholder="Masukkan Email" type="email" name="email" [(ngModel)]="registrationCredentials.email" pattern="[A-Za-z0-9._%+-]{3,}@[a-zA-Z._%+-]{3,}([.]{1}[a-zA-Z]{2,})">
             </ion-input>
           </ion-item>
           <button ion-button block>DAFTAR</button>

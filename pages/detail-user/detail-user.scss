@@ -1,3 +1,47 @@
 page-detail-user {
+    .detail-profile {
+        margin-top: 5%;
+    }
 
+    .detail-profile h6, .detail-profile input {
+        margin-top: 2%;
+    }
+
+    .profile-item {
+        margin-top: 5%;
+        padding: 10px 10px 10px 10px;
+        border-top: 1px solid rgba($color: grey, $alpha: 0.1);
+        border-bottom: 1px solid rgba($color: grey, $alpha: 0.1);
+    }
+
+    .profile-item p{
+        font-size: 10px;
+    }
+
+    .floating-button-edit {
+        position: absolute;
+        top: -10px;
+        left: -145px;
+    }
+
+    .floating-button-edit p, .floating-button-save p {
+        font-size: 11px;
+    }
+
+    .floating-button-save {
+        position: absolute;
+        top: -10px;
+        left: -145px;
+    }
+
+    // .circle {
+    //     width: 80px;
+    //     height: 80px;
+    //     border-radius: 50%;
+    //     font-size: 30px;
+    //     color: #fff;
+    //     line-height: 80px;
+    //     text-align: center;
+    //     background: #2980b9;
+    // }
 }

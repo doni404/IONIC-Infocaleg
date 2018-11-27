@@ -21,6 +21,55 @@
 </ion-header>
 
 
-<ion-content padding>
-  this is detail user page
+<ion-content no-padding>
+  <ion-row style="margin-bottom: 20%" class="detail-profile">
+    <ion-col col-12 text-center style="position: relative;">
+      <ion-col *ngIf="isEdit == false" class="floating-button-edit" (click)="openEdit()">
+        <img no-padding src="../../assets/imgs/logo.png" width="10%">
+        <p no-margin>Edit Profil</p>
+      </ion-col>
+
+      <ion-col *ngIf="isEdit == true" class="floating-button-save" (click)="edit()">
+        <img no-padding src="../../assets/imgs/logo.png" width="10%">
+        <p no-margin>Simpan</p>
+      </ion-col>
+
+      <ion-col no-padding>
+        <img *ngIf="profileImage == null" no-padding src="../../assets/imgs/logo.png" width="90px" height="90px" class="rounded-image">
+        <img *ngIf="profileImage != null" no-padding src="http://18.182.255.183/api/getprofile/{{profileImage}}?token={{token}}"
+          width="90px" height="90px" class="rounded-image">
+
+        <ion-col no-padding>
+          <h6 *ngIf="isEdit == false" no-margin>{{profileName}}</h6>
+          <input *ngIf="isEdit == true" no-margin [(ngModel)]="profileName" style="font-size: 16px;font-weight:500">
+        </ion-col>
+      </ion-col>
+      <!-- <ion-col text-center>
+        <div text-center class="circle">D</div>
+      </ion-col> -->
+    </ion-col>
+
+    <ion-row no-padding text-center class="profile-item">
+      <ion-col col-3 col-md-3>
+        <img no-padding src="../../assets/imgs/ic_thumb_down1.png" width="40%">
+        <p no-margin>200k
+          <br>Disukai</p>
+      </ion-col>
+      <ion-col col-3 col-md-3>
+        <img no-padding src="../../assets/imgs/ic_thumb_up1.png" width="40%">
+        <p no-margin>200k
+          <br>Tidak Suka</p>
+      </ion-col>
+      <ion-col col-3 col-md-3>
+        <img no-padding src="../../assets/imgs/logo.png" width="40%">
+        <p no-margin>200k
+          <br>Dikomentari</p>
+      </ion-col>
+      <ion-col col-3 col-md-3>
+        <img no-padding src="../../assets/imgs/logo.png" width="40%">
+        <p no-margin>200k
+          <br>Dibagikan</p>
+      </ion-col>
+    </ion-row>
+  </ion-row>
 </ion-content>
