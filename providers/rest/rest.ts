@@ -40,7 +40,59 @@ export class RestProvider {
     });
 
     return new Promise((resolve, reject) => {
-      this.httpangular.post(this.apiUrl + '/masuk?token=2', postData, options)
+      this.httpangular.post(this.apiUrl + '/masuk?token=true', postData, options)
+        .subscribe(res => {
+          resolve(res.json());
+          console.log(res);
+        }, (err) => {
+          reject(err);
+        });
+    });
+  }
+
+  register(name, username, password, email) {
+
+    let headers = new Headers(
+      {
+        'Content-Type': 'application/json'
+      });
+
+    let options = new RequestOptions({ headers: headers });
+
+    let postData = JSON.stringify({
+      "name": name,
+      "username": username,
+      "password": password,
+      "email": email
+    });
+
+    return new Promise((resolve, reject) => {
+      this.httpangular.post(this.apiUrl + '/daftar?token=true', postData, options)
+        .subscribe(res => {
+          resolve(res.json());
+          console.log(res);
+        }, (err) => {
+          reject(err);
+        });
+    });
+  }
+
+  editProfile(name, idPengguna, token) {
+
+    let headers = new Headers(
+      {
+        'Content-Type': 'application/json'
+      });
+
+    let options = new RequestOptions({ headers: headers });
+
+    let postData = JSON.stringify({
+      "name": name,
+      "pengguna_id": idPengguna
+    });
+
+    return new Promise((resolve, reject) => {
+      this.httpangular.put(this.apiUrl + '/ubahprofil' + '?token=' + token, postData, options)
         .subscribe(res => {
           resolve(res.json());
           console.log(res);
