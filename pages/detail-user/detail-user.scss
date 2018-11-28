@@ -1,4 +1,11 @@
 page-detail-user {
+    #history-list p {
+        font-size: 12px;
+        word-break: break-all;
+        white-space: normal;
+        width: 100%;
+    }
+
     .detail-profile {
         margin-top: 5%;
     }
@@ -32,6 +39,21 @@ page-detail-user {
         position: absolute;
         top: -10px;
         left: -145px;
+    }
+
+    .item[no-lines].bottom-border { 
+        // border-top: 1px solid rgba($color: grey, $alpha: 0.1);
+        border-bottom: 1px solid rgba($color: grey, $alpha: 0.1);
+    }
+
+    span.caption {
+        font-weight: bold;
+        font-size: 12;
+    }
+
+    .qa-content {
+        padding-top: 2% !important;
+        padding-bottom: 2%;
     }
 
     // .circle {

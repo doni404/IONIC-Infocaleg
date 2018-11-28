@@ -51,25 +51,40 @@
 
     <ion-row no-padding text-center class="profile-item">
       <ion-col col-3 col-md-3>
-        <img no-padding src="../../assets/imgs/ic_thumb_down1.png" width="40%">
+        <img no-padding src="../../assets/imgs/logo.png" width="40%">
         <p no-margin>200k
           <br>Disukai</p>
       </ion-col>
       <ion-col col-3 col-md-3>
-        <img no-padding src="../../assets/imgs/ic_thumb_up1.png" width="40%">
+        <img no-padding src="../../assets/imgs/logo.png" width="40%">
         <p no-margin>200k
           <br>Tidak Suka</p>
       </ion-col>
       <ion-col col-3 col-md-3>
         <img no-padding src="../../assets/imgs/logo.png" width="40%">
         <p no-margin>200k
-          <br>Dikomentari</p>
+          <br>Komentar</p>
       </ion-col>
       <ion-col col-3 col-md-3>
         <img no-padding src="../../assets/imgs/logo.png" width="40%">
         <p no-margin>200k
           <br>Dibagikan</p>
       </ion-col>
+    </ion-row>
+
+    <ion-row no-padding text-center style="margin-top: 5px">
+      <ion-list id="history-list">
+        <ion-item no-lines class="bottom-border" *ngFor="let term of yourArray;">
+          <ion-row class="w100" no-padding>
+            <ion-col col-2 col-md-2 no-padding>
+              <img no-padding src="../../assets/imgs/logo.png" width="80%" class="rounded-image">
+            </ion-col>
+            <ion-col col-10 col-md-10 no-padding>
+              <p><span class="caption">Imam Ghz</span> mengomentari kampanye dari caleg nomor 1 pada halaman kampanye caleg</p>
+            </ion-col>
+          </ion-row>
+        </ion-item>
+      </ion-list>
     </ion-row>
   </ion-row>
 </ion-content>

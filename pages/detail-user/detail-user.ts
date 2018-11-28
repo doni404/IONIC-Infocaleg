@@ -24,6 +24,7 @@ export class DetailUserPage {
   profileName: any;
   isEdit = false;
   response: any;
+  yourArray = ['first','second'];
 
   constructor(
     public navCtrl: NavController, 
