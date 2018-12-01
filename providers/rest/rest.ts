@@ -19,7 +19,7 @@ export class RestProvider {
 
   constructor(
     public http: HttpClient,
-    public httpangular: Http,) {
+    public httpangular: Http, ) {
     console.log('Hello RestProvider Provider');
   }
 
@@ -40,7 +40,7 @@ export class RestProvider {
     });
 
     return new Promise((resolve, reject) => {
-      this.httpangular.post(this.apiUrl + '/masuk?token=true', postData, options)
+      this.httpangular.post(this.apiUrl + '/login?token=true', postData, options)
         .subscribe(res => {
           resolve(res.json());
           console.log(res);
@@ -67,7 +67,7 @@ export class RestProvider {
     });
 
     return new Promise((resolve, reject) => {
-      this.httpangular.post(this.apiUrl + '/daftar?token=true', postData, options)
+      this.httpangular.post(this.apiUrl + '/register?token=true', postData, options)
         .subscribe(res => {
           resolve(res.json());
           console.log(res);
@@ -92,7 +92,85 @@ export class RestProvider {
     });
 
     return new Promise((resolve, reject) => {
-      this.httpangular.put(this.apiUrl + '/ubahprofil' + '?token=' + token, postData, options)
+      this.httpangular.put(this.apiUrl + '/changeprofile' + '?token=' + token, postData, options)
+        .subscribe(res => {
+          resolve(res.json());
+          console.log(res);
+        }, (err) => {
+          reject(err);
+        });
+    });
+  }
+
+  getAllTimeline(penggunaId, sort = "new", token) {
+    if (token != '' || token != null) {
+      console.log('token : true');
+    }
+
+    let headers = new Headers(
+      {
+        'Content-Type': 'application/x-www-form-urlencoded',
+      });
+
+    let options = new RequestOptions({ headers: headers });
+    console.log(this.apiUrl + '/campaigntimeline/' + penggunaId + '/' + sort + '?token=' + token);
+    return new Promise(resolve => {
+      this.httpangular.get(this.apiUrl + '/campaigntimeline/' + penggunaId + '/' + sort + '?token=' + token, options)
+        .subscribe(res => {
+          resolve(res.json());
+        }, (err) => {
+          console.log(err);
+        });
+    });
+  }
+
+  likeCampaign(idKampanye, idPengguna, token) {
+    if (token != '' || token != null) {
+      console.log('token : true');
+    }
+
+    let headers = new Headers(
+      {
+        'Content-Type': 'application/json'
+      });
+
+    let options = new RequestOptions({ headers: headers });
+
+    let postData = JSON.stringify({
+      "id_kampanye": idKampanye,
+      "id_pengguna": idPengguna
+    });
+
+    return new Promise((resolve, reject) => {
+      this.httpangular.put(this.apiUrl + '/campaignlike' + '?token=' + token, postData, options)
+        .subscribe(res => {
+          resolve(res.json());
+          console.log(res);
+        }, (err) => {
+          reject(err);
+        });
+    });
+  }
+
+  dislikeCampaign(idKampanye, idPengguna, token) {
+    if (token != '' || token != null) {
+      console.log('token : true');
+    }
+
+    let headers = new Headers(
+      {
+        'Content-Type': 'application/json'
+      });
+
+    let options = new RequestOptions({ headers: headers });
+
+    let postData = JSON.stringify({
+      "id_kampanye": idKampanye,
+      "id_pengguna": idPengguna
+    });
+
+    return new Promise((resolve, reject) => {
+      this.httpangular.put(this.apiUrl + '/campaigndislike' + '?token=' + token, postData, options)
         .subscribe(res => {
           resolve(res.json());
           console.log(res);

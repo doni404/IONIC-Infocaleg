@@ -28,8 +28,63 @@
   </ion-navbar>
 </ion-header>
 
-<ion-content padding>
-  this is timeline page
+<ion-content no-padding>
+  <ion-row no-padding no-margin class="w100">
+    <ion-col col-12 no-padding class="timeline" *ngFor="let timeline of timelines; let i= index">
+      <ion-col no-padding col-12 class="timeline-title dIF aiCenter">
+        <ion-col col-2 class="title-info">
+          <img *ngIf="timeline.gambar_pengguna != ''" no-padding no-margin src="{{apiUrl}}/getprofile/{{timeline.gambar_pengguna}}?token={{token}}"
+            width="30px" height="30px" class="rounded-image">
+          <img *ngIf="timeline.gambar_pengguna == ''" no-padding no-margin src="../../assets/imgs/profile-test.jpg" width="30px" height="30px"
+            class="rounded-image">
+        </ion-col>
+        <ion-col col-8 class="title-info">
+          <p no-margin>{{timeline.nama_pengguna}}</p>
+        </ion-col>
+        <ion-col col-2 class="title-info">
+          <p no-margin>{{timeline.lama_posting}} Jam</p>
+        </ion-col>
+      </ion-col>
+      <ion-col no-padding col-12 class="timeline-image dIF aiCenter">
+        <img *ngIf="timeline.link_gambar_kampanye != ''" class="w100" src="{{apiUrl}}/getcampaignimage/{{timeline.link_gambar_kampanye}}?token={{token}}" height="200px">
+        <img *ngIf="timeline.link_gambar_kampanye == ''" class="w100" src="../../assets/imgs/timeline/timeline1.jpg" height="200px">
+      </ion-col>
+      <ion-col col-12 no-padding no-margin class="timeline-button dIF aiCenter">
+        <img (click)="likeCampaign(timeline.id, penggunaId, token, i)" class="button-icon" no-padding [src]="timeline.like_icon">
+        <img (click)="dislikeCampaign(timeline.id, penggunaId, token, i)" class="button-icon" no-padding [src]="timeline.dislike_icon">
+        <img class="button-icon" no-padding src="../../assets/imgs/icon/comment.png">
+        <img class="button-icon" no-padding src="../../assets/imgs/icon/share.png">
+        <!-- <ion-icon item-right class="button-icon" name="more" style="zoom: 1.5;"></ion-icon> -->
+        <!-- <ion-icon name="ios-thumbs-up"></ion-icon>
+        <ion-icon name="ios-thumbs-down"></ion-icon>
+        <ion-icon name="ios-text-outline"></ion-icon>
+        <ion-icon name="ios-send-outline"></ion-icon> -->
+      </ion-col>
+      <ion-col col-12 class="timeline-total-like dIF aiCenter">
+        <ion-col col-12 col-md-12 no-padding>
+          <p no-padding no-margin>
+            <b>{{timeline.total_like}}</b> Orang lainnya menyukai ini</p>
+        </ion-col>
+      </ion-col>
+      <ion-col col-12 class="timeline-description dIF">
+        <ion-col col-12 col-md-12 no-padding>
+          <p no-padding no-margin>
+            <b>{{timeline.nama_pengguna}}</b> {{timeline.deskripsi_kampanye}}</p>
+        </ion-col>
+      </ion-col>
+      <ion-col col-12 no-padding class="timeline-comment dIF aiCenter">
+        <ion-col col-2 class="comment-child">
+          <img *ngIf="profileImage == null" no-padding no-margin src="../../assets/imgs/logo.png" width="30px" height="30px" class="rounded-image">
+          <img *ngIf="profileImage != null" no-padding no-margin src="{{apiUrl}}/getprofile/{{profileImage}}?token={{token}}" width="30px"
+            height="30px" class="rounded-image">
+        </ion-col>
+        <ion-col col-10 class="comment-child">
+          <p no-margin>Komentar...</p>
+        </ion-col>
+      </ion-col>
+    </ion-col>
+  </ion-row>
+
   <ion-fab right bottom>
     <button class="fab" ion-fab mini color="danger">
       <ion-icon name="add"></ion-icon>

@@ -1,4 +1,75 @@
 page-timeline {
+    .timeline {
+        height: 420px;
+        max-height: 420px;
+    }
+
+    .timeline-title {
+        background-color: white;
+        height: 45px;
+        font-size: 12px;
+    }
+
+    .timeline-title .title-info:nth-child(1) {
+        text-align: center;
+        align-items: center;
+        vertical-align: middle;
+    }
+
+    .timeline-title .title-info:last-child {
+        float: right;
+    }
+
+    .timeline-image {
+        background-color: green;
+        height: 200px;
+    }
+
+    .timeline-button {
+        padding: 5px 10px 10px 10px;
+        background-color: white;
+        height: 30px;
+        border-bottom: 1px solid rgba($color: grey, $alpha: 0.1);
+    }
+
+    .timeline-button img.button-icon {
+        width: 18px;
+    }
+
+    .timeline-button img.button-icon:not(:first-child), .timeline-button img.button-icon:not(:first-child) {
+        margin-left: 10px;
+    }
+
+    .timeline-button img.button-icon:last-child {
+        float: right;
+    }
+
+    .timeline-total-like {
+        padding: 5px 10px;
+        // background-color: green;
+        height: 30px;
+    }
+
+    .timeline-description {
+        padding: 5px 10px;
+        // background-color: green;
+        max-height: 75px;
+        margin-bottom: 5px;
+    }
+
+    .timeline-comment {
+        height: 40px;
+    }
+
+    .timeline-comment .comment-child:nth-child(1) {
+        text-align: center;
+    }
+
+    .timeline-comment .comment-child:nth-child(2) p {
+        font-size: 11px;
+        color: lightgray;
+    }
+
     .fab[mini] {
         margin: 8px;
         width: 45px;
