@@ -95,10 +95,12 @@ export class TimelinePage {
         if (this.response.status == "success") {
           if (this.response.action == "delete") {
             console.log("berhasil di delete");
+            this.timelines[index].pengguna_like = false;
             this.timelines[index].total_like -= 1;
             this.timelines[index].like_icon = "../../assets/imgs/icon/thumb-up-inactive.png";
           }else if (this.response.action == "insert") {
             console.log("berhasil di insert");
+            this.timelines[index].pengguna_like = true;
             this.timelines[index].total_like += 1;
             this.timelines[index].like_icon = "../../assets/imgs/icon/thumb-up-active.png";
           }
@@ -116,9 +118,11 @@ export class TimelinePage {
         if (this.response.status == "success") {
           if (this.response.action == "delete") {
             console.log("berhasil di delete");
+            this.timelines[index].pengguna_dislike = false;
             this.timelines[index].dislike_icon = "../../assets/imgs/icon/thumb-down-inactive.png";
           }else if (this.response.action == "insert") {
             console.log("berhasil di insert");
+            this.timelines[index].pengguna_dislike = true;
             this.timelines[index].dislike_icon = "../../assets/imgs/icon/thumb-down-active.png"
           }
         }else {
