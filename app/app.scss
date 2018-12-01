@@ -1,6 +1,5 @@
 // http://ionicframework.com/docs/theming/
 
-
 // App Global Sass
 // --------------------------------------------------
 // Put style rules here that you want to apply globally. These
@@ -15,63 +14,75 @@
 // for the .md, .ios, or .wp mode classes. The mode class is
 // automatically applied to the <body> element in the app.
 
-.w100{
-    width:100%;
+.w100 {
+  width: 100%;
 }
 
-.dIF{
-    display: inline-flex;
+.dIF {
+  display: inline-flex;
 }
 
-.aiCenter{
-    align-items: center;
+.aiCenter {
+  align-items: center;
 }
 
 p {
-    font-size: 13px;
+  font-size: 13px;
 }
 
 body {
-    font-family: -apple-system, BlinkMacSystemFont, sans-serif;
+  font-family: -apple-system, BlinkMacSystemFont, sans-serif;
 }
 
+// form style
 .form .grey-form {
-    padding: 10px 5px;
-    background-color: #eeeeee;
-    color: #828282;
+  background-color: #eeeeee;
+  color: #828282;
+}
+.input-field {
+  padding: 0%;
+  margin-bottom: 10px;
+  border-radius: 4px;
+}
+.item-ios.item-block .item-inner{
+    border-bottom: transparent;
 }
 
 .toolbar-background {
-    background-color: white;
+  background-color: white;
 }
 
 .rounded-image {
-    object-fit: cover;
-    border-radius:50%;
+  object-fit: cover;
+  border-radius: 50%;
 }
 
 // Top Bar Setting
 .custom-icon {
-    color: red;
+  color: red;
 }
 
 // Tabs Setting
 .tabs .tabbar {
-    background-color: #fff;
+  background-color: #fff;
 }
 
-.tabs-md .tab-button-icon, .tabs-ios .tab-button-icon{
-    color: grey !important;
+.tabs-md .tab-button-icon,
+.tabs-ios .tab-button-icon {
+  color: grey !important;
 }
 
-.tabs-md .tab-button[aria-selected=true] .tab-button-icon, .tabs-ios .tab-button[aria-selected=true] .tab-button-icon {
-    color: red !important;
+.tabs-md .tab-button[aria-selected="true"] .tab-button-icon,
+.tabs-ios .tab-button[aria-selected="true"] .tab-button-icon {
+  color: red !important;
 }
 
-.tabs-md .tab-button, .tabs-ios .tab-button {
-    color: grey !important;
+.tabs-md .tab-button,
+.tabs-ios .tab-button {
+  color: grey !important;
 }
-  
-.tabs-md .tab-button[aria-selected=true], .tabs-ios .tab-button[aria-selected=true] {
-    color: red !important;
+
+.tabs-md .tab-button[aria-selected="true"],
+.tabs-ios .tab-button[aria-selected="true"] {
+  color: red !important;
 }

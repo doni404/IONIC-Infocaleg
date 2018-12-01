@@ -9,16 +9,16 @@
       <ion-col float-left col-12>
         <form class="form" (ngSubmit)="login()" #registerForm="ngForm">
           <ion-item>
-            <ion-input class="grey-form w100" required text-center placeholder="Nama Pengguna" type="text"
+            <ion-input class="grey-form input-field w100" required text-center placeholder="Nama Pengguna" type="text"
               name="username" [(ngModel)]="loginCredentials.username">
             </ion-input>
           </ion-item>
           <ion-item style="margin-bottom:10%">
-            <ion-input  class="grey-form w100" required text-center placeholder="Kata Sandi" type="password"
+            <ion-input  class="grey-form input-field w100" required text-center placeholder="Kata Sandi" type="password"
               name="password" [(ngModel)]="loginCredentials.password">
             </ion-input>
           </ion-item>
-          <button ion-button block>MASUK</button>
+          <button ion-button block >MASUK</button>
         </form>
         <p>Lupa password anda untuk masuk pak eko ? <b>Dapatkan bantuan untuk masuk</b></p>
       </ion-col>
