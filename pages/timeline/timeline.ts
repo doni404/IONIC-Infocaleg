@@ -1,9 +1,11 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
-import { NotificationPage } from '../notification/notification';
+import { IonicPage, NavController, NavParams, App } from 'ionic-angular';
 import { Storage } from '@ionic/storage';
 import { RestProvider } from '../../providers/rest/rest';
 import moment from 'moment';
+
+import { NotificationPage } from '../notification/notification';
+import { CommentPage } from '../comment/comment';
 
 /**
  * Generated class for the TimelinePage page.
@@ -27,8 +29,11 @@ export class TimelinePage {
   profileName: any;
   response: any;
   timelines: any;
+  sort = "new";
+  isChangeSort = false;
 
   constructor(
+    public app: App,
     public navCtrl: NavController,
     private storage: Storage,
     public restProvider: RestProvider,
@@ -49,62 +54,66 @@ export class TimelinePage {
 
             console.log(this.token);
 
-            this.restProvider.getAllTimeline(this.penggunaId, "new", this.token)
-              .then(data => {
-                this.response = data;
-                this.timelines = this.response.data;
-
-                this.timelines.forEach(function (value) {
-                  console.log(value.deskripsi_kampanye + "\n");
-
-                  //check posting time until now
-                  var now = moment(new Date());
-                  var create_date = moment(value.created_at);
-
-                  var duration = moment.duration(create_date.diff(now));
-                  var hours = duration.asHours();
-
-                  value.lama_posting = Math.floor(hours);
-
-                  if (value.pengguna_like == true) {
-                    value.like_icon = "../../assets/imgs/icon/thumb-up-active.png";
-                  }else {
-                    value.like_icon = "../../assets/imgs/icon/thumb-up-inactive.png";
-                  }
-
-                  if (value.pengguna_dislike == true) {
-                    value.dislike_icon = "../../assets/imgs/icon/thumb-down-active.png"
-                  }else {
-                    value.dislike_icon = "../../assets/imgs/icon/thumb-down-inactive.png"
-                  }
-
-                  console.log("total jam : " + hours);
-                });
-              });
+            this.getAllTimeline(this.sort);
           });
         });
       });
     });
   }
 
+  getAllTimeline(sort) {
+    this.restProvider.getAllTimeline(this.penggunaId, sort, this.token)
+      .then(data => {
+        this.response = data;
+        this.timelines = this.response.data;
+
+        this.timelines.forEach(function (value) {
+          console.log(value.deskripsi_kampanye + "\n");
+
+          //check posting time until now
+          var now = moment(new Date());
+          var create_date = moment(value.created_at);
+
+          var duration = moment.duration(create_date.diff(now));
+          var hours = duration.asHours();
+
+          value.lama_posting = Math.abs(Math.floor(hours));
+
+          if (value.pengguna_like == true) {
+            value.like_icon = "../../assets/imgs/icon/thumb-up-active.png";
+          } else {
+            value.like_icon = "../../assets/imgs/icon/thumb-up-inactive.png";
+          }
+
+          if (value.pengguna_dislike == true) {
+            value.dislike_icon = "../../assets/imgs/icon/thumb-down-active.png"
+          } else {
+            value.dislike_icon = "../../assets/imgs/icon/thumb-down-inactive.png"
+          }
+
+          console.log("total jam : " + hours);
+        });
+      });
+  }
+
   likeCampaign(idKampanye, idPengguna, token, index) {
     this.restProvider.likeCampaign(idKampanye, idPengguna, token)
       .then(data => {
         this.response = data;
-        
+
         if (this.response.status == "success") {
           if (this.response.action == "delete") {
             console.log("berhasil di delete");
             this.timelines[index].pengguna_like = false;
             this.timelines[index].total_like -= 1;
             this.timelines[index].like_icon = "../../assets/imgs/icon/thumb-up-inactive.png";
-          }else if (this.response.action == "insert") {
+          } else if (this.response.action == "insert") {
             console.log("berhasil di insert");
             this.timelines[index].pengguna_like = true;
             this.timelines[index].total_like += 1;
             this.timelines[index].like_icon = "../../assets/imgs/icon/thumb-up-active.png";
           }
-        }else {
+        } else {
           console.log("gagal");
         }
       });
@@ -114,24 +123,49 @@ export class TimelinePage {
     this.restProvider.dislikeCampaign(idKampanye, idPengguna, token)
       .then(data => {
         this.response = data;
-        
+
         if (this.response.status == "success") {
           if (this.response.action == "delete") {
             console.log("berhasil di delete");
             this.timelines[index].pengguna_dislike = false;
             this.timelines[index].dislike_icon = "../../assets/imgs/icon/thumb-down-inactive.png";
-          }else if (this.response.action == "insert") {
+          } else if (this.response.action == "insert") {
             console.log("berhasil di insert");
             this.timelines[index].pengguna_dislike = true;
             this.timelines[index].dislike_icon = "../../assets/imgs/icon/thumb-down-active.png"
           }
-        }else {
+        } else {
           console.log("gagal");
         }
       });
   }
 
+  toggleSort() {
+    if (this.isChangeSort) {
+      this.isChangeSort = false;
+    }else {
+      this.isChangeSort = true;
+    }
+  }
+
+  changeSort(type) {
+    this.isChangeSort = false;
+    this.sort = type;
+    this.getAllTimeline(this.sort);
+  }
+
+  goToComment(idKampanye, deskripsiKampanye, namaPengguna, gambarPengguna) {
+    // This to hide tabs on CommentPage
+    this.app.getRootNav().push(CommentPage, {
+      idKampanye: idKampanye,
+      deskripsiKampanye: deskripsiKampanye,
+      namaPengguna: namaPengguna,
+      gambarPengguna: gambarPengguna
+    });
+  }
+
   goToNotification() {
-    this.navCtrl.push(NotificationPage);
+    // this.navCtrl.push(NotificationPage);
+    this.app.getRootNav().push(NotificationPage);
   }
 }

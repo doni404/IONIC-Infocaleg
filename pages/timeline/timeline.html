@@ -15,7 +15,7 @@
 <ion-header>
   <ion-navbar>
     <ion-buttons left>
-      <button ion-button icon-only>
+      <button (click)="toggleSort()" ion-button icon-only>
         <ion-icon class="custom-icon" name="more"></ion-icon>
       </button>
     </ion-buttons>
@@ -46,13 +46,15 @@
         </ion-col>
       </ion-col>
       <ion-col no-padding col-12 class="timeline-image dIF aiCenter">
-        <img *ngIf="timeline.link_gambar_kampanye != ''" class="w100" src="{{apiUrl}}/getcampaignimage/{{timeline.link_gambar_kampanye}}?token={{token}}" height="200px">
+        <img *ngIf="timeline.link_gambar_kampanye != ''" class="w100" src="{{apiUrl}}/getcampaignimage/{{timeline.link_gambar_kampanye}}?token={{token}}"
+          height="200px">
         <img *ngIf="timeline.link_gambar_kampanye == ''" class="w100" src="../../assets/imgs/timeline/timeline1.jpg" height="200px">
       </ion-col>
       <ion-col col-12 no-padding no-margin class="timeline-button dIF aiCenter">
         <img (click)="likeCampaign(timeline.id, penggunaId, token, i)" class="button-icon" no-padding [src]="timeline.like_icon">
         <img (click)="dislikeCampaign(timeline.id, penggunaId, token, i)" class="button-icon" no-padding [src]="timeline.dislike_icon">
-        <img class="button-icon" no-padding src="../../assets/imgs/icon/comment.png">
+        <img (click)="goToComment(timeline.id, timeline.deskripsi_kampanye, timeline.nama_pengguna, timeline.gambar_pengguna)" class="button-icon"
+          no-padding src="../../assets/imgs/icon/comment.png">
         <img class="button-icon" no-padding src="../../assets/imgs/icon/share.png">
         <!-- <ion-icon item-right class="button-icon" name="more" style="zoom: 1.5;"></ion-icon> -->
         <!-- <ion-icon name="ios-thumbs-up"></ion-icon>
@@ -63,7 +65,8 @@
       <ion-col col-12 class="timeline-total-like dIF aiCenter">
         <ion-col col-12 col-md-12 no-padding>
           <p no-padding no-margin>
-            <b><span *ngIf="timeline.pengguna_like == true">Anda dan </span>{{timeline.total_like}}</b> Orang lainnya menyukai ini</p>
+            <b>
+              <span *ngIf="timeline.pengguna_like == true">Anda dan </span>{{timeline.total_like}}</b> Orang lainnya menyukai ini</p>
         </ion-col>
       </ion-col>
       <ion-col col-12 class="timeline-description dIF">
@@ -78,7 +81,8 @@
           <img *ngIf="profileImage != null" no-padding no-margin src="{{apiUrl}}/getprofile/{{profileImage}}?token={{token}}" width="30px"
             height="30px" class="rounded-image">
         </ion-col>
-        <ion-col col-10 class="comment-child">
+        <ion-col (click)="goToComment(timeline.id, timeline.deskripsi_kampanye, timeline.nama_pengguna, timeline.gambar_pengguna)"
+          col-10 class="comment-child">
           <p no-margin>Komentar...</p>
         </ion-col>
       </ion-col>
@@ -91,3 +95,15 @@
     </button>
   </ion-fab>
 </ion-content>
+
+<!-- This is comment field -->
+<ion-col *ngIf="isChangeSort == true" no-padding col-12 class="w100 timeline-sort aiCenter">
+  <ion-col (click)="changeSort('populer')" col-12 class="sort-child">
+    <p *ngIf="sort == 'populer'" id="sort-populer" no-padding no-margin style="color: orangered">Terpopuler</p>
+    <p *ngIf="sort != 'populer'" id="sort-populer" no-padding no-margin>Terpopuler</p>
+  </ion-col>
+  <ion-col (click)="changeSort('new')" col-12 class="sort-child">
+    <p *ngIf="sort == 'new'" id="sort-populer" no-padding no-margin style="color: orangered">Terbaru</p>
+    <p *ngIf="sort != 'new'" id="sort-populer" no-padding no-margin>Terbaru</p>
+  </ion-col>
+</ion-col>

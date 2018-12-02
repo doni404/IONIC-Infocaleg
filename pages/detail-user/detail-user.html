@@ -25,22 +25,25 @@
   <ion-row style="margin-bottom: 20%" class="detail-profile">
     <ion-col col-12 text-center style="position: relative;">
       <ion-col *ngIf="isEdit == false" class="floating-button-edit" (click)="openEdit()">
-        <img no-padding src="../../assets/imgs/logo.png" width="10%">
+        <img no-padding src="../../assets/imgs/icon/config.png" width="8%">
         <p no-margin>Edit Profil</p>
       </ion-col>
 
       <ion-col *ngIf="isEdit == true" class="floating-button-save" (click)="edit()">
-        <img no-padding src="../../assets/imgs/logo.png" width="10%">
+        <img no-padding src="../../assets/imgs/icon/config.png" width="8%">
         <p no-margin>Simpan</p>
       </ion-col>
 
-      <ion-col no-padding>
-        <img *ngIf="profileImage == null" no-padding src="../../assets/imgs/logo.png" width="90px" height="90px" class="rounded-image">
-        <img *ngIf="profileImage != null" no-padding src="http://18.182.255.183/api/getprofile/{{profileImage}}?token={{token}}"
-          width="90px" height="90px" class="rounded-image">
-
-        <ion-col no-padding>
+      <ion-col col-12 no-padding>
+        <ion-col col-12 no-padding class="dIf aiCenter">
+          <img *ngIf="profileImage == null" no-padding src="../../assets/imgs/logo.png" width="90px" height="90px" class="rounded-image">
+          <img *ngIf="profileImage != null" no-padding src="http://18.182.255.183/api/getprofile/{{profileImage}}?token={{token}}"
+            width="90px" height="90px" class="rounded-image">
+        </ion-col>
+        <ion-col col-12 no-padding>
           <h6 *ngIf="isEdit == false" no-margin>{{profileName}}</h6>
+        </ion-col>
+        <ion-col col-12 no-padding>
           <input *ngIf="isEdit == true" no-margin [(ngModel)]="profileName" style="font-size: 16px;font-weight:500">
         </ion-col>
       </ion-col>
@@ -49,29 +52,29 @@
       </ion-col> -->
     </ion-col>
 
-    <ion-row no-padding text-center class="profile-item">
+    <ion-row no-padding text-center class="profile-item dIf aiCenter">
       <ion-col col-3 col-md-3>
         <img no-padding src="../../assets/imgs/icon/thumb-up-active.png" width="40%">
         <!-- <ion-icon name="ios-thumbs-up" [style.color]="'#2980b9'" style="zoom:2.0;"></ion-icon> -->
-        <p no-margin>200k
+        <p no-margin>{{totalCommentLike}}
           <br>Disukai</p>
       </ion-col>
       <ion-col col-3 col-md-3>
         <img no-padding src="../../assets/imgs/icon/thumb-down-active.png" width="40%">
         <!-- <ion-icon name="ios-thumbs-down" [style.color]="'#2980b9'" style="zoom:2.0;"></ion-icon> -->
-        <p no-margin>200k
+        <p no-margin>{{totalCommentDislike}}
           <br>Tidak Suka</p>
       </ion-col>
       <ion-col col-3 col-md-3>
         <img no-padding src="../../assets/imgs/icon/comment.png" width="40%">
         <!-- <ion-icon name="ios-text-outline" style="zoom:2.0;"></ion-icon> -->
-        <p no-margin>200k
+        <p no-margin>{{totalComment}}
           <br>Komentar</p>
       </ion-col>
       <ion-col col-3 col-md-3>
         <img no-padding src="../../assets/imgs/icon/share.png" width="40%">
         <!-- <ion-icon name="ios-send-outline" style="zoom:2.0;"></ion-icon> -->
-        <p no-margin>200k
+        <p no-margin>20
           <br>Dibagikan</p>
       </ion-col>
     </ion-row>
@@ -84,7 +87,8 @@
               <img no-padding src="../../assets/imgs/logo.png" width="80%" class="rounded-image">
             </ion-col>
             <ion-col col-10 col-md-10 no-padding>
-              <p><span class="caption">Imam Ghz</span> mengomentari kampanye dari caleg nomor 1 pada halaman kampanye caleg</p>
+              <p>
+                <span class="caption">Imam Ghz</span> mengomentari kampanye dari caleg nomor 1 pada halaman kampanye caleg</p>
             </ion-col>
           </ion-row>
         </ion-item>

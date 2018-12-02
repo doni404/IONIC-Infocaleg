@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, AlertController} from 'ionic-angular';
+import { IonicPage, NavController, NavParams, AlertController } from 'ionic-angular';
 import { NotificationPage } from '../notification/notification';
 import { Storage } from '@ionic/storage';
 import { RestProvider } from '../../providers/rest/rest';
@@ -22,12 +22,15 @@ export class DetailUserPage {
   penggunaId: any;
   profileImage: any;
   profileName: any;
+  totalComment: any;
+  totalCommentLike: any;
+  totalCommentDislike: any;
   isEdit = false;
   response: any;
-  yourArray = ['first','second'];
+  yourArray = ['first', 'second'];
 
   constructor(
-    public navCtrl: NavController, 
+    public navCtrl: NavController,
     private storage: Storage,
     public restProvider: RestProvider,
     public navParams: NavParams,
@@ -41,12 +44,21 @@ export class DetailUserPage {
       this.storage.get('gambar').then(gambar => {
         this.storage.get('id').then(id => {
           this.storage.get('nama').then(nama => {
-            this.token = token;
-            this.penggunaId = id;
-            this.profileImage = gambar;
-            this.profileName = nama;
+            this.storage.get('total_comment').then(totalComment => {
+              this.storage.get('total_comment_like').then(totalCommentLike => {
+                this.storage.get('total_comment_dislike').then(totalCommentDislike => {
+                  this.token = token;
+                  this.penggunaId = id;
+                  this.profileImage = gambar;
+                  this.profileName = nama;
+                  this.totalComment = totalComment;
+                  this.totalCommentLike = totalCommentLike;
+                  this.totalCommentDislike = totalCommentDislike;
 
-            console.log(this.token);
+                  console.log(this.token);
+                });
+              });
+            });
           });
         });
       });
@@ -59,14 +71,14 @@ export class DetailUserPage {
 
   edit() {
     this.isEdit = false;
-    this.restProvider.editProfile(this.profileName,this.penggunaId,this.token)
+    this.restProvider.editProfile(this.profileName, this.penggunaId, this.token)
       .then(data => {
         this.response = data;
-          if (this.response.status == "success") {
-            this.showInfo('Ubah profil berhasil!');
-          }else {
-            this.showInfo('Ubah profil gagal!');
-          }
+        if (this.response.status == "success") {
+          this.showInfo('Ubah profil berhasil!');
+        } else {
+          this.showInfo('Ubah profil gagal!');
+        }
       });
   }
 

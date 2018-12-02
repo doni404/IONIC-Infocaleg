@@ -180,4 +180,111 @@ export class RestProvider {
     });
   }
 
+  getAllCampaignComment(kampanyeId, penggunaId, token) {
+    if (token != '' || token != null) {
+      console.log('token : true');
+    }
+
+    let headers = new Headers(
+      {
+        'Content-Type': 'application/x-www-form-urlencoded',
+      });
+
+    let options = new RequestOptions({ headers: headers });
+    console.log(this.apiUrl + '/campaigncomment/' + kampanyeId + '/' + penggunaId +'?token=' + token);
+    return new Promise(resolve => {
+      this.httpangular.get(this.apiUrl + '/campaigncomment/' + kampanyeId + '/' + penggunaId + '?token=' + token, options)
+        .subscribe(res => {
+          resolve(res.json());
+        }, (err) => {
+          console.log(err);
+        });
+    });
+  }
+
+  createComment(idKampanye, idPengguna, komentar, token) {
+    if (token != '' || token != null) {
+      console.log('token : true');
+    }
+
+    let headers = new Headers(
+      {
+        'Content-Type': 'application/json'
+      });
+
+    let options = new RequestOptions({ headers: headers });
+
+    let postData = JSON.stringify({
+      "id_kampanye": idKampanye,
+      "id_pengguna": idPengguna,
+      "komentar": komentar
+    });
+
+    return new Promise((resolve, reject) => {
+      this.httpangular.post(this.apiUrl + '/comment' + '?token=' + token, postData, options)
+        .subscribe(res => {
+          resolve(res.json());
+          console.log(res);
+        }, (err) => {
+          reject(err);
+        });
+    });
+  }
+
+  likeComment(idKomentarKampanye, idPengguna, token) {
+    if (token != '' || token != null) {
+      console.log('token : true');
+    }
+
+    let headers = new Headers(
+      {
+        'Content-Type': 'application/json'
+      });
+
+    let options = new RequestOptions({ headers: headers });
+
+    let postData = JSON.stringify({
+      "id_komentar_kampanye": idKomentarKampanye,
+      "id_pengguna": idPengguna
+    });
+
+    return new Promise((resolve, reject) => {
+      this.httpangular.put(this.apiUrl + '/commentlike' + '?token=' + token, postData, options)
+        .subscribe(res => {
+          resolve(res.json());
+          console.log(res);
+        }, (err) => {
+          reject(err);
+        });
+    });
+  }
+
+  dislikeComment(idKomentarKampanye, idPengguna, token) {
+    if (token != '' || token != null) {
+      console.log('token : true');
+    }
+
+    let headers = new Headers(
+      {
+        'Content-Type': 'application/json'
+      });
+
+    let options = new RequestOptions({ headers: headers });
+
+    let postData = JSON.stringify({
+      "id_komentar_kampanye": idKomentarKampanye,
+      "id_pengguna": idPengguna
+    });
+
+    return new Promise((resolve, reject) => {
+      this.httpangular.put(this.apiUrl + '/commentdislike' + '?token=' + token, postData, options)
+        .subscribe(res => {
+          resolve(res.json());
+          console.log(res);
+        }, (err) => {
+          reject(err);
+        });
+    });
+  }
+
 }
