@@ -1,3 +1,66 @@
 page-rank {
+    .rank-tab {
+        position: absolute;
+        top: 44px;
+        background-color: white;
+        z-index: 99;
+    }
 
+    .rank-tab .tab{
+        padding: 10px 5px;
+        border-bottom: 1px solid rgba($color: grey, $alpha: 0.8);
+    }
+
+    .rank-tab .tab.active {
+        border-bottom: 2px solid rgba($color: red, $alpha: 0.8);
+        color: red;
+    }
+
+    .rank {
+        margin-top: 44px;
+    }
+
+    .rank .wrapper{
+        margin-bottom: 0;
+        padding-bottom: 0;
+        margin-top: 0;
+        padding-top: 0;
+    }
+    
+    .rank-caleg, .rank-pengguna{
+        padding: 10px;
+        border-bottom: 1px solid rgba($color: grey, $alpha: 0.1);
+    }
+
+    .rank-caleg .rank-action {
+        width: 20%;
+    }
+
+    .rank-caleg .rank-pengguna {
+        width: 25%;
+    }
+
+    .rank-action:first-child {
+        margin-left: -10px;
+    }
+
+    .rank-action p {
+        font-size: 9px;
+        color: grey;
+    }
+
+    .rank-sort {
+        position: absolute;
+        top: 44px;
+        background-color: white;
+        z-index: 99;
+        font-size: 12px;
+        display: inline-grid;
+    }
+
+    .rank-sort .sort-child {
+        text-align: center;
+        padding: 15px;
+        border-bottom: 1px solid rgba($color: grey, $alpha: 0.1);
+    }
 }

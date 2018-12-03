@@ -287,4 +287,26 @@ export class RestProvider {
     });
   }
 
+  getAllRank(userRole, sort, token) {
+    if (token != '' || token != null) {
+      console.log('token : true');
+    }
+
+    let headers = new Headers(
+      {
+        'Content-Type': 'application/x-www-form-urlencoded',
+      });
+
+    let options = new RequestOptions({ headers: headers });
+    console.log(this.apiUrl + '/userrank/' + userRole + '/' + sort +'?token=' + token);
+    return new Promise(resolve => {
+      this.httpangular.get(this.apiUrl + '/userrank/' + userRole + '/' + sort + '?token=' + token, options)
+        .subscribe(res => {
+          resolve(res.json());
+        }, (err) => {
+          console.log(err);
+        });
+    });
+  }
+
 }
