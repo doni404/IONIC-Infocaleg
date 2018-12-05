@@ -41,11 +41,11 @@ body {
 }
 .input-field {
   padding: 0%;
-  margin-bottom: 10px;
   border-radius: 4px;
 }
 .item-ios.item-block .item-inner{
     border-bottom: transparent;
+    margin-bottom: 10px;
 }
 
 .toolbar-background {
@@ -57,6 +57,22 @@ body {
   border-radius: 50%;
 }
 
+.item-md {
+  padding-left: 0;
+  margin-bottom: 20px!important;
+}
+.item-md.item-block .item-inner {
+  padding-right: 0px;
+}
+.button-outline-md {
+  border-width: 1px;
+  border-style: solid;
+  border-color: red;
+  color: #0f0f0f;
+  background-color: transparent;
+  -webkit-box-shadow: none;
+  box-shadow: none;
+}
 // Top Bar Setting
 .custom-icon {
   color: red;
