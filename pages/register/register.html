@@ -14,23 +14,24 @@
 
       <ion-col float-left col-12>
         <form class="form" (ngSubmit)="register()" #registerForm="ngForm">
-          <ion-item style="margin-bottom:10%">
-            <ion-input class="grey-form input-field w100" required text-center placeholder="Masukkan Nama Lengkap" type="text" name="name" [(ngModel)]="registrationCredentials.name">
+          <ion-item >
+            <ion-input class="grey-form input-field w100" required text-left placeholder="Masukkan Nama Lengkap" type="text" name="name" [(ngModel)]="registrationCredentials.name">
             </ion-input>
           </ion-item>
-          <ion-item style="margin-bottom:10%">
-            <ion-input class="grey-form input-field  w100" required text-center placeholder="Masukkan Nama Pengguna" type="text" name="username" [(ngModel)]="registrationCredentials.username">
+          <ion-item >
+            <ion-input class="grey-form input-field  w100" required text-left placeholder="Masukkan Nama Pengguna" type="text" name="username" [(ngModel)]="registrationCredentials.username">
             </ion-input>
           </ion-item>
-          <ion-item style="margin-bottom:10%">
-            <ion-input class="grey-form input-field w100" required text-center placeholder="Masukkan Kata Sandi" type="password" name="password" [(ngModel)]="registrationCredentials.password">
+          <ion-item >
+            <ion-input class="grey-form input-field w100" required text-left placeholder="Masukkan Kata Sandi" type="password" name="password" [(ngModel)]="registrationCredentials.password">
             </ion-input>
           </ion-item>
-          <ion-item style="margin-bottom:10%">
-            <ion-input class="grey-form input-field w100" required text-center placeholder="Masukkan Email" type="email" name="email" [(ngModel)]="registrationCredentials.email" pattern="[A-Za-z0-9._%+-]{3,}@[a-zA-Z._%+-]{3,}([.]{1}[a-zA-Z]{2,})">
+          <ion-item >
+            <ion-input class="grey-form input-field w100" required text-left placeholder="Masukkan Email" type="email" name="email" [(ngModel)]="registrationCredentials.email" pattern="[A-Za-z0-9._%+-]{3,}@[a-zA-Z._%+-]{3,}([.]{1}[a-zA-Z]{2,})">
             </ion-input>
           </ion-item>
-          <button ion-button block>DAFTAR</button>
+          <button ion-button block color="red" outline>DAFTAR</button>
+        
         </form>
       </ion-col>
 
@@ -41,4 +42,5 @@
       </ion-col>
     </ion-col>
   </ion-col>
+ 
 </ion-content>

@@ -8,24 +8,40 @@
 
       <ion-col float-left col-12>
         <form class="form" (ngSubmit)="login()" #registerForm="ngForm">
-          <ion-item>
-            <ion-input class="grey-form input-field w100" required text-center placeholder="Nama Pengguna" type="text"
-              name="username" [(ngModel)]="loginCredentials.username">
+          <!-- <ion-item>
+              <ion-icon name="heart" color="red"></ion-icon>
+            <ion-input class="grey-form input-field w100" required text-left placeholder="Nama Pengguna" type="text"
+              name="username" [(ngModel)]="loginCredentials.username"> 
             </ion-input>
-          </ion-item>
-          <ion-item style="margin-bottom:10%">
-            <ion-input  class="grey-form input-field w100" required text-center placeholder="Kata Sandi" type="password"
+           
+          </ion-item> -->
+          <ion-item class="grey-form input-field w100"  >        
+              <ion-label> <ion-icon name="person"></ion-icon></ion-label>
+              <ion-input required text-left  clearInput type="text" name="username" placeholder="Nama Pengguna" [(ngModel)]="loginCredentials.username"> 
+              </ion-input>
+            
+         </ion-item>
+          <ion-item class="grey-form input-field w100" style="margin-bottom:10%">
+              <ion-label> <ion-icon name=md-key></ion-icon></ion-label>
+            <ion-input   required text-left placeholder="Kata Sandi" type="password"
               name="password" [(ngModel)]="loginCredentials.password">
             </ion-input>
           </ion-item>
-          <button ion-button block >MASUK</button>
+         
+          <button ion-button block color="red" outline>MASUK</button>
+          
         </form>
-        <p>Lupa password anda untuk masuk pak eko ? <b>Dapatkan bantuan untuk masuk</b></p>
+        <p>Lupa password anda untuk masuk? <b>Dapatkan bantuan untuk masuk</b></p>
       </ion-col>
 
-      <ion-col float-left col-12>
-        <p (click)="goToRegisterPage()">Anda tidak punya akun ? <b>Buat Akun.</b></p>
-      </ion-col>
     </ion-col>
   </ion-col>
 </ion-content>
+<ion-footer>
+    <ion-toolbar>
+     
+        <ion-col text-center col-12>
+            <p (click)="goToRegisterPage()">Anda tidak punya akun? <b>Buat Akun.</b></p>
+          </ion-col>
+    </ion-toolbar>
+  </ion-footer>
