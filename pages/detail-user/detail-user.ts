@@ -25,9 +25,9 @@ export class DetailUserPage {
   totalComment: any;
   totalCommentLike: any;
   totalCommentDislike: any;
+  comments: any
   isEdit = false;
   response: any;
-  yourArray = ['first', 'second'];
 
   constructor(
     public navCtrl: NavController,
@@ -56,6 +56,7 @@ export class DetailUserPage {
                   this.totalCommentDislike = totalCommentDislike;
 
                   console.log(this.token);
+                  this.getAllCommentByUser(this.penggunaId);
                 });
               });
             });
@@ -63,6 +64,14 @@ export class DetailUserPage {
         });
       });
     });
+  }
+
+  getAllCommentByUser(penggunaId) {
+    this.restProvider.getAllCommentByUser(this.penggunaId, this.token)
+      .then(data => {
+        this.response = data;
+        this.comments = this.response.data;
+      });
   }
 
   openEdit() {

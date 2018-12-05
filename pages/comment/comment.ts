@@ -118,6 +118,11 @@ export class CommentPage {
             this.comments[index].pengguna_like = true;
             this.comments[index].total_like += 1;
             this.comments[index].like_icon = "../../assets/imgs/icon/thumb-up-active.png";
+            
+            // Disable dislike when disliked
+            if (this.comments[index].pengguna_dislike) {
+              this.dislikeComment(idKomentarKampanye, idPengguna, token, index);
+            }
           }
         } else {
           console.log("gagal");
@@ -141,6 +146,11 @@ export class CommentPage {
             this.comments[index].pengguna_dislike = true;
             this.comments[index].total_dislike += 1;
             this.comments[index].dislike_icon = "../../assets/imgs/icon/thumb-down-active.png"
+          
+            // Disable like when disliked
+            if (this.comments[index].pengguna_like) {
+              this.likeComment(idKomentarKampanye, idPengguna, token, index);
+            }
           }
         } else {
           console.log("gagal");

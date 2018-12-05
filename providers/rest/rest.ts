@@ -309,4 +309,69 @@ export class RestProvider {
     });
   }
 
+  getAllCommentByUser(idPengguna, token) {
+    if (token != '' || token != null) {
+      console.log('token : true');
+    }
+
+    let headers = new Headers(
+      {
+        'Content-Type': 'application/x-www-form-urlencoded',
+      });
+
+    let options = new RequestOptions({ headers: headers });
+    console.log(this.apiUrl + '/commentbyuser/' + idPengguna +'?token=' + token);
+    return new Promise(resolve => {
+      this.httpangular.get(this.apiUrl + '/commentbyuser/' + idPengguna +'?token=' + token, options)
+        .subscribe(res => {
+          resolve(res.json());
+        }, (err) => {
+          console.log(err);
+        });
+    });
+  }
+
+  getAllDapil(token) {
+    if (token != '' || token != null) {
+      console.log('token : true');
+    }
+
+    let headers = new Headers(
+      {
+        'Content-Type': 'application/x-www-form-urlencoded',
+      });
+
+    let options = new RequestOptions({ headers: headers });
+    console.log(this.apiUrl + '/dapil' + '?token=' + token);
+    return new Promise(resolve => {
+      this.httpangular.get(this.apiUrl + '/dapil' + '?token=' + token, options)
+        .subscribe(res => {
+          resolve(res.json());
+        }, (err) => {
+          console.log(err);
+        });
+    });
+  }
+
+  getAllPartai(token) {
+    if (token != '' || token != null) {
+      console.log('token : true');
+    }
+
+    let headers = new Headers(
+      {
+        'Content-Type': 'application/x-www-form-urlencoded',
+      });
+
+    let options = new RequestOptions({ headers: headers });
+    console.log(this.apiUrl + '/partai' + '?token=' + token);
+    return new Promise(resolve => {
+      this.httpangular.get(this.apiUrl + '/partai' + '?token=' + token, options)
+        .subscribe(res => {
+          resolve(res.json());
+        }, (err) => {
+          console.log(err);
+        });
+    });
+  }
 }

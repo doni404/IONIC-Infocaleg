@@ -6,6 +6,7 @@ import moment from 'moment';
 
 import { NotificationPage } from '../notification/notification';
 import { CommentPage } from '../comment/comment';
+import { UploadCampaignPage } from '../upload-campaign/upload-campaign';
 
 /**
  * Generated class for the TimelinePage page.
@@ -112,6 +113,11 @@ export class TimelinePage {
             this.timelines[index].pengguna_like = true;
             this.timelines[index].total_like += 1;
             this.timelines[index].like_icon = "../../assets/imgs/icon/thumb-up-active.png";
+            
+            // Disable dislike when disliked
+            if (this.timelines[index].pengguna_dislike) {
+              this.dislikeCampaign(idKampanye, idPengguna, token, index);
+            }
           }
         } else {
           console.log("gagal");
@@ -133,6 +139,11 @@ export class TimelinePage {
             console.log("berhasil di insert");
             this.timelines[index].pengguna_dislike = true;
             this.timelines[index].dislike_icon = "../../assets/imgs/icon/thumb-down-active.png"
+            
+            // Disable dislike when disliked
+            if (this.timelines[index].pengguna_like) {
+              this.likeCampaign(idKampanye, idPengguna, token, index);
+            }
           }
         } else {
           console.log("gagal");
@@ -152,6 +163,10 @@ export class TimelinePage {
     this.isChangeSort = false;
     this.sort = type;
     this.getAllTimeline(this.sort);
+  }
+
+  goToCampaignUpload() {
+    this.app.getRootNav().push(UploadCampaignPage);
   }
 
   goToComment(idKampanye, deskripsiKampanye, namaPengguna, gambarPengguna) {

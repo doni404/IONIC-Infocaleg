@@ -1,3 +1,81 @@
 page-find {
+    .find-sort {
+        position: absolute;
+        top: 53px;
+        background-color: white;
+        z-index: 99;
+        font-size: 12px;
+        display: inline-grid;
+    }
 
+    .find-tab {
+        position: absolute;
+        top: 53px;
+        background-color: white;
+        z-index: 99;
+        font-size: 12px;
+    }
+
+    .find-sort .tab, .find-tab .tab{
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        padding: 10px 5px;
+        border-bottom: 1px solid rgba($color: grey, $alpha: 0.8);
+    }
+
+    .find-sort .tab.active, .find-tab .tab.active {
+        border-bottom: 2px solid rgba($color: red, $alpha: 0.8);
+        color: red;
+    }
+
+    .find-sort .sort-child, .find-tab .sort-child {
+        text-align: center;
+        padding: 15px;
+        border-bottom: 1px solid rgba($color: grey, $alpha: 0.1);
+    }
+
+    .find-content {
+        margin-top: 38px;
+    }
+
+    .box {
+        // width: calc(100% / 3);
+        float: left;
+        clear: both;
+        // position: relative;
+        // // padding-bottom: calc(100% / 3);
+        // width: calc(100% - 16px);
+        // height: calc(100% - 16px);
+    }
+
+    // Content Box
+    * {
+        box-sizing: border-box;
+      }
+      
+    .square-container {
+        margin-top: 38px;
+        // padding: 8px;
+    }
+      
+    .square {
+        width: calc(100% / 3);
+        float: left;
+        position: relative;
+        padding-bottom: calc(100% / 3);
+    }
+      
+    .square .content {
+        width: calc(100% - 16px);
+        height: calc(100% - 16px);
+        margin: 8px;
+        align-items: center;
+        vertical-align: middle;
+        // padding: 16px;
+        position: absolute;
+        color: black;
+        // background-color: #0095ff;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.26);
+    }
 }

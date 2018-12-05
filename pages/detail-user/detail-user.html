@@ -81,14 +81,15 @@
 
     <ion-row no-padding text-center style="margin-top: 5px">
       <ion-list id="history-list">
-        <ion-item no-lines class="bottom-border" *ngFor="let term of yourArray;">
+        <ion-item no-lines class="bottom-border" *ngFor="let comment of comments;">
           <ion-row class="w100" no-padding>
             <ion-col col-2 col-md-2 no-padding>
-              <img no-padding src="../../assets/imgs/logo.png" width="80%" class="rounded-image">
+                <img *ngIf="profileImage == null" no-padding src="../../assets/imgs/logo.png" width="90px" height="90px" class="rounded-image">
+              <img *ngIf="profileImage != null" no-padding src="http://18.182.255.183/api/getprofile/{{profileImage}}?token={{token}}" width="50px" height="50px"class="rounded-image">
             </ion-col>
             <ion-col col-10 col-md-10 no-padding>
               <p>
-                <span class="caption">Imam Ghz</span> mengomentari kampanye dari caleg nomor 1 pada halaman kampanye caleg</p>
+                <span class="caption">{{comment.nama_pengguna}}</span> {{comment.komentar}}</p>
             </ion-col>
           </ion-row>
         </ion-item>

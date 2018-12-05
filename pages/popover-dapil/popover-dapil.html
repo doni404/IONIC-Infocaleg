@@ -1,0 +1,18 @@
+<!--
+  Generated template for the PopoverDapilPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+  <!-- <ion-content style="width: 600px">
+    <ion-col col-12 *ngFor="let dapil of dapilList; let i= index">
+      <p>{{dapil.nama_daerah_pemilihan}}</p>
+    </ion-col>
+  </ion-content> -->
+
+<ion-list class="w100">
+  <ion-list-header>Dapil List</ion-list-header>
+  <ion-col col-12 *ngFor="let dapil of dapilList; let i= index">
+    <button ion-item (click)="setDapil(dapil.nama_daerah_pemilihan)">{{dapil.nama_daerah_pemilihan}}</button>
+  </ion-col>
+</ion-list>

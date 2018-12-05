@@ -15,6 +15,10 @@ import { RegisterPage } from '../pages/register/register';
 import { NotificationPage } from '../pages/notification/notification';
 import { TabsPage } from '../pages/tabs/tabs';
 import { CommentPage } from '../pages/comment/comment';
+import { PopoverDapilPage } from '../pages/popover-dapil/popover-dapil';
+import { PopoverPartaiPage } from '../pages/popover-partai/popover-partai';
+import { PopoverLainPage } from '../pages/popover-lain/popover-lain';
+import { UploadCampaignPage } from '../pages/upload-campaign/upload-campaign';
 
 @NgModule({
   declarations: [
@@ -23,7 +27,11 @@ import { CommentPage } from '../pages/comment/comment';
     LoginPage,
     RegisterPage,
     NotificationPage,
-    CommentPage
+    CommentPage,
+    PopoverDapilPage,
+    PopoverPartaiPage,
+    PopoverLainPage,
+    UploadCampaignPage
   ],
   imports: [
     BrowserModule,
@@ -39,7 +47,11 @@ import { CommentPage } from '../pages/comment/comment';
     LoginPage,
     RegisterPage,
     NotificationPage,
-    CommentPage
+    CommentPage,
+    PopoverDapilPage,
+    PopoverPartaiPage,
+    PopoverLainPage,
+    UploadCampaignPage
   ],
   providers: [
     StatusBar,
