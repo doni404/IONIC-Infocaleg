@@ -92,7 +92,7 @@ export class RestProvider {
     });
 
     return new Promise((resolve, reject) => {
-      this.httpangular.put(this.apiUrl + '/changeprofile' + '?token=' + token, postData, options)
+      this.httpangular.put(this.apiUrl + '/changeprofilename' + '?token=' + token, postData, options)
         .subscribe(res => {
           resolve(res.json());
           console.log(res);

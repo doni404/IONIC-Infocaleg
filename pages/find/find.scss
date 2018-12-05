@@ -66,16 +66,77 @@ page-find {
         padding-bottom: calc(100% / 3);
     }
       
-    .square .content {
-        width: calc(100% - 16px);
-        height: calc(100% - 16px);
-        margin: 8px;
+    .square .content-pulau, .square .content-partai, .square .content-caleg {
+        width: calc(100%);
+        height: calc(100%);
+        margin: 0px;
         align-items: center;
         vertical-align: middle;
         // padding: 16px;
         position: absolute;
         color: black;
+        border: 1px solid rgba($color: grey, $alpha: 0.1);
         // background-color: #0095ff;
-        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.26);
+        // box-shadow: 0 2px 5px rgba(0, 0, 0, 0.26);
+    }
+
+    .square .content-pulau img {
+        width: 80%;
+        height: 80%;
+    }
+
+    .square .content-pulau p {
+        text-transform: capitalize;
+    }
+
+    // Partai Part
+
+    .content-partai{
+        display: -webkit-box;
+    }
+
+    .square .content-partai img {
+        width: 60%;
+        // height: 60%;
+    }
+
+    .square .content-partai p {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 25px;
+        height: 25px;
+        border: 1px solid rgba($color: grey, $alpha: 0.5);
+        font-size: 16px;
+        font-weight: bold;
+        z-index: 99;
+    }
+
+    // Caleg Part
+
+    .content-caleg {
+        padding: 10px;
+    }
+
+    .square .content-caleg img {
+        width: 60px;
+        height: 60px;
+    }
+
+    .square .content-caleg p.middle {
+        text-transform: capitalize;
+        font-size: 8px;
+    }
+
+    .square .content-caleg p.top-left {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 25px;
+        height: 25px;
+        border: 1px solid rgba($color: grey, $alpha: 0.5);
+        font-size: 16px;
+        font-weight: bold;
+        z-index: 99;
     }
 }

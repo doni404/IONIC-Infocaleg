@@ -19,6 +19,9 @@ import { PopoverDapilPage } from '../pages/popover-dapil/popover-dapil';
 import { PopoverPartaiPage } from '../pages/popover-partai/popover-partai';
 import { PopoverLainPage } from '../pages/popover-lain/popover-lain';
 import { UploadCampaignPage } from '../pages/upload-campaign/upload-campaign';
+import { FileTransfer } from '@ionic-native/file-transfer';
+import { Camera } from '@ionic-native/camera';
+import { File } from '@ionic-native/file';
 
 @NgModule({
   declarations: [
@@ -57,7 +60,10 @@ import { UploadCampaignPage } from '../pages/upload-campaign/upload-campaign';
     StatusBar,
     SplashScreen,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
-    RestProvider
+    RestProvider,
+    FileTransfer,
+    Camera,
+    File
   ]
 })
 export class AppModule {}

@@ -183,4 +183,13 @@ export class TimelinePage {
     // this.navCtrl.push(NotificationPage);
     this.app.getRootNav().push(NotificationPage);
   }
+
+  doRefresh(refresher) {
+    console.log('Begin async operation', refresher);
+    this.getAllTimeline(this.sort);
+    setTimeout(() => {
+      console.log('Async operation has ended');
+      refresher.complete();
+    }, 2000);
+  }
 }

@@ -29,6 +29,10 @@
 </ion-header>
 
 <ion-content no-padding>
+  <ion-refresher (ionRefresh)="doRefresh($event)">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
+
   <ion-row no-padding no-margin class="w100">
     <ion-col col-12 no-padding class="timeline" *ngFor="let timeline of timelines; let i= index">
       <ion-col no-padding col-12 class="timeline-title dIF aiCenter">

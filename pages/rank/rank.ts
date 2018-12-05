@@ -71,27 +71,36 @@ export class RankPage {
       this.tabActive = "caleg";
       this.tabCaleg = "aiCenter tab active";
       this.tabPengguna = "aiCenter tab";
+
+      this.getAllRank(this.tabActive, this.sort, this.token);
     } else if (page == "pengguna") {
       this.tabActive = "pengguna";
       this.tabCaleg = "aiCenter tab";
       this.tabPengguna = "aiCenter tab active";
-    }
 
-    this.getAllRank(this.tabActive, this.sort, this.token);
+      this.getAllRank(this.tabActive, "populer", this.token);
+    }
   }
 
   toggleSort() {
-    if (this.isChangeSort) {
-      this.isChangeSort = false;
-    } else {
-      this.isChangeSort = true;
-    }
+    if (this.tabActive == "caleg") {
+      if (this.isChangeSort) {
+        this.isChangeSort = false;
+      } else {
+        this.isChangeSort = true;
+      }
+    } 
   }
 
   changeSort(type) {
     this.isChangeSort = false;
     this.sort = type;
-    this.getAllRank(this.tabActive, this.sort, this.token);
+
+    if (this.tabActive == "pengguna") {
+      this.getAllRank(this.tabActive, "populer", this.token);
+    }else {
+      this.getAllRank(this.tabActive, this.sort, this.token);
+    }
   }
 
 }

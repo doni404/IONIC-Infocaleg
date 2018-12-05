@@ -1,8 +1,12 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, AlertController } from 'ionic-angular';
-import { NotificationPage } from '../notification/notification';
-import { Storage } from '@ionic/storage';
+import { IonicPage, NavController, NavParams, LoadingController, ToastController, Platform, AlertController } from 'ionic-angular';
+import { FileTransfer, FileUploadOptions } from '@ionic-native/file-transfer';
+import { Camera, CameraOptions } from '@ionic-native/camera';
 import { RestProvider } from '../../providers/rest/rest';
+import { Storage } from '@ionic/storage';
+import { File } from '@ionic-native/file';
+
+import { NotificationPage } from '../notification/notification';
 
 /**
  * Generated class for the DetailUserPage page.
@@ -17,6 +21,7 @@ import { RestProvider } from '../../providers/rest/rest';
   templateUrl: 'detail-user.html',
 })
 export class DetailUserPage {
+  apiUrl = 'http://18.182.255.183/api';
 
   token: any;
   penggunaId: any;
@@ -27,13 +32,20 @@ export class DetailUserPage {
   totalCommentDislike: any;
   comments: any
   isEdit = false;
+  loader: any;
   response: any;
 
   constructor(
     public navCtrl: NavController,
+    public navParams: NavParams,
+    private transfer: FileTransfer,
+    private camera: Camera,
+    public loadingCtrl: LoadingController,
+    public toastCtrl: ToastController,
     private storage: Storage,
     public restProvider: RestProvider,
-    public navParams: NavParams,
+    private file: File,
+    private platform: Platform,
     public alertCtrl: AlertController) {
   }
 
@@ -49,12 +61,17 @@ export class DetailUserPage {
                 this.storage.get('total_comment_dislike').then(totalCommentDislike => {
                   this.token = token;
                   this.penggunaId = id;
-                  this.profileImage = gambar;
                   this.profileName = nama;
                   this.totalComment = totalComment;
                   this.totalCommentLike = totalCommentLike;
                   this.totalCommentDislike = totalCommentDislike;
 
+                  if (gambar != null) {
+                    this.profileImage = this.apiUrl + "/getprofile/" + gambar + "?token=" + token;
+                  }else {
+                    this.profileImage = "../../assets/imgs/logo.png";
+                  }
+                  
                   console.log(this.token);
                   this.getAllCommentByUser(this.penggunaId);
                 });
@@ -84,11 +101,122 @@ export class DetailUserPage {
       .then(data => {
         this.response = data;
         if (this.response.status == "success") {
-          this.showInfo('Ubah profil berhasil!');
+          this.showInfo('Ubah nama berhasil!');
         } else {
-          this.showInfo('Ubah profil gagal!');
+          this.showInfo('Ubah nama gagal!');
         }
       });
+  }
+
+  getImage() {
+    let loader = this.loadingCtrl.create({
+      content: "Silahkan pilih gambar ..."
+    });
+    loader.present();
+
+    const options: CameraOptions = {
+      quality: 10,
+      encodingType: this.camera.EncodingType.JPEG,
+      destinationType: this.camera.DestinationType.FILE_URI,
+      sourceType: this.camera.PictureSourceType.PHOTOLIBRARY,
+      saveToPhotoAlbum: false,
+      correctOrientation: true,
+      mediaType: this.camera.MediaType.PICTURE
+    }
+
+    this.camera.getPicture(options).then((imageData) => {
+
+      console.log("image path :" + imageData);
+
+      let fileName = imageData.split('/').pop();
+      let path = imageData.substring(0, imageData.lastIndexOf("/") + 1);
+      let correctFileName;
+
+      if (this.platform.is('android')) {
+        correctFileName = fileName.substring(0, fileName.lastIndexOf("?"));
+      }
+      if (this.platform.is('ios')) {
+        correctFileName = fileName;
+      }
+
+      console.log("path :" + path);
+      console.log("filename :" + correctFileName);
+
+      this.file.readAsDataURL(path, correctFileName)
+        .then(base64File => {
+          this.storage.get('token').then(dataToken => {
+            this.token = dataToken;
+          });
+
+          loader.dismiss();
+
+          // update profile
+          this.uploadProfile(this.token);
+        })
+        .catch(() => {
+          console.log('Error reading file');
+          loader.dismiss();
+        })
+    }, (err) => {
+      console.log(err);
+      this.presentToast(err);
+      loader.dismiss();
+    });
+  }
+
+  presentToast(msg) {
+    let toast = this.toastCtrl.create({
+      message: msg,
+      duration: 3000,
+      position: 'bottom'
+    });
+
+    toast.onDidDismiss(() => {
+      console.log('Dismissed toast');
+    });
+
+    toast.present();
+  }
+
+  uploadProfile(token) {
+    // show loading screen
+    this.loader = this.loadingCtrl.create({
+      content: "Sedang menggunggah..."
+    });
+    this.loader.present();
+
+    //send image data
+    let url = this.apiUrl + '/changeprofileimage?token=' + token;
+    console.log();
+    var options: FileUploadOptions = {
+      fileKey: 'image',
+
+      fileName: this.profileImage,
+      chunkedMode: false,
+      httpMethod: 'put',
+      mimeType: 'multipart/form-data',
+      params: {
+        'image': this.profileImage,
+        'id_pengguna': this.penggunaId
+      }
+    }
+
+    const FileTransfer = this.transfer.create();
+
+    FileTransfer.upload(this.profileImage, url, options);
+
+    FileTransfer.onProgress((progressEvent) => {
+      var progress = Math.floor(progressEvent.loaded / progressEvent.total * 100);
+      // this.progress = perc;
+      console.log("progress : " + progress);
+      if (progress == 100) {
+        this.loader.dismiss();
+
+        // this.navCtrl.pop();
+        this.showInfo('Ubah gambar profil berhasil!');
+      }
+    });
+
   }
 
   goToNotification() {

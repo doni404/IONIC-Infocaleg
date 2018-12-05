@@ -36,9 +36,9 @@
 
       <ion-col col-12 no-padding>
         <ion-col col-12 no-padding class="dIf aiCenter">
-          <img *ngIf="profileImage == null" no-padding src="../../assets/imgs/logo.png" width="90px" height="90px" class="rounded-image">
-          <img *ngIf="profileImage != null" no-padding src="http://18.182.255.183/api/getprofile/{{profileImage}}?token={{token}}"
-            width="90px" height="90px" class="rounded-image">
+          <img no-padding (click)="getImage()" [src]="profileImage" width="90px" height="90px" class="rounded-image">
+          <!-- <img *ngIf="profileImage != null" no-padding src="http://18.182.255.183/api/getprofile/{{profileImage}}?token={{token}}"
+            width="90px" height="90px" class="rounded-image"> -->
         </ion-col>
         <ion-col col-12 no-padding>
           <h6 *ngIf="isEdit == false" no-margin>{{profileName}}</h6>
@@ -84,8 +84,8 @@
         <ion-item no-lines class="bottom-border" *ngFor="let comment of comments;">
           <ion-row class="w100" no-padding>
             <ion-col col-2 col-md-2 no-padding>
-                <img *ngIf="profileImage == null" no-padding src="../../assets/imgs/logo.png" width="90px" height="90px" class="rounded-image">
-              <img *ngIf="profileImage != null" no-padding src="http://18.182.255.183/api/getprofile/{{profileImage}}?token={{token}}" width="50px" height="50px"class="rounded-image">
+                <!-- <img *ngIf="profileImage == null" no-padding src="../../assets/imgs/logo.png" width="90px" height="90px" class="rounded-image"> -->
+              <img no-padding [src]="profileImage" width="50px" height="50px"class="rounded-image">
             </ion-col>
             <ion-col col-10 col-md-10 no-padding>
               <p>
