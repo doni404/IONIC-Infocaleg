@@ -1,7 +1,7 @@
 page-find {
     .find-sort {
         position: absolute;
-        top: 53px;
+        top: 52px;
         background-color: white;
         z-index: 99;
         font-size: 12px;
@@ -10,7 +10,7 @@ page-find {
 
     .find-tab {
         position: absolute;
-        top: 53px;
+        top: 52px;
         background-color: white;
         z-index: 99;
         font-size: 12px;
@@ -126,6 +126,10 @@ page-find {
     .square .content-caleg p.middle {
         text-transform: capitalize;
         font-size: 8px;
+    }
+
+    .bold {
+        font-weight: bold;
     }
 
     .square .content-caleg p.top-left {

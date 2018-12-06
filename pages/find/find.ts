@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, PopoverController } from 'ionic-angular';
+import { Storage } from '@ionic/storage';
+import { RestProvider } from '../../providers/rest/rest';
 import { PopoverDapilPage } from '../popover-dapil/popover-dapil';
 import { PopoverPartaiPage } from '../popover-partai/popover-partai';
 import { PopoverLainPage } from '../popover-lain/popover-lain';
@@ -29,6 +31,7 @@ export class FindPage {
   tabNomor = "aiCenter tab";
   sort = "daerah";
   isChangeSort = false;
+  response: any;
 
   filterDapil = "DAPIL";
   filterPartai = "PARTAI";
@@ -45,45 +48,78 @@ export class FindPage {
     {src:"../../assets/imgs/pulau/Papua.png", nama:"papua"}
   ];
 
-  partaiList = [
-    {src:"https://infopemilu.kpu.go.id/download/logoParpol/117/logo%20PKB.jpeg", nomor:1},
-    {src:"https://infopemilu.kpu.go.id/download/logoParpol/118/LAMBANG%20PARTAI%20GERINDRA%2010x10%20cm.jpg", nomor:2},
-    {src:"https://infopemilu.kpu.go.id/download/logoParpol/120/LOGO%20KPU.jpg", nomor:3},
-    {src:"https://infopemilu.kpu.go.id/download/logoParpol/131/Logo%20Partai%20GOLKAR%20(Ukuran%2010x10cm).jpg", nomor:4},
-    {src:"https://infopemilu.kpu.go.id/download/logoParpol/115/LAMBANG'.jpg", nomor:5},
-    {src:"https://infopemilu.kpu.go.id/download/logoParpol/128/Logo-Partai-Garuda.jpg", nomor:6},
-    {src:"https://infopemilu.kpu.go.id/download/logoParpol/126/Logo%20PARTAI%20BERKARYA.jpg", nomor:7},
-    {src:"https://infopemilu.kpu.go.id/download/logoParpol/116/Logo%20PKS%20(2013)%20w%20bg%20(bigger).jpg", nomor:8}
-  ];
+  partaiList: any;
 
-  calegList = [
-    {src:"https://silonpemilu.kpu.go.id/publik/calon/28917/19", nomor:1, nama:"H. MUSLIM AYUB", partai:"PARTAI AMANAT NASIONAL", dapil:"ACEH I"},
-    {src:"https://silonpemilu.kpu.go.id/publik/calon/30195/19", nomor:2, nama:"MOHD ALFATAH", partai:"PARTAI AMANAT NASIONAL", dapil:"ACEH I"},
-    {src:"https://silonpemilu.kpu.go.id/publik/calon/112209/19", nomor:3, nama:"ZAKIYAH DRAZAT", partai:"PARTAI AMANAT NASIONAL", dapil:"ACEH I"},
-    {src:"https://silonpemilu.kpu.go.id/publik/calon/202211/19", nomor:4, nama:"H. NAZARUDDIN DEK GAM", partai:"PARTAI AMANAT NASIONAL", dapil:"ACEH I"},
-    {src:"https://silonpemilu.kpu.go.id/publik/calon/122594/19", nomor:5, nama:"LELI HERAWATI", partai:"PARTAI AMANAT NASIONAL", dapil:"ACEH I"},
-    {src:"https://silonpemilu.kpu.go.id/publik/calon/35028/19", nomor:6, nama:"MARGONINGSIH", partai:"PARTAI AMANAT NASIONAL", dapil:"ACEH I"},
-    {src:"https://silonpemilu.kpu.go.id/publik/calon/30115/19", nomor:7, nama:"SULAIMAN ALI", partai:"PARTAI AMANAT NASIONAL", dapil:"ACEH I"},
-    {src:"https://silonpemilu.kpu.go.id/publik/calon/21661/19", nomor:8, nama:"NURCHALIS", partai:"PARTAI BERKARYA", dapil:"ACEH II"}
-  ];
+  // = [
+  //   {src:"https://infopemilu.kpu.go.id/download/logoParpol/117/logo%20PKB.jpeg", nomor:1},
+  //   {src:"https://infopemilu.kpu.go.id/download/logoParpol/118/LAMBANG%20PARTAI%20GERINDRA%2010x10%20cm.jpg", nomor:2},
+  //   {src:"https://infopemilu.kpu.go.id/download/logoParpol/120/LOGO%20KPU.jpg", nomor:3},
+  //   {src:"https://infopemilu.kpu.go.id/download/logoParpol/131/Logo%20Partai%20GOLKAR%20(Ukuran%2010x10cm).jpg", nomor:4},
+  //   {src:"https://infopemilu.kpu.go.id/download/logoParpol/115/LAMBANG'.jpg", nomor:5},
+  //   {src:"https://infopemilu.kpu.go.id/download/logoParpol/128/Logo-Partai-Garuda.jpg", nomor:6},
+  //   {src:"https://infopemilu.kpu.go.id/download/logoParpol/126/Logo%20PARTAI%20BERKARYA.jpg", nomor:7},
+  //   {src:"https://infopemilu.kpu.go.id/download/logoParpol/116/Logo%20PKS%20(2013)%20w%20bg%20(bigger).jpg", nomor:8}
+  // ];
+
+  calegList: any;
+
+  // [
+  //   {src:"https://silonpemilu.kpu.go.id/publik/calon/28917/19", nomor:1, nama:"H. MUSLIM AYUB", partai:"PARTAI AMANAT NASIONAL", dapil:"ACEH I"},
+  //   {src:"https://silonpemilu.kpu.go.id/publik/calon/30195/19", nomor:2, nama:"MOHD ALFATAH", partai:"PARTAI AMANAT NASIONAL", dapil:"ACEH I"},
+  //   {src:"https://silonpemilu.kpu.go.id/publik/calon/112209/19", nomor:3, nama:"ZAKIYAH DRAZAT", partai:"PARTAI AMANAT NASIONAL", dapil:"ACEH I"},
+  //   {src:"https://silonpemilu.kpu.go.id/publik/calon/202211/19", nomor:4, nama:"H. NAZARUDDIN DEK GAM", partai:"PARTAI AMANAT NASIONAL", dapil:"ACEH I"},
+  //   {src:"https://silonpemilu.kpu.go.id/publik/calon/122594/19", nomor:5, nama:"LELI HERAWATI", partai:"PARTAI AMANAT NASIONAL", dapil:"ACEH I"},
+  //   {src:"https://silonpemilu.kpu.go.id/publik/calon/35028/19", nomor:6, nama:"MARGONINGSIH", partai:"PARTAI AMANAT NASIONAL", dapil:"ACEH I"},
+  //   {src:"https://silonpemilu.kpu.go.id/publik/calon/30115/19", nomor:7, nama:"SULAIMAN ALI", partai:"PARTAI AMANAT NASIONAL", dapil:"ACEH I"},
+  //   {src:"https://silonpemilu.kpu.go.id/publik/calon/21661/19", nomor:8, nama:"NURCHALIS", partai:"PARTAI BERKARYA", dapil:"ACEH II"}
+  // ];
 
   constructor(
     public navCtrl: NavController,
+    private storage: Storage,
     public navParams: NavParams,
+    public restProvider: RestProvider,
     public popoverCtrl: PopoverController) {
 
   }
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad FindPage');
+
+    this.storage.get('token').then(token => {
+      this.token = token;
+      
+      this.getAllPartai();
+      this.getAllCaleg();
+    });
   }
 
   showInput() {
     console.log("input : " + this.keyword);
   }
 
-  search() {
+  findCaleg(keyword) {
+    this.restProvider.findCaleg(keyword, this.token)
+      .then(data => {
+        this.response = data;
+        this.calegList = this.response.data;
+      });
+  }
 
+  getAllPartai() {
+    this.restProvider.getAllPartai(this.token)
+      .then(data => {
+        this.response = data;
+        this.partaiList = this.response.data;
+      });
+  }
+
+  getAllCaleg() {
+    this.restProvider.getAllCaleg(this.token)
+      .then(data => {
+        this.response = data;
+        this.calegList = this.response.data;
+      });
   }
 
   toggleSort() {

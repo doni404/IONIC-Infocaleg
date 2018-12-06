@@ -15,7 +15,7 @@
       (ionCancel)="showInput()">
     </ion-searchbar>
     <ion-buttons right>
-      <button (click)="search()" ion-button icon-only>
+      <button (click)="findCaleg(keyword)" ion-button icon-only>
         <ion-icon class="custom-icon" name="search"></ion-icon>
       </button>
     </ion-buttons>
@@ -23,35 +23,6 @@
 </ion-header>
 
 <ion-content no-padding>
-  <!-- <ion-row no-padding no-margin class="w100 dIF">
-    <ion-col no-padding col-12 class="dIF find-content aiCenter" text-center>
-      <ion-col col-4 no-padding class="box">
-        <img src="../../assets/imgs/pulau/Kalimantan.png" width="50px" height="50px">
-        <p no-padding no-margin>Bali</p>
-      </ion-col>
-      <ion-col col-4 no-padding class="box">
-        <img src="../../assets/imgs/pulau/Jawa.png" width="50px" height="50px">
-        <p no-padding no-margin>Jawa</p>
-      </ion-col>
-      <ion-col col-4 no-padding class="box">
-        <img src="../../assets/imgs/pulau/Maluku.png" width="50px" height="50px">
-        <p no-padding no-margin>Maluku</p>
-      </ion-col>
-      <ion-col col-4 no-padding class="box">
-        <img src="../../assets/imgs/pulau/Kalimantan.png" width="50px" height="50px">
-        <p no-padding no-margin>Bali</p>
-      </ion-col>
-      <ion-col col-4 no-padding class="box">
-        <img src="../../assets/imgs/pulau/Jawa.png" width="50px" height="50px">
-        <p no-padding no-margin>Jawa</p>
-      </ion-col>
-      <ion-col col-4 no-padding class="box">
-        <img src="../../assets/imgs/pulau/Maluku.png" width="50px" height="50px">
-        <p no-padding no-margin>Maluku</p>
-      </ion-col>
-    </ion-col>
-  </ion-row> -->
-
   <div class="square-container">
     <div *ngIf="sort == 'daerah'">
       <div *ngFor="let pulau of pulauList; let i= index" class="square aiCenter" text-center>
@@ -64,73 +35,24 @@
 
     <div *ngIf="sort == 'partai'">
       <div *ngFor="let partai of partaiList; let i= index" class="square aiCenter" text-center>
-        <div class="content-partai" (click)="choosePartai(partai.nomor)">
-          <img src="{{partai.src}}">
-          <p no-padding no-margin>{{partai.nomor}}</p>
+        <div class="content-partai" (click)="choosePartai(partai.kode)">
+          <img src="{{partai.logo}}">
+          <p no-padding no-margin>{{partai.kode}}</p>
         </div>
       </div>
     </div>
 
     <div *ngIf="sort == 'nama'">
       <div *ngFor="let caleg of calegList; let i= index" class="square aiCenter" text-center>
-        <div class="content-caleg" (click)="chooseCaleg(caleg.nomor)">
-          <img src="{{caleg.src}}" class="rounded-image">
-          <p no-padding no-margin class="top-left">{{caleg.nomor}}</p>
-          <p no-padding no-margin class="middle">{{caleg.nama}}</p>
-          <p no-padding no-margin class="middle">{{caleg.partai}}</p>
-          <p no-padding no-margin class="middle">{{caleg.dapil}}</p>
+        <div class="content-caleg" (click)="chooseCaleg(caleg.id)">
+          <img src="{{caleg.link_gambar}}" class="rounded-image">
+          <p no-padding no-margin class="top-left">{{caleg.nomor_urut}}</p>
+          <p no-padding no-margin class="middle bold">{{caleg.nama_lengkap}}</p>
+          <p no-padding no-margin class="middle bold">{{caleg.nama_partai}}</p>
+          <p no-padding no-margin class="middle">{{caleg.daerah_pemilihan}}</p>
         </div>
       </div>
     </div>
-
-    <!-- <div class="square aiCenter" text-center>
-      <div class="content-pulau">
-        <img src="../../assets/imgs/pulau/Kalimantan.png">
-        <p no-padding no-margin>Kalimantan</p>
-      </div>
-    </div>
-
-    <div class="square aiCenter" text-center>
-      <div class="content-pulau">
-        <img src="../../assets/imgs/pulau/Jawa.png">
-        <p no-padding no-margin>Jawa</p>
-      </div>
-    </div>
-
-    <div class="square aiCenter" text-center>
-      <div class="content-pulau">
-        <img src="../../assets/imgs/pulau/Sulawesi.png">
-        <p no-padding no-margin>Sulawesi</p>
-      </div>
-    </div>
-
-    <div class="square aiCenter" text-center>
-      <div class="content-pulau">
-        <img src="../../assets/imgs/pulau/Bali.png">
-        <p no-padding no-margin>Bali</p>
-      </div>
-    </div>
-
-    <div class="square aiCenter" text-center>
-      <div class="content-pulau">
-        <img src="../../assets/imgs/pulau/NusaTenggara.png">
-        <p no-padding no-margin>Nusa Tenggara</p>
-      </div>
-    </div>
-
-    <div class="square aiCenter" text-center>
-      <div class="content-pulau">
-        <img src="../../assets/imgs/pulau/Maluku.png">
-        <p no-padding no-margin>Maluku</p>
-      </div>
-    </div>
-
-    <div class="square aiCenter" text-center>
-      <div class="content-pulau">
-        <img src="../../assets/imgs/pulau/Papua.png">
-        <p no-padding no-margin>Papua</p>
-      </div>
-    </div> -->
   </div>
 </ion-content>
 
