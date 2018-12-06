@@ -7,6 +7,6 @@
 <ion-list class="w100">
   <ion-list-header>Partai List</ion-list-header>
   <ion-col col-12 *ngFor="let partai of partaiList; let i= index">
-    <button ion-item (click)="setPartai(partai.akronim)">{{partai.akronim}}</button>
+    <button ion-item (click)="setPartai(i)">{{partai.akronim}}</button>
   </ion-col>
 </ion-list>

@@ -418,4 +418,75 @@ export class RestProvider {
         });
     });
   }
+
+  findCalegByIsland(island, token) {
+    if (token != '' || token != null) {
+      console.log('token : true');
+    }
+
+    let headers = new Headers(
+      {
+        'Content-Type': 'application/x-www-form-urlencoded',
+      });
+
+    let options = new RequestOptions({ headers: headers });
+    console.log(this.apiUrl + '/calegbyisland/' + island + '?token=' + token);
+    return new Promise(resolve => {
+      this.httpangular.get(this.apiUrl + '/calegbyisland/' + island + '?token=' + token, options)
+        .subscribe(res => {
+          resolve(res.json());
+        }, (err) => {
+          console.log(err);
+        });
+    });
+  }
+
+  findCalegByPartai(idPartaiPolitik, token) {
+    if (token != '' || token != null) {
+      console.log('token : true');
+    }
+
+    let headers = new Headers(
+      {
+        'Content-Type': 'application/x-www-form-urlencoded',
+      });
+
+    let options = new RequestOptions({ headers: headers });
+    console.log(this.apiUrl + '/calegbypartai/' + idPartaiPolitik + '?token=' + token);
+    return new Promise(resolve => {
+      this.httpangular.get(this.apiUrl + '/calegbypartai/' + idPartaiPolitik + '?token=' + token, options)
+        .subscribe(res => {
+          resolve(res.json());
+        }, (err) => {
+          console.log(err);
+        });
+    });
+  }
+
+  findCalegMultiparam(idDapil, idPartaiPolitik, sortType, token) {
+    console.log('iddapil : ' + idDapil);
+    console.log('idparpol : ' + idPartaiPolitik);
+    console.log('sort : ' + sortType);
+
+    if (token != '' || token != null) {
+      console.log('token : true');
+    }
+
+    let headers = new Headers(
+      {
+        'Content-Type': 'application/x-www-form-urlencoded',
+      });
+
+    let options = new RequestOptions({ headers: headers });
+    console.log(this.apiUrl + '/calegbymultiparam/' + idDapil + '/' + idPartaiPolitik + '/' + sortType + '?token=' + token);
+    return new Promise(resolve => {
+      this.httpangular.get(this.apiUrl + '/calegbymultiparam/' + idDapil + '/' + idPartaiPolitik + '/' + sortType + '?token=' + token, options)
+        .subscribe(res => {
+          resolve(res.json());
+        }, (err) => {
+          console.log(err);
+        });
+    });
+  }
+  
 }

@@ -76,7 +76,7 @@ export class TimelinePage {
           var create_date = moment(value.created_at);
 
           var duration = moment.duration(create_date.diff(now));
-          var hours = duration.asHours();
+          var hours = duration.asHours() + 6;
 
           value.lama_posting = Math.abs(Math.floor(hours));
 

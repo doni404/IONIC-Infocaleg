@@ -42,7 +42,7 @@ export class PopoverPartaiPage {
     });
   }
 
-  setPartai(partai) {
-    this.viewCtrl.dismiss(partai);
+  setPartai(index) {
+    this.viewCtrl.dismiss(this.partaiList[index]);
   }
 }

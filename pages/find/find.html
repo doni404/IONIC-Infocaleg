@@ -15,7 +15,7 @@
       (ionCancel)="showInput()">
     </ion-searchbar>
     <ion-buttons right>
-      <button (click)="findCaleg(keyword)" ion-button icon-only>
+      <button (click)="findCaleg('search', keyword, null)" ion-button icon-only>
         <ion-icon class="custom-icon" name="search"></ion-icon>
       </button>
     </ion-buttons>
@@ -26,7 +26,7 @@
   <div class="square-container">
     <div *ngIf="sort == 'daerah'">
       <div *ngFor="let pulau of pulauList; let i= index" class="square aiCenter" text-center>
-        <div class="content-pulau" (click)="chooseRegion(pulau.nama)">
+        <div class="content-pulau" (click)="findCaleg('island', pulau.nama, null)">
           <img src="{{pulau.src}}">
           <p no-padding no-margin>{{pulau.nama}}</p>
         </div>
@@ -35,16 +35,16 @@
 
     <div *ngIf="sort == 'partai'">
       <div *ngFor="let partai of partaiList; let i= index" class="square aiCenter" text-center>
-        <div class="content-partai" (click)="choosePartai(partai.kode)">
+        <div class="content-partai" (click)="findCaleg('partai', partai.id, partai.akronim)">
           <img src="{{partai.logo}}">
-          <p no-padding no-margin>{{partai.kode}}</p>
+          <p no-padding no-margin>{{partai.nomor_urut}}</p>
         </div>
       </div>
     </div>
 
     <div *ngIf="sort == 'nama'">
       <div *ngFor="let caleg of calegList; let i= index" class="square aiCenter" text-center>
-        <div class="content-caleg" (click)="chooseCaleg(caleg.id)">
+        <div class="content-caleg" (click)="findCaleg(caleg.id)">
           <img src="{{caleg.link_gambar}}" class="rounded-image">
           <p no-padding no-margin class="top-left">{{caleg.nomor_urut}}</p>
           <p no-padding no-margin class="middle bold">{{caleg.nama_lengkap}}</p>

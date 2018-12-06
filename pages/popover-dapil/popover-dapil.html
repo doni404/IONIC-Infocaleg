@@ -13,6 +13,6 @@
 <ion-list class="w100">
   <ion-list-header>Dapil List</ion-list-header>
   <ion-col col-12 *ngFor="let dapil of dapilList; let i= index">
-    <button ion-item (click)="setDapil(dapil.nama_daerah_pemilihan)">{{dapil.nama_daerah_pemilihan}}</button>
+    <button ion-item (click)="setDapil(i)">{{dapil.nama_daerah_pemilihan}}</button>
   </ion-col>
 </ion-list>

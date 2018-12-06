@@ -1,7 +1,8 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, App} from 'ionic-angular';
 import { Storage } from '@ionic/storage';
 import { RestProvider } from '../../providers/rest/rest';
+import { NotificationPage } from '../notification/notification';
 
 /**
  * Generated class for the RankPage page.
@@ -31,6 +32,7 @@ export class RankPage {
   response: any;
 
   constructor(
+    public app: App,
     public navCtrl: NavController,
     private storage: Storage,
     public restProvider: RestProvider,
@@ -101,6 +103,10 @@ export class RankPage {
     }else {
       this.getAllRank(this.tabActive, this.sort, this.token);
     }
+  }
+
+  goToNotification() {
+    this.app.getRootNav().push(NotificationPage);
   }
 
 }

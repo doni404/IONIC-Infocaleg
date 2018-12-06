@@ -35,10 +35,14 @@ export class FindPage {
 
   filterDapil = "DAPIL";
   filterPartai = "PARTAI";
-  filterLain = "NO.URUT";
+  filterLain = "LAINNYA";
+
+  filterDapilId: any;
+  filterPartaiId: any;
+  filterNomor = "ASC";
 
   pulauList = [
-    {src:"../../assets/imgs/pulau/Sumatra.png", nama:"sumatra"},
+    {src:"../../assets/imgs/pulau/Sumatra.png", nama:"sumatera"},
     {src:"../../assets/imgs/pulau/Kalimantan.png", nama:"kalimantan"},
     {src:"../../assets/imgs/pulau/Jawa.png", nama:"jawa"},
     {src:"../../assets/imgs/pulau/Sulawesi.png", nama:"sulawesi"},
@@ -49,30 +53,7 @@ export class FindPage {
   ];
 
   partaiList: any;
-
-  // = [
-  //   {src:"https://infopemilu.kpu.go.id/download/logoParpol/117/logo%20PKB.jpeg", nomor:1},
-  //   {src:"https://infopemilu.kpu.go.id/download/logoParpol/118/LAMBANG%20PARTAI%20GERINDRA%2010x10%20cm.jpg", nomor:2},
-  //   {src:"https://infopemilu.kpu.go.id/download/logoParpol/120/LOGO%20KPU.jpg", nomor:3},
-  //   {src:"https://infopemilu.kpu.go.id/download/logoParpol/131/Logo%20Partai%20GOLKAR%20(Ukuran%2010x10cm).jpg", nomor:4},
-  //   {src:"https://infopemilu.kpu.go.id/download/logoParpol/115/LAMBANG'.jpg", nomor:5},
-  //   {src:"https://infopemilu.kpu.go.id/download/logoParpol/128/Logo-Partai-Garuda.jpg", nomor:6},
-  //   {src:"https://infopemilu.kpu.go.id/download/logoParpol/126/Logo%20PARTAI%20BERKARYA.jpg", nomor:7},
-  //   {src:"https://infopemilu.kpu.go.id/download/logoParpol/116/Logo%20PKS%20(2013)%20w%20bg%20(bigger).jpg", nomor:8}
-  // ];
-
   calegList: any;
-
-  // [
-  //   {src:"https://silonpemilu.kpu.go.id/publik/calon/28917/19", nomor:1, nama:"H. MUSLIM AYUB", partai:"PARTAI AMANAT NASIONAL", dapil:"ACEH I"},
-  //   {src:"https://silonpemilu.kpu.go.id/publik/calon/30195/19", nomor:2, nama:"MOHD ALFATAH", partai:"PARTAI AMANAT NASIONAL", dapil:"ACEH I"},
-  //   {src:"https://silonpemilu.kpu.go.id/publik/calon/112209/19", nomor:3, nama:"ZAKIYAH DRAZAT", partai:"PARTAI AMANAT NASIONAL", dapil:"ACEH I"},
-  //   {src:"https://silonpemilu.kpu.go.id/publik/calon/202211/19", nomor:4, nama:"H. NAZARUDDIN DEK GAM", partai:"PARTAI AMANAT NASIONAL", dapil:"ACEH I"},
-  //   {src:"https://silonpemilu.kpu.go.id/publik/calon/122594/19", nomor:5, nama:"LELI HERAWATI", partai:"PARTAI AMANAT NASIONAL", dapil:"ACEH I"},
-  //   {src:"https://silonpemilu.kpu.go.id/publik/calon/35028/19", nomor:6, nama:"MARGONINGSIH", partai:"PARTAI AMANAT NASIONAL", dapil:"ACEH I"},
-  //   {src:"https://silonpemilu.kpu.go.id/publik/calon/30115/19", nomor:7, nama:"SULAIMAN ALI", partai:"PARTAI AMANAT NASIONAL", dapil:"ACEH I"},
-  //   {src:"https://silonpemilu.kpu.go.id/publik/calon/21661/19", nomor:8, nama:"NURCHALIS", partai:"PARTAI BERKARYA", dapil:"ACEH II"}
-  // ];
 
   constructor(
     public navCtrl: NavController,
@@ -97,12 +78,56 @@ export class FindPage {
   showInput() {
     console.log("input : " + this.keyword);
   }
+  
+  findCaleg(findType, params, value) {
+    this.sort = "nama";
 
-  findCaleg(keyword) {
-    this.restProvider.findCaleg(keyword, this.token)
+    console.log("find type : " + findType);
+    console.log("nama partai : " + value);
+    
+    if (findType == "search") {
+      this.restProvider.findCaleg(params, this.token)
       .then(data => {
         this.response = data;
         this.calegList = this.response.data;
+        
+        this.filterDapil = "DAPIL";
+        this.filterPartai = "PARTAI";
+        this.filterLain = "LAINNYA";
+      });
+    } else if (findType == "island") {
+      this.restProvider.findCalegByIsland(params, this.token)
+      .then(data => {
+        this.response = data;
+        this.calegList = this.response.data;
+      });
+    } else if (findType == "partai") {
+      this.restProvider.findCalegByPartai(params, this.token)
+      .then(data => {
+        this.response = data;
+        this.calegList = this.response.data;
+        this.filterPartai = value;
+        this.filterPartaiId = params;
+        this.tabActive = "partai";
+        this.tabDapil = "aiCenter tab";
+        this.tabPartai = "aiCenter tab active";
+        this.tabNomor = "aiCenter tab";
+      });
+    }
+    
+  }
+
+  findCalegMultiparam(param1, param2, param3, token){
+    this.restProvider.findCalegMultiparam(param1, param2, param3, token)
+      .then(data => {
+        this.response = data;
+        this.calegList = this.response.data;
+
+        if (this.filterNomor == "ASC") {
+          this.filterNomor = "DESC";
+        }else {
+          this.filterNomor = "ASC";
+        }
       });
   }
 
@@ -133,7 +158,6 @@ export class FindPage {
   changeSort(type) {
     this.isChangeSort = false;
     this.sort = type;
-    // this.findUser(this.sort);
   }
 
   setActiveTab(page, myEvent) {
@@ -152,8 +176,11 @@ export class FindPage {
         if (dapil == null) {
           this.filterDapil = "DAPIL";
         }else {
-          this.filterDapil = dapil;
+          this.filterDapilId = dapil.id;
+          this.filterDapil = dapil.nama_daerah_pemilihan;
         }
+
+        this.setDataToFindCaleg();
       });
     } else if (page == "partai") {
       this.tabActive = "partai";
@@ -170,8 +197,12 @@ export class FindPage {
         if (partai == null) {
           this.filterPartai = "PARTAI";
         }else {
-          this.filterPartai = partai;
+          console.log("partai id hoe : " + partai.id);
+          this.filterPartaiId = partai.id;
+          this.filterPartai = partai.nama;
         }
+
+        this.setDataToFindCaleg();
       });
     } else if (page == "nomor") {
       this.tabActive = "nomor";
@@ -186,18 +217,41 @@ export class FindPage {
       popover.onDidDismiss(lain => {
         console.log("val : " + lain);
         if (lain == null) {
-          this.filterLain = "NO.URUT";
+          this.filterLain = "LAINNYA";
         }else {
           this.filterLain = lain;
         }
+
+        this.setDataToFindCaleg();
       });
     }
-
-    // this.getAllRank(this.tabActive, this.sort, this.token);
   }
 
-  chooseRegion(region) {
-    console.log(region);
-  }
+  setDataToFindCaleg() {
+    var param1 = "-1";
+    var param2 = "-1";
+    var param3 = "-1";
 
+    if (this.filterDapil == "DAPIL") {
+      param1 = "-1";
+    }else {
+      param1 = this.filterDapilId;
+    }
+    if (this.filterPartai == "PARTAI") {
+      param2 = "-1";
+    }else {
+      param2 = this.filterPartaiId;
+    }
+    if (this.filterLain == "LAINNYA") {
+      param3 = "-1";
+    }else if (this.filterLain == "A - Z") {
+      param3 = "nama ASC";
+    }else if (this.filterLain == "Z - A") {
+      param3 = "nama DESC";
+    }else if (this.filterLain == "NOMOR") {
+      param3 = "nomor " + this.filterNomor;
+    }
+
+    this.findCalegMultiparam(param1, param2, param3, this.token);
+  }
 }

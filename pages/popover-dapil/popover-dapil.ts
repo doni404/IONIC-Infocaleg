@@ -43,7 +43,7 @@ export class PopoverDapilPage {
     });
   }
 
-  setDapil(dapil) {
-    this.viewCtrl.dismiss(dapil);
+  setDapil(index) {
+    this.viewCtrl.dismiss(this.dapilList[index]);
   }
 }
