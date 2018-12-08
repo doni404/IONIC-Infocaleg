@@ -1,0 +1,424 @@
+<!--
+  Generated template for the DetailOtherUserPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+  <ion-navbar hideBackButton>
+    <ion-buttons left>
+      <button (click)="goBack()" ion-button icon-only>
+        <ion-icon class="custom-icon" name="arrow-round-back"></ion-icon>
+      </button>
+    </ion-buttons>
+    <ion-title>INFORMASI</ion-title>
+    <ion-buttons right>
+      <button (click)="goToNotification()" ion-button icon-only>
+        <ion-icon class="custom-icon" name="notifications"></ion-icon>
+      </button>
+    </ion-buttons>
+  </ion-navbar>
+</ion-header>
+
+
+<ion-content no-padding>
+  <div *ngIf="role == 'caleg' && tabActive == 'aktifitas'" style="margin-top: 16%;"></div>
+  <div *ngIf="role == 'pengguna' && tabActive == 'aktifitas'" style="margin-top: 8%;"></div>
+  <ion-row *ngIf="tabActive == 'aktifitas'" style="margin-bottom: 20%" class="detail-activity">
+    <ion-col col-12 text-center style="position: relative;">
+      <ion-col *ngIf="role == 'caleg'" class="floating-button-role" (click)="openEdit()">
+        <img no-padding src="../../assets/imgs/icon/label_caleg.png" width="20%">
+      </ion-col>
+      <ion-col *ngIf="role == 'pengguna'" class="floating-button-role" (click)="openEdit()">
+        <img no-padding src="../../assets/imgs/icon/label_pengguna.png" width="20%">
+      </ion-col>
+
+      <ion-col *ngIf="rank == 1" class="floating-button-rank">
+        <img no-padding src="../../assets/imgs/icon/rank1.png" width="10%">
+      </ion-col>
+      <ion-col *ngIf="rank == 2" class="floating-button-rank">
+        <img no-padding src="../../assets/imgs/icon/rank2.png" width="10%">
+      </ion-col>
+      <ion-col *ngIf="rank == 3" class="floating-button-rank">
+        <img no-padding src="../../assets/imgs/icon/rank3.png" width="10%">
+      </ion-col>
+
+      <ion-col col-12 no-padding>
+        <ion-col col-12 no-padding class="dIf aiCenter">
+          <img no-padding (click)="getImage()" [src]="profileImage" width="90px" height="90px" class="rounded-image">
+        </ion-col>
+        <ion-col col-12 no-padding>
+          <h6 no-margin>{{profileName}}</h6>
+        </ion-col>
+      </ion-col>
+    </ion-col>
+
+    <ion-row no-padding text-center class="profile-item dIf aiCenter">
+      <ion-col col-3 col-md-3>
+        <img no-padding src="../../assets/imgs/icon/thumb-up-active.png" width="30%">
+        <p no-margin>{{totalCommentLike}}
+          <br>Disukai</p>
+      </ion-col>
+      <ion-col col-3 col-md-3>
+        <img no-padding src="../../assets/imgs/icon/thumb-down-active.png" width="30%">
+        <p no-margin>{{totalCommentDislike}}
+          <br>Tidak Suka</p>
+      </ion-col>
+      <ion-col col-3 col-md-3>
+        <img no-padding src="../../assets/imgs/icon/comment.png" width="30%">
+        <p no-margin>{{totalComment}}
+          <br>Komentar</p>
+      </ion-col>
+      <ion-col col-3 col-md-3>
+        <img no-padding src="../../assets/imgs/icon/share.png" width="30%">
+        <p no-margin>20
+          <br>Dibagikan</p>
+      </ion-col>
+    </ion-row>
+
+    <ion-row no-padding text-center style="margin-top: 5px">
+      <ion-list id="history-list">
+        <ion-item no-lines class="bottom-border" *ngFor="let comment of comments;">
+          <ion-row class="w100" no-padding>
+            <ion-col col-2 col-md-2 no-padding>
+              <img no-padding [src]="profileImage" width="50px" height="50px" class="rounded-image">
+            </ion-col>
+            <ion-col col-10 col-md-10 no-padding>
+              <p>
+                <span class="caption">{{comment.nama_pengguna}}</span> {{comment.komentar}}</p>
+            </ion-col>
+          </ion-row>
+        </ion-item>
+      </ion-list>
+    </ion-row>
+  </ion-row>
+  <ion-row *ngIf="tabActive == 'profil'" style="margin-bottom: 20%" class="detail-profile">
+    <!-- TITLE -->
+    <ion-col col-12 text-center class="column">
+      PROFIL SINGKAT
+    </ion-col>
+
+    <!-- PROFILE CALEG -->
+    <ion-col no-padding col-12 class="column">
+      <ion-col no-padding col-12 class="dIF">
+        <ion-col col-6>
+          <p no-padding no-margin>No. Urut</p>
+        </ion-col>
+        <ion-col col-6>
+          <p no-padding no-margin>: {{caleg.nomor_urut}}</p>
+        </ion-col>
+      </ion-col>
+      <ion-col no-padding col-12 class="dIF">
+        <ion-col col-6>
+          <p no-padding no-margin>NIK</p>
+        </ion-col>
+        <ion-col col-6>
+          <p no-padding no-margin>: {{caleg.nik}}</p>
+        </ion-col>
+      </ion-col>
+      <ion-col no-padding col-12 class="dIF">
+        <ion-col col-6>
+          <p no-padding no-margin>Nama Lengkap</p>
+        </ion-col>
+        <ion-col col-6>
+          <p no-padding no-margin>: {{caleg.nama_lengkap}}</p>
+        </ion-col>
+      </ion-col>
+      <ion-col no-padding col-12 class="dIF">
+        <ion-col col-6>
+          <p no-padding no-margin>Tempat Lahir</p>
+        </ion-col>
+        <ion-col col-6>
+          <p no-padding no-margin>: {{caleg.tempat_lahir}}</p>
+        </ion-col>
+      </ion-col>
+      <ion-col no-padding col-12 class="dIF">
+        <ion-col col-6>
+          <p no-padding no-margin>Tanggal Lahir</p>
+        </ion-col>
+        <ion-col col-6>
+          <p no-padding no-margin>: {{caleg.tanggal_lahir}}</p>
+        </ion-col>
+      </ion-col>
+      <ion-col no-padding col-12 class="dIF">
+        <ion-col col-6>
+          <p no-padding no-margin>Jenis Kelamin</p>
+        </ion-col>
+        <ion-col col-6>
+          <p no-padding no-margin>: {{caleg.jenis_kelamin}}</p>
+        </ion-col>
+      </ion-col>
+      <ion-col no-padding col-12 class="dIF">
+        <ion-col col-6>
+          <p no-padding no-margin>Agama</p>
+        </ion-col>
+        <ion-col col-6>
+          <p no-padding no-margin>: {{caleg.agama}}</p>
+        </ion-col>
+      </ion-col>
+      <ion-col no-padding col-12 class="dIF">
+        <ion-col col-6>
+          <p no-padding no-margin>Status Perkawinan</p>
+        </ion-col>
+        <ion-col col-6>
+          <p no-padding no-margin>: {{caleg.status_perkawinan}}</p>
+        </ion-col>
+      </ion-col>
+      <ion-col no-padding col-12 class="dIF">
+        <ion-col col-6>
+          <p no-padding no-margin>Jumlah Anak</p>
+        </ion-col>
+        <ion-col col-6>
+          <p no-padding no-margin>: {{caleg.jumlah_anak}}</p>
+        </ion-col>
+      </ion-col>
+      <ion-col no-padding col-12 class="dIF">
+        <ion-col col-6>
+          <p no-padding no-margin>Alamat</p>
+        </ion-col>
+        <ion-col col-6>
+          <p no-padding no-margin>: {{caleg.alamat}}</p>
+        </ion-col>
+      </ion-col>
+      <ion-col no-padding col-12 class="dIF">
+        <ion-col col-6>
+          <p no-padding no-margin>Pendidikan</p>
+        </ion-col>
+        <ion-col col-6>
+          <p no-padding no-margin>: {{caleg.pendidikan}}</p>
+        </ion-col>
+      </ion-col>
+      <ion-col no-padding col-12 class="dIF">
+        <ion-col col-6>
+          <p no-padding no-margin>Pekerjaan</p>
+        </ion-col>
+        <ion-col col-6>
+          <p no-padding no-margin>: {{caleg.pekerjaan}}</p>
+        </ion-col>
+      </ion-col>
+      <ion-col no-padding col-12 class="dIF">
+        <ion-col col-6>
+          <p no-padding no-margin>Motivasi</p>
+        </ion-col>
+        <ion-col col-6>
+          <p no-padding no-margin>: {{caleg.motivasi}}</p>
+        </ion-col>
+      </ion-col>
+    </ion-col>
+
+    <!-- TITLE -->
+    <ion-col col-12 text-center class="column">
+      PROFIL PARTAI
+    </ion-col>
+
+    <!-- PROFILE PARTAI -->
+    <ion-col no-padding col-12 class="column">
+      <ion-col no-padding col-12 class="dIF">
+        <ion-col col-6>
+          <p no-padding no-margin>Nomor Urut Partai</p>
+        </ion-col>
+        <ion-col col-6>
+          <p no-padding no-margin>: {{caleg.nomor_urut_partai}}</p>
+        </ion-col>
+      </ion-col>
+      <ion-col no-padding col-12 class="dIF">
+        <ion-col col-6>
+          <p no-padding no-margin>Nama Partai</p>
+        </ion-col>
+        <ion-col col-6>
+          <p no-padding no-margin>: {{caleg.nama_partai}}</p>
+        </ion-col>
+      </ion-col>
+      <ion-col no-padding col-12 class="dIF">
+        <ion-col col-6>
+          <p no-padding no-margin>Akronim Partai</p>
+        </ion-col>
+        <ion-col col-6>
+          <p no-padding no-margin>: {{caleg.akronim_partai}}</p>
+        </ion-col>
+      </ion-col>
+      <ion-col no-padding col-12 class="dIF">
+        <ion-col col-6>
+          <p no-padding no-margin>Alamat Partai</p>
+        </ion-col>
+        <ion-col col-6>
+          <p no-padding no-margin>: {{caleg.alamat_partai}}</p>
+        </ion-col>
+      </ion-col>
+      <ion-col no-padding col-12 class="dIF">
+        <ion-col col-6>
+          <p no-padding no-margin>Email Partai</p>
+        </ion-col>
+        <ion-col col-6>
+          <p no-padding no-margin>: {{caleg.email_partai}}</p>
+        </ion-col>
+      </ion-col>
+      <ion-col no-padding col-12 class="dIF">
+        <ion-col col-6>
+          <p no-padding no-margin>Website Partai</p>
+        </ion-col>
+        <ion-col col-6>
+          <p no-padding no-margin>: {{caleg.website_partai}}</p>
+        </ion-col>
+      </ion-col>
+      <ion-col no-padding col-12 class="dIF">
+        <ion-col col-6>
+          <p no-padding no-margin>Nama Ketua Partai</p>
+        </ion-col>
+        <ion-col col-6>
+          <p no-padding no-margin>: {{caleg.nama_ketua_umum_partai}}</p>
+        </ion-col>
+      </ion-col>
+      <ion-col no-padding col-12 class="dIF">
+        <ion-col col-6>
+          <p no-padding no-margin>Nama Sekertaris Partai</p>
+        </ion-col>
+        <ion-col col-6>
+          <p no-padding no-margin>: {{caleg.nama_sekertaris_jendral_partai}}</p>
+        </ion-col>
+      </ion-col>
+      <ion-col no-padding col-12 class="dIF">
+        <ion-col col-6>
+          <p no-padding no-margin>Nama Bendahara Partai</p>
+        </ion-col>
+        <ion-col col-6>
+          <p no-padding no-margin>: {{caleg.nama_bendahara_umum_partai}}</p>
+        </ion-col>
+      </ion-col>
+      <ion-col no-padding col-12 class="dIF">
+        <ion-col col-6>
+          <p no-padding no-margin>Nama Notaris Partai</p>
+        </ion-col>
+        <ion-col col-6>
+          <p no-padding no-margin>: {{caleg.nama_notaris_partai}}</p>
+        </ion-col>
+      </ion-col>
+      <ion-col no-padding col-12 class="dIF">
+        <ion-col col-6>
+          <p no-padding no-margin>Alamat Notaris Partai</p>
+        </ion-col>
+        <ion-col col-6>
+          <p no-padding no-margin>: {{caleg.alamat_notaris_partai}}</p>
+        </ion-col>
+      </ion-col>
+      <ion-col no-padding col-12 class="dIF">
+        <ion-col col-6>
+          <p no-padding no-margin>Nomor Akta Notaris Partai</p>
+        </ion-col>
+        <ion-col col-6>
+          <p no-padding no-margin>: {{caleg.nomor_akta_notaris_partai}}</p>
+        </ion-col>
+      </ion-col>
+      <ion-col no-padding col-12 class="dIF">
+        <ion-col col-6>
+          <p no-padding no-margin>Tanggal Akta Notaris Partai</p>
+        </ion-col>
+        <ion-col col-6>
+          <p no-padding no-margin>: {{caleg.tanggal_akta_notaris_partai}}</p>
+        </ion-col>
+      </ion-col>
+      <ion-col no-padding col-12 class="dIF">
+        <ion-col col-6>
+          <p no-padding no-margin>Nomor SK Partai</p>
+        </ion-col>
+        <ion-col col-6>
+          <p no-padding no-margin>: {{caleg.nomor_sk_partai}}</p>
+        </ion-col>
+      </ion-col>
+    </ion-col>
+
+    <!-- TITLE -->
+    <ion-col col-12 text-center class="column">
+      LAIN - LAIN
+    </ion-col>
+
+    <!-- LAIN - LAIN -->
+    <ion-col no-padding col-12 class="column">
+      <ion-col no-padding col-12>
+        <ion-col col-12>
+          <p no-padding no-margin>
+            File AD ART
+            <br>
+            <a href="{{caleg.file_ad_art_partai}}">{{caleg.file_ad_art_partai}}</a>
+          </p>
+        </ion-col>
+      </ion-col>
+      <ion-col no-padding col-12>
+        <ion-col col-12>
+          <p no-padding no-margin>
+            File Dokumen Kantor
+            <br>
+            <a href="{{caleg.file_dokumen_kantor_partai}}">{{caleg.file_dokumen_kantor_partai}}</a>
+          </p>
+        </ion-col>
+      </ion-col>
+      <ion-col no-padding col-12>
+        <ion-col col-12>
+          <p no-padding no-margin>
+            File SK Kepengurusan Partai
+            <br>
+            <a href="{{caleg.file_sk_kepengurusan_partai}}">{{caleg.file_sk_kepengurusan_partai}}</a>
+          </p>
+        </ion-col>
+      </ion-col>
+      <ion-col no-padding col-12>
+        <ion-col col-12>
+          <p no-padding no-margin>
+            File SK Domisili Partai
+            <br>
+            <a href="{{caleg.file_sk_domisili_partai}}">{{caleg.file_sk_domisili_partai}}</a>
+          </p>
+        </ion-col>
+      </ion-col>
+    </ion-col>
+  </ion-row>
+  <ion-row *ngIf="tabActive == 'litsus'" style="margin-bottom: 20%" class="detail-litsus">
+    Litsus page
+  </ion-row>
+</ion-content>
+
+<!-- Tab -->
+<ion-row *ngIf="role == 'caleg'" no-padding no-margin class="w100">
+  <ion-col no-padding col-12 class="dIF detail-caleg-tab aiCenter">
+    <ion-col (click)="setActiveTab('aktifitas', $event)" col-4 text-center [class]="tabDapil">
+      AKTIFITAS
+    </ion-col>
+    <ion-col (click)="setActiveTab('profil', $event)" col-4 text-center [class]="tabPartai">
+      PROFIL
+    </ion-col>
+    <ion-col (click)="setActiveTab('litsus', $event)" col-4 text-center [class]="tabNomor">
+      LITSUS
+    </ion-col>
+  </ion-col>
+</ion-row>
+
+<!-- This is rate field -->
+<ion-row *ngIf="role == 'caleg'" no-padding no-margin class="w100">
+  <ion-col col-12 class="caleg-rate dIF aiCenter">
+    <ion-col col-6 class="rate-child">
+      <p no-padding no-margin>Beri Peringkat Caleg</p>
+    </ion-col>
+    <ion-col col-6 class="rate-child aiCenter">
+      <img *ngIf="rate >= 1" (click)="rateCaleg(caleg.id, penggunaId, 1, token)" no-padding no-margin src="../../assets/imgs/icon/star_active.png"
+        width="30px" height="30px" class="rounded-image">
+      <img *ngIf="rate < 1" (click)="rateCaleg(caleg.id, penggunaId, 1, token)" no-padding no-margin src="../../assets/imgs/icon/star_inactive.png"
+        width="30px" height="30px" class="rounded-image">
+      <img *ngIf="rate >= 2" (click)="rateCaleg(caleg.id, penggunaId, 2, token)" no-padding no-margin src="../../assets/imgs/icon/star_active.png"
+        width="30px" height="30px" class="rounded-image">
+      <img *ngIf="rate < 2" (click)="rateCaleg(caleg.id, penggunaId, 2, token)" no-padding no-margin src="../../assets/imgs/icon/star_inactive.png"
+        width="30px" height="30px" class="rounded-image">
+      <img *ngIf="rate >= 3" (click)="rateCaleg(caleg.id, penggunaId, 3, token)" no-padding no-margin src="../../assets/imgs/icon/star_active.png"
+        width="30px" height="30px" class="rounded-image">
+      <img *ngIf="rate < 3" (click)="rateCaleg(caleg.id, penggunaId, 3, token)" no-padding no-margin src="../../assets/imgs/icon/star_inactive.png"
+        width="30px" height="30px" class="rounded-image">
+      <img *ngIf="rate >= 4" (click)="rateCaleg(caleg.id, penggunaId, 4, token)" no-padding no-margin src="../../assets/imgs/icon/star_active.png"
+        width="30px" height="30px" class="rounded-image">
+      <img *ngIf="rate < 4" (click)="rateCaleg(caleg.id, penggunaId, 4, token)" no-padding no-margin src="../../assets/imgs/icon/star_inactive.png"
+        width="30px" height="30px" class="rounded-image">
+      <img *ngIf="rate >= 5" (click)="rateCaleg(caleg.id, penggunaId, 5, token)" no-padding no-margin src="../../assets/imgs/icon/star_active.png"
+        width="30px" height="30px" class="rounded-image">
+      <img *ngIf="rate < 5" (click)="rateCaleg(caleg.id, penggunaId, 5, token)" no-padding no-margin src="../../assets/imgs/icon/star_inactive.png"
+        width="30px" height="30px" class="rounded-image">
+    </ion-col>
+  </ion-col>
+</ion-row>

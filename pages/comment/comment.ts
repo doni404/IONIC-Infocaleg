@@ -50,19 +50,15 @@ export class CommentPage {
     console.log('ionViewDidLoad CommentPage');
 
     this.storage.get('token').then(token => {
-      this.storage.get('gambar').then(gambar => {
-        this.storage.get('id').then(id => {
-          this.storage.get('nama').then(nama => {
-            this.token = token;
-            this.idPengguna = id;
-            this.profileImage = gambar;
-            this.profileName = nama;
+      this.storage.get('pengguna').then(pengguna => {
+        this.token = token;
+        this.idPengguna = pengguna.id;
+        this.profileImage = pengguna.gambar;
+        this.profileName = pengguna.nama;
 
-            console.log(this.token);
+        console.log(this.token);
 
-            this.getAllCampaignComment();
-          });
-        });
+        this.getAllCampaignComment();
       });
     });
   }

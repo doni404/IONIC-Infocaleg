@@ -45,7 +45,8 @@ body {
 }
 .item-ios.item-block .item-inner{
     border-bottom: transparent;
-    margin-bottom: 10px;
+    padding: 0 15px;
+    // margin-bottom: 10px;
 }
 
 .toolbar-background {
@@ -57,14 +58,14 @@ body {
   border-radius: 50%;
 }
 
-.item-md {
+.item-ios, .item-md {
   padding-left: 0;
   margin-bottom: 20px!important;
 }
-.item-md.item-block .item-inner {
+.item-ios.item-block .item-inner, .item-md.item-block .item-inner {
   padding-right: 0px;
 }
-.button-outline-md {
+.button-outline-ios, .button-outline-md {
   border-width: 1px;
   border-style: solid;
   border-color: red;

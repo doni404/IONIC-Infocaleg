@@ -21,9 +21,13 @@ page-detail-user {
 
     .profile-item {
         margin-top: 5%;
-        padding: 10px 10px 10px 10px;
+        padding: 5px 10px 5px 10px;
         border-top: 1px solid rgba($color: grey, $alpha: 0.1);
         border-bottom: 1px solid rgba($color: grey, $alpha: 0.1);
+    }
+
+    img.profile {
+        margin-top: 4%;
     }
 
     .profile-item p{
@@ -36,14 +40,20 @@ page-detail-user {
         left: -145px;
     }
 
-    .floating-button-edit p, .floating-button-save p {
-        font-size: 11px;
+    .floating-button-exit {
+        position: absolute;
+        top: -10px;
+        right: -145px;
     }
 
     .floating-button-save {
         position: absolute;
         top: -10px;
         left: -145px;
+    }
+
+    .floating-button-edit p, .floating-button-save p, .floating-button-exit p {
+        font-size: 11px;
     }
 
     .item[no-lines].bottom-border { 

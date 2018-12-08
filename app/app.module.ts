@@ -22,6 +22,7 @@ import { UploadCampaignPage } from '../pages/upload-campaign/upload-campaign';
 import { FileTransfer } from '@ionic-native/file-transfer';
 import { Camera } from '@ionic-native/camera';
 import { File } from '@ionic-native/file';
+import { DetailOtherUserPage } from '../pages/detail-other-user/detail-other-user';
 
 @NgModule({
   declarations: [
@@ -34,7 +35,8 @@ import { File } from '@ionic-native/file';
     PopoverDapilPage,
     PopoverPartaiPage,
     PopoverLainPage,
-    UploadCampaignPage
+    UploadCampaignPage,
+    DetailOtherUserPage
   ],
   imports: [
     BrowserModule,
@@ -54,7 +56,8 @@ import { File } from '@ionic-native/file';
     PopoverDapilPage,
     PopoverPartaiPage,
     PopoverLainPage,
-    UploadCampaignPage
+    UploadCampaignPage,
+    DetailOtherUserPage
   ],
   providers: [
     StatusBar,

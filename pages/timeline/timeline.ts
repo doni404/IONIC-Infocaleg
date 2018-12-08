@@ -7,6 +7,7 @@ import moment from 'moment';
 import { NotificationPage } from '../notification/notification';
 import { CommentPage } from '../comment/comment';
 import { UploadCampaignPage } from '../upload-campaign/upload-campaign';
+import { DetailOtherUserPage } from '../detail-other-user/detail-other-user';
 
 /**
  * Generated class for the TimelinePage page.
@@ -45,19 +46,15 @@ export class TimelinePage {
     console.log('ionViewDidLoad TimelinePage');
 
     this.storage.get('token').then(token => {
-      this.storage.get('gambar').then(gambar => {
-        this.storage.get('id').then(id => {
-          this.storage.get('nama').then(nama => {
-            this.token = token;
-            this.penggunaId = id;
-            this.profileImage = gambar;
-            this.profileName = nama;
+      this.storage.get('pengguna').then(pengguna => {
+        this.token = token;
+        this.penggunaId = pengguna.id;
+        this.profileImage = pengguna.gambar;
+        this.profileName = pengguna.nama;
 
-            console.log(this.token);
+        console.log(this.token);
 
-            this.getAllTimeline(this.sort);
-          });
-        });
+        this.getAllTimeline(this.sort);
       });
     });
   }
@@ -163,6 +160,10 @@ export class TimelinePage {
     this.isChangeSort = false;
     this.sort = type;
     this.getAllTimeline(this.sort);
+  }
+
+  goToDetailCaleg(caleg) {
+    this.app.getRootNav().push(DetailOtherUserPage, {caleg: caleg, role: "caleg"});
   }
 
   goToCampaignUpload() {

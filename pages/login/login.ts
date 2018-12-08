@@ -62,18 +62,21 @@ export class LoginPage {
 
             console.log("token : " + this.user.token);
   
+            this.storage.set('pengguna', this.user.data[0]);
             this.storage.set('token', this.user.token);
-            this.storage.set('id', this.user.data[0].id);
-            this.storage.set('nama', this.user.data[0].nama);
-            this.storage.set('username', this.user.data[0].username);
-            this.storage.set('email', this.user.data[0].email);
-            this.storage.set('password', this.user.data[0].password);
-            this.storage.set('gambar', this.user.data[0].gambar);
-            this.storage.set('role', this.user.data[0].role);
-            this.storage.set('total_comment', this.user.data[0].total_comment);
-            this.storage.set('total_comment_like', this.user.data[0].total_comment_like);
-            this.storage.set('total_comment_dislike', this.user.data[0].total_comment_dislike);
             this.storage.set('isLogin', "true");
+
+            // this.storage.set('id', this.user.data[0].id);
+            // this.storage.set('nama', this.user.data[0].nama);
+            // this.storage.set('username', this.user.data[0].username);
+            // this.storage.set('email', this.user.data[0].email);
+            // this.storage.set('password', this.user.data[0].password);
+            // this.storage.set('gambar', this.user.data[0].gambar);
+            // this.storage.set('role', this.user.data[0].role);
+            // this.storage.set('total_comment', this.user.data[0].total_comment);
+            // this.storage.set('total_comment_like', this.user.data[0].total_comment_like);
+            // this.storage.set('total_comment_dislike', this.user.data[0].total_comment_dislike);
+            // this.storage.set('isLogin', "true");
             this.navCtrl.setRoot(TabsPage);
           }
           else{

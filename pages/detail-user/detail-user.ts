@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, LoadingController, ToastController, Platform, AlertController } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, LoadingController, ToastController, Platform, AlertController, App } from 'ionic-angular';
 import { FileTransfer, FileUploadOptions } from '@ionic-native/file-transfer';
 import { Camera, CameraOptions } from '@ionic-native/camera';
 import { RestProvider } from '../../providers/rest/rest';
@@ -7,6 +7,7 @@ import { Storage } from '@ionic/storage';
 import { File } from '@ionic-native/file';
 
 import { NotificationPage } from '../notification/notification';
+import { LoginPage } from '../login/login';
 
 /**
  * Generated class for the DetailUserPage page.
@@ -36,6 +37,7 @@ export class DetailUserPage {
   response: any;
 
   constructor(
+    public app: App,
     public navCtrl: NavController,
     public navParams: NavParams,
     private transfer: FileTransfer,
@@ -53,34 +55,25 @@ export class DetailUserPage {
     console.log('ionViewDidLoad DetailUserPage');
 
     this.storage.get('token').then(token => {
-      this.storage.get('gambar').then(gambar => {
-        this.storage.get('id').then(id => {
-          this.storage.get('nama').then(nama => {
-            this.storage.get('total_comment').then(totalComment => {
-              this.storage.get('total_comment_like').then(totalCommentLike => {
-                this.storage.get('total_comment_dislike').then(totalCommentDislike => {
-                  this.token = token;
-                  this.penggunaId = id;
-                  this.profileName = nama;
-                  this.totalComment = totalComment;
-                  this.totalCommentLike = totalCommentLike;
-                  this.totalCommentDislike = totalCommentDislike;
+      this.storage.get('pengguna').then(pengguna => {
+        this.token = token;
+        this.penggunaId = pengguna.id;
+        this.profileName = pengguna.nama;
+        this.totalComment = pengguna.total_comment;
+        this.totalCommentLike = pengguna.total_comment_like;
+        this.totalCommentDislike = pengguna.total_comment_dislike;
 
-                  if (gambar != null) {
-                    this.profileImage = this.apiUrl + "/getprofile/" + gambar + "?token=" + token;
-                  }else {
-                    this.profileImage = "../../assets/imgs/logo.png";
-                  }
-                  
-                  console.log(this.token);
-                  this.getAllCommentByUser(this.penggunaId);
-                });
-              });
-            });
-          });
-        });
+        if (pengguna.gambar != null) {
+          this.profileImage = this.apiUrl + "/getprofile/" + pengguna.gambar + "?token=" + token;
+        } else {
+          this.profileImage = "../../assets/imgs/logo.png";
+        }
+
+        console.log(this.token);
+        this.getAllCommentByUser(this.penggunaId);
       });
     });
+
   }
 
   getAllCommentByUser(penggunaId) {
@@ -225,6 +218,15 @@ export class DetailUserPage {
 
   goBack() {
     this.navCtrl.pop();
+  }
+
+  logout() {
+    this.storage.remove('pengguna');
+    this.storage.remove('token');
+    this.storage.set('isLogin', "false");
+
+    this.app.getRootNav().push(LoginPage);
+    this.app.getRootNav().setRoot(LoginPage);
   }
 
   showInfo(text) {

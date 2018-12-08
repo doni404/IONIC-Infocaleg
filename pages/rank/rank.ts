@@ -3,6 +3,7 @@ import { IonicPage, NavController, NavParams, App} from 'ionic-angular';
 import { Storage } from '@ionic/storage';
 import { RestProvider } from '../../providers/rest/rest';
 import { NotificationPage } from '../notification/notification';
+import { DetailOtherUserPage } from '../detail-other-user/detail-other-user';
 
 /**
  * Generated class for the RankPage page.
@@ -43,9 +44,9 @@ export class RankPage {
     console.log('ionViewDidLoad RankPage');
 
     this.storage.get('token').then(token => {
-      this.storage.get('id').then(id => {
+      this.storage.get('pengguna').then(pengguna => {
         this.token = token;
-        this.penggunaId = id;
+        this.penggunaId = pengguna.id;
 
         this.getAllRank(this.tabActive, this.sort, this.token);
       });
@@ -103,6 +104,24 @@ export class RankPage {
     }else {
       this.getAllRank(this.tabActive, this.sort, this.token);
     }
+  }
+
+  goToDetailCaleg(caleg, rank) {
+    // this.restProvider.findCalegByPengguna(pengguna.id, this.token)
+    //   .then(data => {
+    //     this.response = data;
+
+    //     if (this.response.status == "success") {
+    //       this.app.getRootNav().push(DetailOtherUserPage, {caleg: this.response.data[0], role: "caleg", rank: rank});
+    //     }
+
+    //   });
+    this.app.getRootNav().push(DetailOtherUserPage, {caleg: caleg, role: "caleg", rank: rank});
+  }
+
+  goToDetailPengguna(pengguna, rank) {
+    console.log("iki : " + rank);
+    this.app.getRootNav().push(DetailOtherUserPage, {pengguna: pengguna, role: "pengguna", rank: rank});
   }
 
   goToNotification() {

@@ -419,6 +419,24 @@ export class RestProvider {
     });
   }
 
+  findCalegByPengguna(idPengguna, token) {
+    let headers = new Headers(
+      {
+        'Content-Type': 'application/x-www-form-urlencoded',
+      });
+
+    let options = new RequestOptions({ headers: headers });
+    console.log(this.apiUrl + '/calegbypengguna/' + idPengguna + '?token=' + token);
+    return new Promise(resolve => {
+      this.httpangular.get(this.apiUrl + '/calegbypengguna/' + idPengguna + '?token=' + token, options)
+        .subscribe(res => {
+          resolve(res.json());
+        }, (err) => {
+          console.log(err);
+        });
+    });
+  }
+
   findCalegByIsland(island, token) {
     if (token != '' || token != null) {
       console.log('token : true');
@@ -481,6 +499,49 @@ export class RestProvider {
     console.log(this.apiUrl + '/calegbymultiparam/' + idDapil + '/' + idPartaiPolitik + '/' + sortType + '?token=' + token);
     return new Promise(resolve => {
       this.httpangular.get(this.apiUrl + '/calegbymultiparam/' + idDapil + '/' + idPartaiPolitik + '/' + sortType + '?token=' + token, options)
+        .subscribe(res => {
+          resolve(res.json());
+        }, (err) => {
+          console.log(err);
+        });
+    });
+  }
+
+  rateCaleg(idCalonLegislatif, idPengguna, rate, token) {
+    let headers = new Headers(
+      {
+        'Content-Type': 'application/json'
+      });
+
+    let options = new RequestOptions({ headers: headers });
+
+    let postData = JSON.stringify({
+      "id_calon_legislatif": idCalonLegislatif,
+      "id_pengguna": idPengguna,
+      "rate": rate
+    });
+
+    return new Promise((resolve, reject) => {
+      this.httpangular.post(this.apiUrl + '/calegrate?token=' + token, postData, options)
+        .subscribe(res => {
+          resolve(res.json());
+          console.log(res);
+        }, (err) => {
+          reject(err);
+        });
+    });
+  }
+
+  getRateCaleg(idCalonLegislatif, idPengguna, token) {
+    let headers = new Headers(
+      {
+        'Content-Type': 'application/x-www-form-urlencoded',
+      });
+
+    let options = new RequestOptions({ headers: headers });
+    console.log(this.apiUrl + '/calegrate/' + idPengguna + '/' + idCalonLegislatif + '?token=' + token);
+    return new Promise(resolve => {
+      this.httpangular.get(this.apiUrl + '/calegrate/' + idPengguna + '/' + idCalonLegislatif + '?token=' + token, options)
         .subscribe(res => {
           resolve(res.json());
         }, (err) => {

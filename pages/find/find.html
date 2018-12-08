@@ -44,7 +44,7 @@
 
     <div *ngIf="sort == 'nama'">
       <div *ngFor="let caleg of calegList; let i= index" class="square aiCenter" text-center>
-        <div class="content-caleg" (click)="findCaleg(caleg.id)">
+        <div class="content-caleg" (click)="goToDetailCaleg(caleg)">
           <img src="{{caleg.link_gambar}}" class="rounded-image">
           <p no-padding no-margin class="top-left">{{caleg.nomor_urut}}</p>
           <p no-padding no-margin class="middle bold">{{caleg.nama_lengkap}}</p>

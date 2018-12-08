@@ -45,9 +45,9 @@ export class UploadCampaignPage {
     console.log('ionViewDidLoad UploadCampaignPage');
 
     this.storage.get('token').then(token => {
-      this.storage.get('id').then(id => {
+      this.storage.get('pengguna').then(pengguna => {
         this.token = token;
-        this.penggunaId = id;
+        this.penggunaId = pengguna.id;
       });
     });
   }

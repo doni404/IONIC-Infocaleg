@@ -25,15 +25,18 @@
     <ion-row *ngIf="tabActive == 'caleg'" no-padding no-margin class="w100">
       <ion-col *ngFor="let rank of rankCaleg; let i= index" col-12 class="rank-caleg dIF">
         <ion-col col-3 no-padding text-center>
-          <img *ngIf="rank.gambar != null" no-padding no-margin src="{{apiUrl}}/getprofile/{{rank.gambar}}?token={{token}}" width="80px"
+          <img no-padding no-margin src="{{rank.link_gambar}}" width="80px"
             height="80px" class="rounded-image">
-          <img *ngIf="rank.gambar == null" no-padding no-margin src="../../assets/imgs/logo.png" width="80px" height="80px" class="rounded-image"> </ion-col>
+          <!-- <img *ngIf="rank.gambar != null" no-padding no-margin src="{{apiUrl}}/getprofile/{{rank.gambar}}?token={{token}}" width="80px"
+            height="80px" class="rounded-image">
+          <img *ngIf="rank.gambar == null" no-padding no-margin src="../../assets/imgs/logo.png" width="80px" height="80px" class="rounded-image">  -->
+        </ion-col>
         <ion-col col-9 no-padding>
           <ion-col col-12 class="dIF wrapper">
-            <ion-col col-9>
-              <b>{{rank.nama}}</b>
-              <p no-padding no-margin>Partai Nasional Demokrasi</p>
-              <p no-padding no-margin>Daerah Pilih Aceh II</p>
+            <ion-col col-9 (click)="goToDetailCaleg(rank, (i+1))">
+              <p no-padding no-margin><b>{{rank.nama_lengkap}}</b></p>
+              <p no-padding no-margin>{{rank.nama_partai}}</p>
+              <p no-padding no-margin>{{rank.daerah_pemilihan}}</p>
             </ion-col>
             <ion-col col-3 text-center>
               <img *ngIf="i == 0" no-padding no-margin src="../../assets/imgs/icon/rank1.png" width="35px">
@@ -41,20 +44,20 @@
               <img *ngIf="i == 2" no-padding no-margin src="../../assets/imgs/icon/rank3.png" width="35px">
             </ion-col>
           </ion-col>
-          <ion-col col-12 class="dIF aiCenter">
+          <ion-col *ngIf="sort == 'populer'" col-12 class="dIF aiCenter">
             <ion-col class="rank-action" text-center>
-              <img no-padding no-margin src="../../assets/imgs/icon/comment.png" width="20px">
+              <img no-padding no-margin src="../../assets/imgs/icon/posting.png" width="16px">
               <p no-padding no-margin>{{rank.total_posting}}
                 <br>Post</p>
             </ion-col>
             <ion-col class="rank-action" text-center>
               <img no-padding no-margin src="../../assets/imgs/icon/thumb-up-active.png" width="20px">
-              <p no-padding no-margin>{{rank.total_comment_like}}
+              <p no-padding no-margin>{{rank.total_posting_like}}
                 <br>Like</p>
             </ion-col>
             <ion-col class="rank-action" text-center>
               <img no-padding no-margin src="../../assets/imgs/icon/thumb-down-active.png" width="20px">
-              <p no-padding no-margin>{{rank.total_comment_dislike}}
+              <p no-padding no-margin>{{rank.total_posting_dislike}}
                 <br>Dislike</p>
             </ion-col>
             <ion-col class="rank-action" text-center>
@@ -63,10 +66,25 @@
                 <br>Komentar</p>
             </ion-col>
             <ion-col class="rank-action" text-center>
-              <img no-padding no-margin src="../../assets/imgs/icon/share.png" width="20px">
+              <img no-padding no-margin src="../../assets/imgs/icon/share.png" width="25px">
               <p no-padding no-margin>100k
                 <br>Share</p>
             </ion-col>
+          </ion-col>
+          <ion-col *ngIf="sort == 'favorit'" no-padding col-12 class="dIF aiCenter">
+            <ion-col class="rank-action" text-center>
+              <img no-padding no-margin src="../../assets/imgs/icon/star_active.png" width="20px">
+              <p no-padding no-margin>{{rank.rate}}
+                <br>Rate</p>
+            </ion-col>
+            <ion-col class="rank-action" text-center>
+              <img no-padding no-margin src="../../assets/imgs/icon/share.png" width="25px">
+              <p no-padding no-margin>100k
+                <br>Share</p>
+            </ion-col>
+            <ion-col class="rank-action" text-center></ion-col>
+            <ion-col class="rank-action" text-center></ion-col>
+            <ion-col class="rank-action" text-center></ion-col>
           </ion-col>
         </ion-col>
       </ion-col>
@@ -80,7 +98,7 @@
         </ion-col>
         <ion-col col-9 no-padding>
           <ion-col col-12 class="dIF wrapper">
-            <ion-col col-9>
+            <ion-col col-9 (click)="goToDetailPengguna(rank, (i+1))">
               <b>{{rank.nama}}</b>
               <p no-padding no-margin>NKRI Harga Mati !!!</p>
             </ion-col>

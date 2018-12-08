@@ -1,10 +1,11 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, PopoverController } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, PopoverController, App} from 'ionic-angular';
 import { Storage } from '@ionic/storage';
 import { RestProvider } from '../../providers/rest/rest';
 import { PopoverDapilPage } from '../popover-dapil/popover-dapil';
 import { PopoverPartaiPage } from '../popover-partai/popover-partai';
 import { PopoverLainPage } from '../popover-lain/popover-lain';
+import { DetailOtherUserPage } from '../detail-other-user/detail-other-user';
 
 /**
  * Generated class for the FindPage page.
@@ -23,7 +24,6 @@ export class FindPage {
   apiUrl = 'http://18.182.255.183/api';
 
   token: any;
-  penggunaId: any;
   keyword: any;
   tabActive = "dapil";
   tabDapil = "aiCenter tab active";
@@ -56,6 +56,7 @@ export class FindPage {
   calegList: any;
 
   constructor(
+    public app: App,
     public navCtrl: NavController,
     private storage: Storage,
     public navParams: NavParams,
@@ -253,5 +254,9 @@ export class FindPage {
     }
 
     this.findCalegMultiparam(param1, param2, param3, this.token);
+  }
+
+  goToDetailCaleg(caleg) {
+    this.app.getRootNav().push(DetailOtherUserPage, {caleg: caleg, role: "caleg"});
   }
 }
