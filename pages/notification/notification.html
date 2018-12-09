@@ -20,6 +20,26 @@
   </ion-navbar>
 </ion-header>
 
-<ion-content padding>
-  Notification List Will Here...
+<ion-content no-padding>
+  <ion-row no-margin class="w100">
+    <!-- This is campaign description -->
+    <ion-col *ngFor="let notification of notifications; let i= index" col-12 no-padding class="w100 notification-item dIF">
+      <ion-col col-2 col-md-2 class="aiCenter" text-center>
+        <img *ngIf="notification.gambar_pengirim == null" no-padding no-margin src="../../assets/imgs/logo.png" width="50px" height="50px" class="rounded-image">
+        <img *ngIf="notification.gambar_pengirim != null" no-padding no-margin src="{{apiUrl}}/getprofile/{{notification.gambar_pengirim}}?token={{token}}"
+          width="50px" height="50px" class="rounded-image">
+      </ion-col>
+      <ion-col col-10 col-md-10>
+        <p no-padding no-margin>
+          <b>{{notification.nama_pengirim}} </b>
+          <span *ngIf="notification.jenis_notifikasi == 'like_kampanye'">menyukai kampanye anda.</span>
+          <span *ngIf="notification.jenis_notifikasi == 'dislike_kampanye'">tidak menyukai kampanye anda.</span>
+          <span *ngIf="notification.jenis_notifikasi == 'like_komentar_kampanye'">menyukai komentar anda "{{notification.keterangan}}".</span>
+          <span *ngIf="notification.jenis_notifikasi == 'dislike_komentar_kampanye'">tidak menyukai komentar anda "{{notification.keterangan}}".</span>
+          <span *ngIf="notification.jenis_notifikasi == 'komentar_kampanye'">mengomentari kampanye anda.
+            <br>"{{notification.keterangan}}"</span>
+        </p>
+      </ion-col>
+    </ion-col>
+  </ion-row>
 </ion-content>

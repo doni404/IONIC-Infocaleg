@@ -14,7 +14,8 @@
     <ion-title>PERINGKAT</ion-title>
     <ion-buttons right>
       <button (click)="goToNotification()" ion-button icon-only>
-        <ion-icon class="custom-icon" name="notifications"></ion-icon>
+        <ion-icon class="custom-icon" name="notifications-outline"></ion-icon>
+        <ion-badge class="badge-circle-red">{{notification_total}}</ion-badge>
       </button>
     </ion-buttons>
   </ion-navbar>

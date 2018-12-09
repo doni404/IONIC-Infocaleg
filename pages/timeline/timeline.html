@@ -22,7 +22,8 @@
     <ion-title>INFO CALEG</ion-title>
     <ion-buttons right>
       <button (click)="goToNotification()" ion-button icon-only>
-        <ion-icon class="custom-icon" name="notifications"></ion-icon>
+        <ion-icon class="custom-icon" name="notifications-outline"></ion-icon>
+        <ion-badge class="badge-circle-red">{{notification_total}}</ion-badge>
       </button>
     </ion-buttons>
   </ion-navbar>
@@ -93,7 +94,7 @@
     </ion-col>
   </ion-row>
 
-  <ion-fab right bottom>
+  <ion-fab right bottom *ngIf="role == 'caleg'">
     <button (click)="goToCampaignUpload()" class="fab" ion-fab mini color="danger">
       <ion-icon name="add"></ion-icon>
     </button>

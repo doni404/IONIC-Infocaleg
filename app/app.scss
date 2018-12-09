@@ -74,9 +74,29 @@ body {
   -webkit-box-shadow: none;
   box-shadow: none;
 }
+
+// Item 
+.notification-item {
+  border-bottom: 1px solid rgba($color: grey, $alpha: 0.1);
+  padding: 5px;
+}
+
 // Top Bar Setting
 .custom-icon {
   color: red;
+}
+
+.badge-circle-red {
+  // display: inline-block;
+  color: white;
+  background-color: red;
+  // border-radius: 100%;
+  // font-size: 14px;
+  // font-weight: bolder;
+  // align-items: center;
+  position: absolute;
+   top: -3px;
+   right: -3px;
 }
 
 // Tabs Setting

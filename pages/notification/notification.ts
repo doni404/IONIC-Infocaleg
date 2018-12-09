@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { Storage } from '@ionic/storage';
+import { RestProvider } from '../../providers/rest/rest';
 
 /**
  * Generated class for the NotificationPage page.
@@ -15,11 +17,39 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 })
 export class NotificationPage {
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+  apiUrl = 'http://18.182.255.183/api';
+
+  token: any;
+  penggunaId: any;
+  notifications: any;
+
+  constructor(
+    public navCtrl: NavController,
+    private storage: Storage,
+    public restProvider: RestProvider,
+    public navParams: NavParams) {
+
+      this.notifications = this.navParams.get("notification");
+
   }
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad NotificationPage');
+
+    this.storage.get('token').then(token => {
+      this.storage.get('pengguna').then(pengguna => {
+        this.token = token;
+        this.penggunaId = pengguna.id;
+
+        console.log(this.token);
+
+        this.showAllNotification(this.penggunaId, this.token);
+      });
+    });
+  }
+
+  showAllNotification(idPengguna, token) {
+
   }
 
   goBack() {

@@ -14,7 +14,8 @@
     <ion-title>INFORMASI</ion-title>
     <ion-buttons right>
       <button (click)="goToNotification()" ion-button icon-only>
-        <ion-icon class="custom-icon" name="notifications"></ion-icon>
+        <ion-icon class="custom-icon" name="notifications-outline"></ion-icon>
+        <ion-badge class="badge-circle-red">{{notification_total}}</ion-badge>
       </button>
     </ion-buttons>
   </ion-navbar>
@@ -84,12 +85,27 @@
       </ion-col>
     </ion-row>
 
-    <ion-row no-padding text-center style="margin-top: 5px">
-      <ion-list id="history-list">
+    <ion-row no-padding style="margin-top: 5px" class="w100">
+      <!-- This is campaign description -->
+      <ion-col *ngFor="let comment of comments; let i= index" col-12 no-padding class="w100 notification-item dIF">
+        <ion-col col-2 col-md-2 class="aiCenter" text-center>
+          <img *ngIf="comment.gambar_pengguna == null" no-padding no-margin src="../../assets/imgs/logo.png" width="50px" height="50px"
+            class="rounded-image">
+          <img *ngIf="comment.gambar_pengguna != null" no-padding no-margin src="{{apiUrl}}/getprofile/{{comment.gambar_pengguna}}?token={{token}}"
+            width="50px" height="50px" class="rounded-image">
+        </ion-col>
+        <ion-col col-10 col-md-10>
+          <p no-padding no-margin>
+            <b>{{comment.nama_pengguna}} </b>{{comment.komentar}}
+          </p>
+        </ion-col>
+      </ion-col>
+
+      <!-- <ion-list id="history-list">
         <ion-item no-lines class="bottom-border" *ngFor="let comment of comments;">
           <ion-row class="w100" no-padding>
             <ion-col col-2 col-md-2 no-padding>
-              <!-- <img *ngIf="profileImage == null" no-padding src="../../assets/imgs/logo.png" width="90px" height="90px" class="rounded-image"> -->
+              <img *ngIf="profileImage == null" no-padding src="../../assets/imgs/logo.png" width="90px" height="90px" class="rounded-image">
               <img no-padding [src]="profileImage" width="50px" height="50px" class="rounded-image">
             </ion-col>
             <ion-col col-10 col-md-10 no-padding>
@@ -98,7 +114,7 @@
             </ion-col>
           </ion-row>
         </ion-item>
-      </ion-list>
+      </ion-list> -->
     </ion-row>
   </ion-row>
 </ion-content>

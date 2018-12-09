@@ -55,22 +55,7 @@ page-detail-user {
     .floating-button-edit p, .floating-button-save p, .floating-button-exit p {
         font-size: 11px;
     }
-
-    .item[no-lines].bottom-border { 
-        // border-top: 1px solid rgba($color: grey, $alpha: 0.1);
-        border-bottom: 1px solid rgba($color: grey, $alpha: 0.1);
-    }
-
-    span.caption {
-        font-weight: bold;
-        font-size: 12;
-    }
-
-    .qa-content {
-        padding-top: 2% !important;
-        padding-bottom: 2%;
-    }
-
+    
     // .circle {
     //     width: 80px;
     //     height: 80px;

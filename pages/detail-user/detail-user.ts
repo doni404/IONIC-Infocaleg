@@ -36,6 +36,9 @@ export class DetailUserPage {
   loader: any;
   response: any;
 
+  notification: any;
+  notification_total: any;
+
   constructor(
     public app: App,
     public navCtrl: NavController,
@@ -71,6 +74,7 @@ export class DetailUserPage {
 
         console.log(this.token);
         this.getAllCommentByUser(this.penggunaId);
+        this.getNotification(this.penggunaId, this.token);
       });
     });
 
@@ -82,6 +86,16 @@ export class DetailUserPage {
         this.response = data;
         this.comments = this.response.data;
       });
+  }
+
+  getNotification(idPengguna, token) {
+    this.restProvider.getNotification(idPengguna, token)
+      .then(data => {
+        this.response = data;
+
+        this.notification_total = this.response.total_new;
+        this.notification = this.response.data;
+      }); 
   }
 
   openEdit() {
@@ -213,7 +227,7 @@ export class DetailUserPage {
   }
 
   goToNotification() {
-    this.navCtrl.push(NotificationPage);
+    this.app.getRootNav().push(NotificationPage, {notification: this.notification});
   }
 
   goBack() {

@@ -549,5 +549,22 @@ export class RestProvider {
         });
     });
   }
-  
+
+  getNotification(idPengguna, token) {
+    let headers = new Headers(
+      {
+        'Content-Type': 'application/x-www-form-urlencoded',
+      });
+
+    let options = new RequestOptions({ headers: headers });
+    console.log(this.apiUrl + '/notification/' + idPengguna + '?token=' + token);
+    return new Promise(resolve => {
+      this.httpangular.get(this.apiUrl + '/notification/' + idPengguna + '?token=' + token, options)
+        .subscribe(res => {
+          resolve(res.json());
+        }, (err) => {
+          console.log(err);
+        });
+    });
+  }
 }

@@ -1,7 +1,8 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, App } from 'ionic-angular';
 import { Storage } from '@ionic/storage';
 import { RestProvider } from '../../providers/rest/rest';
+import { NotificationPage } from '../notification/notification';
 
 /**
  * Generated class for the DetailOtherUserPage page.
@@ -40,14 +41,18 @@ export class DetailOtherUserPage {
   totalCommentDislike: any;
   totalComment: any;
 
+  notification: any;
+  notification_total: any;
+
   comments = [
-    {nama_pengguna:"Doni Putra Purbawa", komentar:"sumatera"},
-    {nama_pengguna:"Doni Putra Purbawa", komentar:"kalimantan"},
-    {nama_pengguna:"Doni Putra Purbawa", komentar:"jawa"},
-    {nama_pengguna:"Doni Putra Purbawa", komentar:"sulawesi"}
+    // {nama_pengguna:"Doni Putra Purbawa", komentar:"sumatera"},
+    // {nama_pengguna:"Doni Putra Purbawa", komentar:"kalimantan"},
+    // {nama_pengguna:"Doni Putra Purbawa", komentar:"jawa"},
+    // {nama_pengguna:"Doni Putra Purbawa", komentar:"sulawesi"}
   ];
 
   constructor(
+    public app: App,
     public navCtrl: NavController,
     private storage: Storage,
     public navParams: NavParams,
@@ -96,6 +101,8 @@ export class DetailOtherUserPage {
             this.profileImage = "../../assets/imgs/logo.png";
           }
         }
+
+        this.getNotification(this.penggunaId, this.token);
       });
     });
   }
@@ -147,6 +154,20 @@ export class DetailOtherUserPage {
           this.rate = rate;
         }
       });
+  }
+
+  getNotification(idPengguna, token) {
+    this.restProvider.getNotification(idPengguna, token)
+      .then(data => {
+        this.response = data;
+
+        this.notification_total = this.response.total_new;
+        this.notification = this.response.data;
+      }); 
+  }
+
+  goToNotification() {
+    this.app.getRootNav().push(NotificationPage, {notification: this.notification});
   }
 
   goBack() {

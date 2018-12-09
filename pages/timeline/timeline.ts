@@ -26,6 +26,7 @@ export class TimelinePage {
   apiUrl = 'http://18.182.255.183/api';
 
   token: any;
+  role: any;
   penggunaId: any;
   profileImage: any;
   profileName: any;
@@ -33,6 +34,9 @@ export class TimelinePage {
   timelines: any;
   sort = "new";
   isChangeSort = false;
+
+  notification: any;
+  notification_total: any;
 
   constructor(
     public app: App,
@@ -48,6 +52,7 @@ export class TimelinePage {
     this.storage.get('token').then(token => {
       this.storage.get('pengguna').then(pengguna => {
         this.token = token;
+        this.role = pengguna.role;
         this.penggunaId = pengguna.id;
         this.profileImage = pengguna.gambar;
         this.profileName = pengguna.nama;
@@ -55,6 +60,7 @@ export class TimelinePage {
         console.log(this.token);
 
         this.getAllTimeline(this.sort);
+        this.getNotification(this.penggunaId, this.token);
       });
     });
   }
@@ -148,6 +154,16 @@ export class TimelinePage {
       });
   }
 
+  getNotification(idPengguna, token) {
+    this.restProvider.getNotification(idPengguna, token)
+      .then(data => {
+        this.response = data;
+
+        this.notification_total = this.response.total_new;
+        this.notification = this.response.data;
+      }); 
+  }
+
   toggleSort() {
     if (this.isChangeSort) {
       this.isChangeSort = false;
@@ -182,12 +198,13 @@ export class TimelinePage {
 
   goToNotification() {
     // this.navCtrl.push(NotificationPage);
-    this.app.getRootNav().push(NotificationPage);
+    this.app.getRootNav().push(NotificationPage, {notification: this.notification});
   }
 
   doRefresh(refresher) {
     console.log('Begin async operation', refresher);
     this.getAllTimeline(this.sort);
+    this.getNotification(this.penggunaId, this.token);
     setTimeout(() => {
       console.log('Async operation has ended');
       refresher.complete();

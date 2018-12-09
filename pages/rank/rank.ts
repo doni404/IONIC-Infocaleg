@@ -32,6 +32,9 @@ export class RankPage {
   isChangeSort = false;
   response: any;
 
+  notification: any;
+  notification_total: any;
+
   constructor(
     public app: App,
     public navCtrl: NavController,
@@ -49,6 +52,7 @@ export class RankPage {
         this.penggunaId = pengguna.id;
 
         this.getAllRank(this.tabActive, this.sort, this.token);
+        this.getNotification(this.penggunaId, this.token);
       });
     });
   }
@@ -69,6 +73,16 @@ export class RankPage {
       });
   }
 
+  getNotification(idPengguna, token) {
+    this.restProvider.getNotification(idPengguna, token)
+      .then(data => {
+        this.response = data;
+
+        this.notification_total = this.response.total_new;
+        this.notification = this.response.data;
+      }); 
+  }
+  
   setActiveTab(page) {
     if (page == "caleg") {
       this.tabActive = "caleg";
@@ -125,7 +139,7 @@ export class RankPage {
   }
 
   goToNotification() {
-    this.app.getRootNav().push(NotificationPage);
+    this.app.getRootNav().push(NotificationPage, {notification: this.notification});
   }
 
 }
