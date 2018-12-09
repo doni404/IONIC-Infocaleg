@@ -44,6 +44,11 @@ export class LoginPage {
   login() {
     console.log("logging in...");
 
+    if (this.loginCredentials.username == '' || this.loginCredentials.password == '') {
+      this.showInfo('Username dan password harus di isi!');
+      return;
+    }
+
     let loader = this.loadingCtrl.create({
       content: "Mohon tunggu..."
     });

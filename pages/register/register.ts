@@ -37,6 +37,11 @@ export class RegisterPage {
   }
 
   register() {
+    if (this.registrationCredentials.name == '' || this.registrationCredentials.username == '' || this.registrationCredentials.password == '' || this.registrationCredentials.email == '') {
+      this.showInfo('Semua kolom harus di isi!');
+      return;
+    }
+
     let loader = this.loadingCtrl.create({
       content: "Mohon tunggu..."
     });
