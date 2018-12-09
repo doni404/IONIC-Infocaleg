@@ -34,6 +34,10 @@ body {
   font-family: -apple-system, BlinkMacSystemFont, sans-serif;
 }
 
+.app-second-title{
+  margin-top: -2em!important;
+}
+
 // form style
 .form .grey-form {
   background-color: #eeeeee;
@@ -48,7 +52,9 @@ body {
     padding: 0 15px;
     // margin-bottom: 10px;
 }
-
+// input.text-input.text-input-ios {
+//   font-size: 14px;
+// }
 .toolbar-background {
   background-color: white;
 }
