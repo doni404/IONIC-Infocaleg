@@ -22,12 +22,35 @@
 </ion-header>
 
 <ion-content no-padding>
+  <ion-row ion-fixed no-padding no-margin class="w100">
+    <!-- Tab -->
+    <ion-col no-padding col-12 class="dIF rank-tab">
+      <ion-col (click)="setActiveTab('caleg')" col-6 text-center [class]="tabCaleg">
+        CALEG
+      </ion-col>
+      <ion-col (click)="setActiveTab('pengguna')" col-6 text-center [class]="tabPengguna">
+        PENGGUNA
+      </ion-col>
+    </ion-col>
+
+    <!-- This is sort panel -->
+    <ion-col *ngIf="isChangeSort == true" no-padding col-12 class="w100 rank-sort aiCenter">
+      <ion-col (click)="changeSort('populer')" col-12 class="sort-child">
+        <p *ngIf="sort == 'populer'" id="sort-populer" no-padding no-margin style="color: orangered">Populer</p>
+        <p *ngIf="sort != 'populer'" id="sort-populer" no-padding no-margin>Populer</p>
+      </ion-col>
+      <ion-col (click)="changeSort('favorit')" col-12 class="sort-child">
+        <p *ngIf="sort == 'favorit'" id="sort-populer" no-padding no-margin style="color: orangered">Favorit</p>
+        <p *ngIf="sort != 'favorit'" id="sort-populer" no-padding no-margin>Favorit</p>
+      </ion-col>
+    </ion-col>
+  </ion-row>
+
   <ion-row no-padding no-margin class="rank w100">
     <ion-row *ngIf="tabActive == 'caleg'" no-padding no-margin class="w100">
       <ion-col *ngFor="let rank of rankCaleg; let i= index" col-12 class="rank-caleg dIF">
         <ion-col col-3 no-padding text-center>
-          <img no-padding no-margin src="{{rank.link_gambar}}" width="80px"
-            height="80px" class="rounded-image">
+          <img no-padding no-margin src="{{rank.link_gambar}}" width="80px" height="80px" class="rounded-image">
           <!-- <img *ngIf="rank.gambar != null" no-padding no-margin src="{{apiUrl}}/getprofile/{{rank.gambar}}?token={{token}}" width="80px"
             height="80px" class="rounded-image">
           <img *ngIf="rank.gambar == null" no-padding no-margin src="../../assets/imgs/logo.png" width="80px" height="80px" class="rounded-image">  -->
@@ -35,7 +58,9 @@
         <ion-col col-9 no-padding>
           <ion-col col-12 class="dIF wrapper">
             <ion-col col-9 (click)="goToDetailCaleg(rank, (i+1))">
-              <p no-padding no-margin><b>{{rank.nama_lengkap}}</b></p>
+              <p no-padding no-margin>
+                <b>{{rank.nama_lengkap}}</b>
+              </p>
               <p no-padding no-margin>{{rank.nama_partai}}</p>
               <p no-padding no-margin>{{rank.daerah_pemilihan}}</p>
             </ion-col>
@@ -101,7 +126,7 @@
           <ion-col col-12 class="dIF wrapper">
             <ion-col col-9 (click)="goToDetailPengguna(rank, (i+1))">
               <b>{{rank.nama}}</b>
-              <p no-padding no-margin>NKRI Harga Mati !!!</p>
+              <!-- <p no-padding no-margin>NKRI Harga Mati !!!</p> -->
             </ion-col>
             <ion-col col-3 text-center>
               <img *ngIf="i == 0" no-padding no-margin src="../../assets/imgs/icon/rank1.png" width="35px">
@@ -136,27 +161,3 @@
     </ion-row>
   </ion-row>
 </ion-content>
-
-<!-- Tab -->
-<ion-row no-padding no-margin class="w100">
-  <ion-col no-padding col-12 class="dIF rank-tab">
-    <ion-col (click)="setActiveTab('caleg')" col-6 text-center [class]="tabCaleg">
-      CALEG
-    </ion-col>
-    <ion-col (click)="setActiveTab('pengguna')" col-6 text-center [class]="tabPengguna">
-      PENGGUNA
-    </ion-col>
-  </ion-col>
-</ion-row>
-
-<!-- This is sort panel -->
-<ion-col *ngIf="isChangeSort == true" no-padding col-12 class="w100 rank-sort aiCenter">
-  <ion-col (click)="changeSort('populer')" col-12 class="sort-child">
-    <p *ngIf="sort == 'populer'" id="sort-populer" no-padding no-margin style="color: orangered">Populer</p>
-    <p *ngIf="sort != 'populer'" id="sort-populer" no-padding no-margin>Populer</p>
-  </ion-col>
-  <ion-col (click)="changeSort('favorit')" col-12 class="sort-child">
-    <p *ngIf="sort == 'favorit'" id="sort-populer" no-padding no-margin style="color: orangered">Favorit</p>
-    <p *ngIf="sort != 'favorit'" id="sort-populer" no-padding no-margin>Favorit</p>
-  </ion-col>
-</ion-col>

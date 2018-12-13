@@ -42,14 +42,8 @@ export class NotificationPage {
         this.penggunaId = pengguna.id;
 
         console.log(this.token);
-
-        this.showAllNotification(this.penggunaId, this.token);
       });
     });
-  }
-
-  showAllNotification(idPengguna, token) {
-
   }
 
   goBack() {

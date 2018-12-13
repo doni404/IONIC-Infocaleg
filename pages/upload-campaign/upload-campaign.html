@@ -30,7 +30,7 @@
       <textarea placeholder="Deskripsi kampanye..." rows="1" [(ngModel)]="deskripsi"></textarea>
     </ion-col>
     <ion-col col-12 class="upload-content" text-center>
-        <button ion-button block color="red" outline>UNGGAH</button>
+        <button (click)="uploadCampaign()" ion-button block color="red" outline>UNGGAH</button>
     </ion-col>
   </ion-row>
 </ion-content>

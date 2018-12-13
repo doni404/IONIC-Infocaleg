@@ -23,6 +23,21 @@
 
 
 <ion-content no-padding>
+  <!-- Tab -->
+  <ion-row *ngIf="role == 'caleg'" ion-fixed no-padding no-margin class="w100">
+    <ion-col no-padding col-12 class="dIF detail-caleg-tab aiCenter">
+      <ion-col (click)="setActiveTab('aktifitas', $event)" col-4 text-center [class]="tabDapil">
+        AKTIFITAS
+      </ion-col>
+      <ion-col (click)="setActiveTab('profil', $event)" col-4 text-center [class]="tabPartai">
+        PROFIL
+      </ion-col>
+      <ion-col (click)="setActiveTab('litsus', $event)" col-4 text-center [class]="tabNomor">
+        LITSUS
+      </ion-col>
+    </ion-col>
+  </ion-row>
+
   <div *ngIf="role == 'caleg' && tabActive == 'aktifitas'" style="margin-top: 16%;"></div>
   <div *ngIf="role == 'pengguna' && tabActive == 'aktifitas'" style="margin-top: 8%;"></div>
   <ion-row *ngIf="tabActive == 'aktifitas'" style="margin-bottom: 20%" class="detail-activity">
@@ -380,21 +395,6 @@
     Litsus page
   </ion-row>
 </ion-content>
-
-<!-- Tab -->
-<ion-row *ngIf="role == 'caleg'" no-padding no-margin class="w100">
-  <ion-col no-padding col-12 class="dIF detail-caleg-tab aiCenter">
-    <ion-col (click)="setActiveTab('aktifitas', $event)" col-4 text-center [class]="tabDapil">
-      AKTIFITAS
-    </ion-col>
-    <ion-col (click)="setActiveTab('profil', $event)" col-4 text-center [class]="tabPartai">
-      PROFIL
-    </ion-col>
-    <ion-col (click)="setActiveTab('litsus', $event)" col-4 text-center [class]="tabNomor">
-      LITSUS
-    </ion-col>
-  </ion-col>
-</ion-row>
 
 <!-- This is rate field -->
 <ion-row *ngIf="role == 'caleg'" no-padding no-margin class="w100">

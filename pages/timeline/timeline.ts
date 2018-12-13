@@ -65,6 +65,11 @@ export class TimelinePage {
     });
   }
 
+  ionViewWillEnter() {
+    this.getAllTimeline(this.sort);
+    this.getNotification(this.penggunaId, this.token);
+  }
+
   getAllTimeline(sort) {
     this.restProvider.getAllTimeline(this.penggunaId, sort, this.token)
       .then(data => {
@@ -116,7 +121,7 @@ export class TimelinePage {
             this.timelines[index].pengguna_like = true;
             this.timelines[index].total_like += 1;
             this.timelines[index].like_icon = "../../assets/imgs/icon/thumb-up-active.png";
-            
+
             // Disable dislike when disliked
             if (this.timelines[index].pengguna_dislike) {
               this.dislikeCampaign(idKampanye, idPengguna, token, index);
@@ -142,7 +147,7 @@ export class TimelinePage {
             console.log("berhasil di insert");
             this.timelines[index].pengguna_dislike = true;
             this.timelines[index].dislike_icon = "../../assets/imgs/icon/thumb-down-active.png"
-            
+
             // Disable dislike when disliked
             if (this.timelines[index].pengguna_like) {
               this.likeCampaign(idKampanye, idPengguna, token, index);
@@ -161,13 +166,13 @@ export class TimelinePage {
 
         this.notification_total = this.response.total_new;
         this.notification = this.response.data;
-      }); 
+      });
   }
 
   toggleSort() {
     if (this.isChangeSort) {
       this.isChangeSort = false;
-    }else {
+    } else {
       this.isChangeSort = true;
     }
   }
@@ -179,7 +184,7 @@ export class TimelinePage {
   }
 
   goToDetailCaleg(caleg) {
-    this.app.getRootNav().push(DetailOtherUserPage, {caleg: caleg, role: "caleg"});
+    this.app.getRootNav().push(DetailOtherUserPage, { caleg: caleg, role: "caleg" });
   }
 
   goToCampaignUpload() {
@@ -198,7 +203,7 @@ export class TimelinePage {
 
   goToNotification() {
     // this.navCtrl.push(NotificationPage);
-    this.app.getRootNav().push(NotificationPage, {notification: this.notification});
+    this.app.getRootNav().push(NotificationPage, { notification: this.notification });
   }
 
   doRefresh(refresher) {

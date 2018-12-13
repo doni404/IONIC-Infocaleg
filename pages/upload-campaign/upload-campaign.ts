@@ -92,6 +92,7 @@ export class UploadCampaignPage {
             this.token = dataToken;
           });
 
+          this.imageCampaign = base64File;
           loader.dismiss();
         })
         .catch(() => {
@@ -119,7 +120,7 @@ export class UploadCampaignPage {
     toast.present();
   }
 
-  uploadCampaign(token) {
+  uploadCampaign() {
     // show loading screen
     this.loader = this.loadingCtrl.create({
       content: "Sedang menggunggah..."
@@ -127,7 +128,7 @@ export class UploadCampaignPage {
     this.loader.present();
 
     //send image data
-    let url = this.apiUrl + '/campaign?token=' + token;
+    let url = this.apiUrl + '/campaign?token=' + this.token;
     console.log();
     var options: FileUploadOptions = {
       fileKey: 'image',
@@ -151,16 +152,24 @@ export class UploadCampaignPage {
       var progress = Math.floor(progressEvent.loaded / progressEvent.total * 100);
       // this.progress = perc;
       console.log("progress : " + progress);
-      if (progress == 100) {
+      if (progress == 99) {
         this.loader.dismiss();
-        this.navCtrl.pop();
+        this.showInfo('Kampanye berhasil diunggah!');
+        this.goBack();
       }
     });
+  }
 
+  showInfo(text) {
+    let alert = this.alertCtrl.create({
+      title: 'Informasi',
+      subTitle: text,
+      buttons: ['Tutup']
+    });
+    alert.present();
   }
 
   goBack() {
     this.navCtrl.pop();
   }
-
 }

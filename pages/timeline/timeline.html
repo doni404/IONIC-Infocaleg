@@ -30,6 +30,20 @@
 </ion-header>
 
 <ion-content no-padding>
+  <ion-row ion-fixed no-padding no-margin class="w100">
+    <!-- This is sort panel -->
+    <ion-col *ngIf="isChangeSort == true" no-padding col-12 class="w100 timeline-sort aiCenter">
+      <ion-col (click)="changeSort('populer')" col-12 class="sort-child">
+        <p *ngIf="sort == 'populer'" id="sort-populer" no-padding no-margin style="color: orangered">Terpopuler</p>
+        <p *ngIf="sort != 'populer'" id="sort-populer" no-padding no-margin>Terpopuler</p>
+      </ion-col>
+      <ion-col (click)="changeSort('new')" col-12 class="sort-child">
+        <p *ngIf="sort == 'new'" id="sort-populer" no-padding no-margin style="color: orangered">Terbaru</p>
+        <p *ngIf="sort != 'new'" id="sort-populer" no-padding no-margin>Terbaru</p>
+      </ion-col>
+    </ion-col>
+  </ion-row>
+  
   <ion-refresher (ionRefresh)="doRefresh($event)">
     <ion-refresher-content></ion-refresher-content>
   </ion-refresher>
@@ -52,8 +66,8 @@
       </ion-col>
       <ion-col no-padding col-12 class="timeline-image dIF aiCenter">
         <img *ngIf="timeline.link_gambar_kampanye != ''" class="w100" src="{{apiUrl}}/getcampaignimage/{{timeline.link_gambar_kampanye}}?token={{token}}"
-          height="200px">
-        <img *ngIf="timeline.link_gambar_kampanye == ''" class="w100" src="../../assets/imgs/timeline/timeline1.jpg" height="200px">
+          height="250px">
+        <img *ngIf="timeline.link_gambar_kampanye == ''" class="w100" src="../../assets/imgs/timeline/timeline1.jpg" height="250px">
       </ion-col>
       <ion-col col-12 no-padding no-margin class="timeline-button dIF aiCenter">
         <img (click)="likeCampaign(timeline.id, penggunaId, token, i)" class="button-icon" no-padding [src]="timeline.like_icon">
@@ -100,15 +114,3 @@
     </button>
   </ion-fab>
 </ion-content>
-
-<!-- This is sort panel -->
-<ion-col *ngIf="isChangeSort == true" no-padding col-12 class="w100 timeline-sort aiCenter">
-  <ion-col (click)="changeSort('populer')" col-12 class="sort-child">
-    <p *ngIf="sort == 'populer'" id="sort-populer" no-padding no-margin style="color: orangered">Terpopuler</p>
-    <p *ngIf="sort != 'populer'" id="sort-populer" no-padding no-margin>Terpopuler</p>
-  </ion-col>
-  <ion-col (click)="changeSort('new')" col-12 class="sort-child">
-    <p *ngIf="sort == 'new'" id="sort-populer" no-padding no-margin style="color: orangered">Terbaru</p>
-    <p *ngIf="sort != 'new'" id="sort-populer" no-padding no-margin>Terbaru</p>
-  </ion-col>
-</ion-col>

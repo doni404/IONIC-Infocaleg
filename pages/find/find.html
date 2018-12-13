@@ -23,6 +23,37 @@
 </ion-header>
 
 <ion-content no-padding>
+  <!-- Tab -->
+  <ion-row ion-fixed no-padding no-margin class="w100">
+    <ion-col no-padding col-12 class="dIF find-tab aiCenter">
+      <ion-col (click)="setActiveTab('dapil', $event)" col-4 text-center [class]="tabDapil">
+        {{filterDapil}}
+      </ion-col>
+      <ion-col (click)="setActiveTab('partai', $event)" col-4 text-center [class]="tabPartai">
+        {{filterPartai}}
+      </ion-col>
+      <ion-col (click)="setActiveTab('nomor', $event)" col-4 text-center [class]="tabNomor">
+        {{filterLain}}
+      </ion-col>
+    </ion-col>
+
+    <!-- This is sort panel -->
+    <ion-col *ngIf="isChangeSort == true" no-padding col-12 class="w100 find-sort aiCenter">
+      <ion-col (click)="changeSort('daerah')" col-12 class="sort-child">
+        <p *ngIf="sort == 'daerah'" id="sort-populer" no-padding no-margin style="color: orangered">Daerah</p>
+        <p *ngIf="sort != 'daerah'" id="sort-populer" no-padding no-margin>Daerah</p>
+      </ion-col>
+      <ion-col (click)="changeSort('partai')" col-12 class="sort-child">
+        <p *ngIf="sort == 'partai'" id="sort-populer" no-padding no-margin style="color: orangered">Partai</p>
+        <p *ngIf="sort != 'partai'" id="sort-populer" no-padding no-margin>Partai</p>
+      </ion-col>
+      <ion-col (click)="changeSort('nama')" col-12 class="sort-child">
+        <p *ngIf="sort == 'nama'" id="sort-populer" no-padding no-margin style="color: orangered">Nama</p>
+        <p *ngIf="sort != 'nama'" id="sort-populer" no-padding no-margin>Nama</p>
+      </ion-col>
+    </ion-col>
+  </ion-row>
+  
   <div class="square-container">
     <div *ngIf="sort == 'daerah'">
       <div *ngFor="let pulau of pulauList; let i= index" class="square aiCenter" text-center>
@@ -55,34 +86,3 @@
     </div>
   </div>
 </ion-content>
-
-<!-- Tab -->
-<ion-row no-padding no-margin class="w100">
-  <ion-col no-padding col-12 class="dIF find-tab aiCenter">
-    <ion-col (click)="setActiveTab('dapil', $event)" col-4 text-center [class]="tabDapil">
-      {{filterDapil}}
-    </ion-col>
-    <ion-col (click)="setActiveTab('partai', $event)" col-4 text-center [class]="tabPartai">
-      {{filterPartai}}
-    </ion-col>
-    <ion-col (click)="setActiveTab('nomor', $event)" col-4 text-center [class]="tabNomor">
-      {{filterLain}}
-    </ion-col>
-  </ion-col>
-
-  <!-- This is sort panel -->
-  <ion-col *ngIf="isChangeSort == true" no-padding col-12 class="w100 find-sort aiCenter">
-    <ion-col (click)="changeSort('daerah')" col-12 class="sort-child">
-      <p *ngIf="sort == 'daerah'" id="sort-populer" no-padding no-margin style="color: orangered">Daerah</p>
-      <p *ngIf="sort != 'daerah'" id="sort-populer" no-padding no-margin>Daerah</p>
-    </ion-col>
-    <ion-col (click)="changeSort('partai')" col-12 class="sort-child">
-      <p *ngIf="sort == 'partai'" id="sort-populer" no-padding no-margin style="color: orangered">Partai</p>
-      <p *ngIf="sort != 'partai'" id="sort-populer" no-padding no-margin>Partai</p>
-    </ion-col>
-    <ion-col (click)="changeSort('nama')" col-12 class="sort-child">
-      <p *ngIf="sort == 'nama'" id="sort-populer" no-padding no-margin style="color: orangered">Nama</p>
-      <p *ngIf="sort != 'nama'" id="sort-populer" no-padding no-margin>Nama</p>
-    </ion-col>
-  </ion-col>
-</ion-row>

@@ -155,10 +155,11 @@ export class DetailUserPage {
             this.token = dataToken;
           });
 
+          this.profileImage = base64File;
           loader.dismiss();
 
           // update profile
-          this.uploadProfile(this.token);
+          this.uploadProfile(this.profileImage, this.token);
         })
         .catch(() => {
           console.log('Error reading file');
@@ -185,7 +186,7 @@ export class DetailUserPage {
     toast.present();
   }
 
-  uploadProfile(token) {
+  uploadProfile(image, token) {
     // show loading screen
     this.loader = this.loadingCtrl.create({
       content: "Sedang menggunggah..."
@@ -198,25 +199,25 @@ export class DetailUserPage {
     var options: FileUploadOptions = {
       fileKey: 'image',
 
-      fileName: this.profileImage,
+      fileName: image,
       chunkedMode: false,
       httpMethod: 'put',
       mimeType: 'multipart/form-data',
       params: {
-        'image': this.profileImage,
+        'image': image,
         'id_pengguna': this.penggunaId
       }
     }
 
     const FileTransfer = this.transfer.create();
 
-    FileTransfer.upload(this.profileImage, url, options);
+    FileTransfer.upload(image, url, options);
 
     FileTransfer.onProgress((progressEvent) => {
       var progress = Math.floor(progressEvent.loaded / progressEvent.total * 100);
       // this.progress = perc;
       console.log("progress : " + progress);
-      if (progress == 100) {
+      if (progress == 99) {
         this.loader.dismiss();
 
         // this.navCtrl.pop();
