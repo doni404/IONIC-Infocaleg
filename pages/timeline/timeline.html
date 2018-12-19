@@ -58,7 +58,7 @@
             class="rounded-image">
         </ion-col>
         <ion-col col-8 class="title-info">
-          <p no-margin>{{timeline.nama_pengguna}}</p>
+          <p (click)="goToDetailCaleg(timeline.id_pengguna)" no-margin>{{timeline.nama_pengguna}}</p>
         </ion-col>
         <ion-col col-2 class="title-info">
           <p no-margin>{{timeline.lama_posting}} Jam</p>

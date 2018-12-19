@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, PopoverController, App} from 'ionic-angular';
+import { IonicPage, NavController, NavParams, PopoverController, App, AlertController} from 'ionic-angular';
 import { Storage } from '@ionic/storage';
 import { RestProvider } from '../../providers/rest/rest';
 import { PopoverDapilPage } from '../popover-dapil/popover-dapil';
@@ -41,6 +41,10 @@ export class FindPage {
   filterPartaiId: any;
   filterNomor = "ASC";
 
+  visibleDapil: any;
+  visiblePartai: any;
+  visibleNomor: any;
+
   pulauList = [
     {src:"../../assets/imgs/pulau/Sumatra.png", nama:"sumatera"},
     {src:"../../assets/imgs/pulau/Kalimantan.png", nama:"kalimantan"},
@@ -61,7 +65,8 @@ export class FindPage {
     private storage: Storage,
     public navParams: NavParams,
     public restProvider: RestProvider,
-    public popoverCtrl: PopoverController) {
+    public popoverCtrl: PopoverController,
+    public alertCtrl: AlertController) {
 
   }
 
@@ -124,6 +129,10 @@ export class FindPage {
         this.response = data;
         this.calegList = this.response.data;
 
+        if (this.calegList.length == 0) {
+          this.showInfo("Daftar caleg tidak ditemukan.");
+        }
+
         if (this.filterNomor == "ASC") {
           this.filterNomor = "DESC";
         }else {
@@ -168,6 +177,12 @@ export class FindPage {
       this.tabPartai = "aiCenter tab";
       this.tabNomor = "aiCenter tab";
 
+      if (this.visibleDapil == true) {
+        this.visibleDapil = false;
+      }else {
+        this.visibleDapil = true;
+      }
+
       let popover = this.popoverCtrl.create(PopoverDapilPage, {cssClass: 'dapil-popover'});
       popover.present({
         ev: myEvent
@@ -181,6 +196,12 @@ export class FindPage {
           this.filterDapil = dapil.nama_daerah_pemilihan;
         }
 
+        if (this.visibleDapil == true) {
+          this.visibleDapil = false;
+        }else {
+          this.visibleDapil = true;
+        }
+
         this.setDataToFindCaleg();
       });
     } else if (page == "partai") {
@@ -188,6 +209,12 @@ export class FindPage {
       this.tabDapil = "aiCenter tab";
       this.tabPartai = "aiCenter tab active";
       this.tabNomor = "aiCenter tab";
+
+      if (this.visiblePartai == true) {
+        this.visiblePartai = false;
+      }else {
+        this.visiblePartai = true;
+      }
 
       let popover = this.popoverCtrl.create(PopoverPartaiPage);
       popover.present({
@@ -203,6 +230,12 @@ export class FindPage {
           this.filterPartai = partai.nama;
         }
 
+        if (this.visiblePartai == true) {
+          this.visiblePartai = false;
+        }else {
+          this.visiblePartai = true;
+        }
+
         this.setDataToFindCaleg();
       });
     } else if (page == "nomor") {
@@ -210,6 +243,12 @@ export class FindPage {
       this.tabDapil = "aiCenter tab";
       this.tabPartai = "aiCenter tab";
       this.tabNomor = "aiCenter tab active";
+
+      if (this.visibleNomor == true) {
+        this.visibleNomor = false;
+      }else {
+        this.visibleNomor = true;
+      }
 
       let popover = this.popoverCtrl.create(PopoverLainPage);
       popover.present({
@@ -221,6 +260,12 @@ export class FindPage {
           this.filterLain = "LAINNYA";
         }else {
           this.filterLain = lain;
+        }
+
+        if (this.visibleNomor == true) {
+          this.visibleNomor = false;
+        }else {
+          this.visibleNomor = true;
         }
 
         this.setDataToFindCaleg();
@@ -258,5 +303,14 @@ export class FindPage {
 
   goToDetailCaleg(caleg) {
     this.app.getRootNav().push(DetailOtherUserPage, {caleg: caleg, role: "caleg"});
+  }
+
+  showInfo(text) {
+    let alert = this.alertCtrl.create({
+      title: 'Informasi',
+      subTitle: text,
+      buttons: ['Tutup']
+    });
+    alert.present();
   }
 }

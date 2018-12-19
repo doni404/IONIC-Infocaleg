@@ -1,5 +1,5 @@
 import { Component, ElementRef, ViewChild } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, AlertController} from 'ionic-angular';
 import { Storage } from '@ionic/storage';
 import { RestProvider } from '../../providers/rest/rest';
 import moment from 'moment';
@@ -37,7 +37,8 @@ export class CommentPage {
     public navCtrl: NavController,
     private storage: Storage,
     public restProvider: RestProvider,
-    public navParams: NavParams) {
+    public navParams: NavParams,
+    public alertCtrl: AlertController) {
 
     this.idKampanye = navParams.get('idKampanye');
     this.deskripsiKampanye = navParams.get('deskripsiKampanye');
@@ -155,6 +156,11 @@ export class CommentPage {
   }
 
   sendComment(idKampanye, idPengguna, komentar, token) {
+    if (komentar == "") {
+      this.showInfo("Komentar tidak boleh kosong!");
+      return;
+    }
+    
     this.restProvider.createComment(idKampanye, idPengguna, komentar, token)
       .then(data => {
         this.response = data;
@@ -172,6 +178,14 @@ export class CommentPage {
   // resize() {
   //   this.myInput.nativeElement.style.height = this.myInput.nativeElement.scrollHeight + 'px';
   // }
+  showInfo(text) {
+    let alert = this.alertCtrl.create({
+      title: 'Informasi',
+      subTitle: text,
+      buttons: ['Tutup']
+    });
+    alert.present();
+  }
 
   goBack() {
     this.navCtrl.pop();

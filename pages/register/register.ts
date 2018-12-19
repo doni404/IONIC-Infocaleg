@@ -58,7 +58,7 @@ export class RegisterPage {
           this.navCtrl.pop();
         }else{
           loader.dismiss();
-          this.showInfo('Registrasi gagal, silahkan cek kolom!');
+          this.showInfo('Registrasi gagal, username atau email sudah terdaftar!');
         }
     });
   }

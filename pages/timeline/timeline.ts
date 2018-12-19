@@ -183,8 +183,24 @@ export class TimelinePage {
     this.getAllTimeline(this.sort);
   }
 
-  goToDetailCaleg(caleg) {
-    this.app.getRootNav().push(DetailOtherUserPage, { caleg: caleg, role: "caleg" });
+  // goToDetailCaleg(caleg) {
+  //   this.app.getRootNav().push(DetailOtherUserPage, { caleg: caleg, role: "caleg" });
+  // }
+
+  goToDetailCaleg(idPengguna) {
+    console.log("id : " + idPengguna);
+    this.restProvider.findCalegByPengguna(idPengguna, this.token)
+      .then(data => {
+        this.response = data;
+
+        console.log("data : " + this.response.data[0].id);
+
+        if (this.response.status == "success") {
+          this.app.getRootNav().push(DetailOtherUserPage, {caleg: this.response.data[0], role: "caleg"});
+        }
+
+      });
+    // this.app.getRootNav().push(DetailOtherUserPage, {caleg: caleg, role: "caleg", rank: rank});
   }
 
   goToCampaignUpload() {

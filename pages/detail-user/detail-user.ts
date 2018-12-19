@@ -115,7 +115,7 @@ export class DetailUserPage {
       });
   }
 
-  getImage() {
+  getImage(sourceType: number) {
     let loader = this.loadingCtrl.create({
       content: "Silahkan pilih gambar ..."
     });
@@ -125,7 +125,8 @@ export class DetailUserPage {
       quality: 10,
       encodingType: this.camera.EncodingType.JPEG,
       destinationType: this.camera.DestinationType.FILE_URI,
-      sourceType: this.camera.PictureSourceType.PHOTOLIBRARY,
+      // sourceType: this.camera.PictureSourceType.PHOTOLIBRARY,
+      sourceType: sourceType,
       saveToPhotoAlbum: false,
       correctOrientation: true,
       mediaType: this.camera.MediaType.PICTURE
@@ -217,7 +218,7 @@ export class DetailUserPage {
       var progress = Math.floor(progressEvent.loaded / progressEvent.total * 100);
       // this.progress = perc;
       console.log("progress : " + progress);
-      if (progress == 99) {
+      if (progress >= 99) {
         this.loader.dismiss();
 
         // this.navCtrl.pop();
@@ -242,6 +243,28 @@ export class DetailUserPage {
 
     this.app.getRootNav().push(LoginPage);
     this.app.getRootNav().setRoot(LoginPage);
+  }
+
+  showGetImageOption() {
+    let alert = this.alertCtrl.create({
+      title: 'Informasi',
+      subTitle: 'Pilih cara untuk pilih foto',
+      buttons: [
+        {
+          text: 'Galeri',
+          handler: () => {
+            this.getImage(0);
+          }
+        },
+        {
+          text: 'Kamera',
+          handler: () => {
+            this.getImage(1);
+          }
+        }
+      ]
+    });
+    alert.present();
   }
 
   showInfo(text) {

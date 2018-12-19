@@ -61,7 +61,7 @@ export class DetailOtherUserPage {
     this.role = navParams.get("role");
     this.rank = navParams.get("rank");
 
-    console.log("rank : " + this.rank);
+    // console.log("rank : " + this.rank);
 
     if (this.role == "caleg") {
       this.caleg = navParams.get("caleg");

@@ -11,7 +11,7 @@
         <ion-icon class="custom-icon" name="more"></ion-icon>
       </button>
     </ion-buttons>
-    <ion-searchbar text-center placeholder="Cari nama" [(ngModel)]="keyword" [showCancelButton]="shouldShowCancel" (ionInput)="showInput()"
+    <ion-searchbar text-center placeholder="Cari nama caleg" [(ngModel)]="keyword" [showCancelButton]="shouldShowCancel" (ionInput)="showInput()"
       (ionCancel)="showInput()">
     </ion-searchbar>
     <ion-buttons right>
@@ -27,13 +27,13 @@
   <ion-row ion-fixed no-padding no-margin class="w100">
     <ion-col no-padding col-12 class="dIF find-tab aiCenter">
       <ion-col (click)="setActiveTab('dapil', $event)" col-4 text-center [class]="tabDapil">
-        {{filterDapil}}
+        {{filterDapil}} <ion-icon [name]="visibleDapil ? 'arrow-dropup' :'arrow-dropdown'"></ion-icon>
       </ion-col>
       <ion-col (click)="setActiveTab('partai', $event)" col-4 text-center [class]="tabPartai">
-        {{filterPartai}}
+        {{filterPartai}} <ion-icon [name]="visiblePartai? 'arrow-dropup' :'arrow-dropdown'"></ion-icon>
       </ion-col>
       <ion-col (click)="setActiveTab('nomor', $event)" col-4 text-center [class]="tabNomor">
-        {{filterLain}}
+        {{filterLain}} <ion-icon [name]="visibleNomor ? 'arrow-dropup' :'arrow-dropdown'"></ion-icon>
       </ion-col>
     </ion-col>
 
