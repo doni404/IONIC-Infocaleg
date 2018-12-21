@@ -46,6 +46,10 @@
     </ion-col>
   </ion-row>
 
+  <ion-refresher (ionRefresh)="doRefresh($event)">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
+
   <ion-row no-padding no-margin class="rank w100">
     <ion-row *ngIf="tabActive == 'caleg'" no-padding no-margin class="w100">
       <ion-col *ngFor="let rank of rankCaleg; let i= index" col-12 class="rank-caleg dIF">

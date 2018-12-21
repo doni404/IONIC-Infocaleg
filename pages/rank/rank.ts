@@ -142,4 +142,14 @@ export class RankPage {
     this.app.getRootNav().push(NotificationPage, {notification: this.notification});
   }
 
+  doRefresh(refresher) {
+    console.log('Begin async operation', refresher);
+    this.getAllRank(this.tabActive, this.sort, this.token);
+    this.getNotification(this.penggunaId, this.token);
+    setTimeout(() => {
+      console.log('Async operation has ended');
+      refresher.complete();
+    }, 2000);
+  }
+
 }

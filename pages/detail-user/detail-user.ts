@@ -108,7 +108,7 @@ export class DetailUserPage {
       .then(data => {
         this.response = data;
         if (this.response.status == "success") {
-          this.showInfo('Ubah nama berhasil!');
+          this.showInfo('Terima Kasih!');
         } else {
           this.showInfo('Ubah nama gagal!');
         }
@@ -269,8 +269,8 @@ export class DetailUserPage {
 
   showInfo(text) {
     let alert = this.alertCtrl.create({
-      title: 'Informasi',
-      subTitle: text,
+      title: 'Terima Kasih !',
+      subTitle: "",
       buttons: ['Tutup']
     });
     alert.present();
